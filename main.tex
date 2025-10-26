@@ -1,0 +1,76 @@
+% main.tex
+% !TeX program = lualatex
+% !BIB program = biber
+
+\documentclass[12pt,letterpaper]{report}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+%referencias bib
+\usepackage[
+  backend=biber,
+  style=verbose-trad2,    % notas al pie completas + 'Ibíd.' / 'Op. cit.'
+  autocite=footnote,      % \autocite => nota al pie
+  ibidtracker=context,    % controla cuándo usar Ibíd.
+  pagetracker=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+\usepackage{icontec_style}
+\usepackage[hidelinks]{hyperref}
+
+%Ajustes de cleveref
+\usepackage[spanish,noabbrev,nameinlink]{cleveref}
+
+%Configuraciones extra para referencias al español
+\DefineBibliographyStrings{spanish}{references = {Referencias},}
+\DefineBibliographyStrings{spanish}{
+  ibidem = {Ibíd.},
+  opcit  = {Op.\addabbrvspace cit.},
+}
+
+\usepackage[hang,flushmargin]{footmisc}
+\renewcommand{\footnotelayout}{\setstretch{1}}
+
+% Metadatos portada:
+\icontecsetup{
+  universidad = {Universidad Industrial de Santander},
+  facultad    = {Facultad de Ingenierías Fisicomecánicas},
+  programa    = {Escuela de Ingeniería de Sistemas e Informática},
+  titulo      = {PROTOTIPO DE UN VIDEOJUEGO SERIO SOBRE SISTEMAS FERROVIARIOS EN COLOMBIA},
+  autores     = {\\Miguel Ángel Plata Rodríguez -- 2190050\\Mateo Salazar Serrano -- 2200135},
+  director    = {\\Urbano Eliécer Gómez Prada, PhD},
+  ciudad      = {Bucaramanga},
+  anio        = {\textit{(poner fecha de entrega)}}
+}
+
+\begin{document}
+
+% Portada
+\maketitleicontec
+
+%Agradecimientos / Resumen / Abstract
+% \chapter*{Agradecimientos}\addcontentsline{toc}{chapter}{Agradecimientos}
+% \begin{resumen} ... \keywords{...} \end{resumen}
+% \begin{abstractES} ... \keywords{...} \end{abstractES}
+
+% Índices
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+
+% ===== Contenido =====
+\include{chapters/01-introduccion}
+\include{chapters/02-marco-de-referencia}
+\include{chapters/03-metodologia}
+\include{chapters/04-resultados} 
+
+% Bibliografía
+\printbibliography[title={Referencias}]
+
+% (Opcional) Apéndices
+% \appendix
+% \include{appendices/apendice-a}
+
+\end{document}

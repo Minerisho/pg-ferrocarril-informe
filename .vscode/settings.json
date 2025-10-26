@@ -1,0 +1,44 @@
+{
+  // --- Compilación con LuaLaTeX via latexmk (sin -pdf) y salida en build/ ---
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk (LuaLaTeX)",
+      "command": "latexmk",
+      "args": [
+        "-lualatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-outdir=build",
+        "%DOC%"
+      ]
+    }
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk → LuaLaTeX (build)",
+      "tools": ["latexmk (LuaLaTeX)"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+
+  // Carpeta de salida (evita problemas con espacios en rutas)
+  "latex-workshop.latex.outDir": "build",
+
+  // Visor interno de PDF y SyncTeX (forward/inverse search)
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+
+  // Cuándo compilar (elige: onSave | onFileChange | never)
+  "latex-workshop.latex.autoBuild.run": "onSave",
+
+  // Limpieza de auxiliares
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.clean.subfolder.outDir": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux", "*.bbl", "*.bcf", "*.blg", "*.fdb_latexmk", "*.fls", "*.log",
+    "*.out", "*.run.xml", "*.toc", "*.lof", "*.lot", "*.synctex.gz",
+    "*.nav", "*.snm", "*.xdv", "*.thm", "*.ilg", "*.ind", "*.idx"
+  ]
+}

@@ -1,0 +1,20 @@
+# LaTeX
+build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.xdv
+
+# VS Code: ignorar todo menos lo que da reproducibilidad
+.vscode/*
+!.vscode/settings.json

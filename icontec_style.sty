@@ -1,0 +1,155 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{icontec_style}[2025/10/26 v1.4 ICONTEC Arial (LuaLaTeX)]
+
+% --- Márgenes ICONTEC aprox. ---
+\RequirePackage[letterpaper,left=4cm,right=2cm,top=3cm,bottom=3cm]{geometry}
+
+% --- Tipografías: Arial desde ./fonts (TTF) ---
+% Compilar siempre con LuaLaTeX.
+\RequirePackage{fontspec}
+
+% Usa Arial como tipografía principal del documento
+% (textos normales, títulos, etc.). Cargamos los archivos TTF explícitos.
+\setmainfont[
+  Path=fonts/,
+  UprightFont    = ARIAL.ttf,
+  BoldFont       = ARIALBD.ttf,
+  ItalicFont     = ARIALI.ttf,
+  BoldItalicFont = ARIALBI.ttf,
+  Ligatures=TeX
+]{Arial}
+
+% También como sans para consistencia
+\setsansfont[
+  Path=fonts/,
+  UprightFont    = ARIAL.ttf,
+  BoldFont       = ARIALBD.ttf,
+  ItalicFont     = ARIALI.ttf,
+  BoldItalicFont = ARIALBI.ttf,,
+  Ligatures=TeX
+]{Arial}
+
+% Hacemos que la familia por defecto sea sans (Arial)
+\renewcommand{\familydefault}{\sfdefault}
+
+% --- Matemáticas ---
+% (Arial no tiene símbolos matemáticos; usamos newtxmath, estética sobria)
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{newtxmath}
+
+% --- Interlineado 1.5 ---
+\RequirePackage{setspace}
+\onehalfspacing
+
+% --- Microtipografía ---
+\RequirePackage{microtype}
+\microtypesetup{protrusion=true,expansion=false}
+
+% Para URLs largas sin overfull
+\RequirePackage{xurl}
+
+% --- Gráficos, tablas y listas ---
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{booktabs}
+\RequirePackage{enumitem}
+\RequirePackage{xcolor}
+
+% --- Formato de títulos ---
+\RequirePackage{titlesec}
+% SIN "Capítulo N": solo el título en negrita grande
+\titleformat{\chapter}{\bfseries\Large}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{-0.5\baselineskip}{1\baselineskip}
+\titleformat{\section}{\bfseries\normalsize}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\bfseries\normalsize}{\thesubsection}{0.8em}{}
+
+% --- Encabezados y pies ---
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- Figuras y tablas ---
+\RequirePackage{caption}
+\captionsetup{format=plain,labelfont=bf,labelsep=period,font=small}
+
+% --- Código (ligero) ---
+\RequirePackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  captionpos=b,
+  tabsize=2
+}
+
+% --- Párrafo ---
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% ================== Metadatos portada ==================
+% Definiciones vacías (para rellenar desde main.tex)
+\providecommand{\universidad}{}
+\providecommand{\facultad}{}
+\providecommand{\programa}{}
+\providecommand{\titulo}{}
+\providecommand{\autor}{}   % acepta una o varias líneas
+\providecommand{\asesor}{}  
+\providecommand{\ciudad}{}
+\providecommand{\anio}{}
+
+% Interfaz cómoda por claves: \icontecsetup{universidad={...}, titulo={...}, ...}
+\RequirePackage{xkeyval}
+\makeatletter
+\define@key{icontec}{universidad}{\renewcommand{\universidad}{#1}}
+\define@key{icontec}{facultad}{\renewcommand{\facultad}{#1}}
+\define@key{icontec}{programa}{\renewcommand{\programa}{#1}}
+\define@key{icontec}{titulo}{\renewcommand{\titulo}{#1}}
+\define@key{icontec}{autor}{\renewcommand{\autor}{#1}}
+\define@key{icontec}{autores}{\renewcommand{\autor}{#1}}   % alias
+\define@key{icontec}{director}{\renewcommand{\asesor}{#1}} % alias a \asesor
+\define@key{icontec}{asesor}{\renewcommand{\asesor}{#1}}
+\define@key{icontec}{ciudad}{\renewcommand{\ciudad}{#1}}
+\define@key{icontec}{anio}{\renewcommand{\anio}{#1}}
+\newcommand{\icontecsetup}[1]{\setkeys{icontec}{#1}}
+\makeatother
+
+
+% --- Portada (sin logo) ---
+\providecommand{\maketitleicontec}{} 
+\renewcommand{\maketitleicontec}{%
+  \begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    {\Large \textbf{\universidad}\par}
+    {\normalsize \facultad\par}
+    {\normalsize \programa\par}
+    \vfill
+    {\bfseries\Large \titulo\par}
+    \vspace{1.2cm}
+    {\normalsize \textbf{Autores:} \autor\par}
+    {\normalsize \textbf{Director:} \asesor\par}
+    \vfill
+    {\normalsize \ciudad, \anio\par}
+  \end{titlepage}
+  \clearpage
+}
+
+% --- Resumen / Abstract ---
+\newenvironment{resumen}{%
+  \chapter*{Resumen}\addcontentsline{toc}{chapter}{Resumen}%
+}{}
+\newenvironment{abstractES}{%
+  \chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}%
+}{}
+\newcommand{\keywords}[1]{\par\smallskip\noindent\textbf{Palabras clave:} #1}
+
+% --- Utilidad para figuras centradas ---
+\newcommand{\img}[4][0.9\linewidth]{%
+  \begin{figure}[H]\centering
+    \includegraphics[width=#1]{#2}
+    \caption{#3}\label{#4}
+  \end{figure}
+}
