@@ -16,6 +16,14 @@
 ]{biblatex}
 \addbibresource{referencias.bib}
 
+\AtEveryCite{%
+  \togglefalse{bbx:url}%
+  \togglefalse{bbx:doi}%
+  \togglefalse{bbx:eprint}%
+  \togglefalse{bbx:isbn}%
+  \renewbibmacro*{url+urldate}{}% suprime tanto la URL como la fecha de consulta en la nota
+}
+
 \usepackage{icontec_style}
 \usepackage[hidelinks]{hyperref}
 
