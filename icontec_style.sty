@@ -58,11 +58,31 @@
 
 % --- Formato de títulos ---
 \RequirePackage{titlesec}
-% SIN "Capítulo N": solo el título en negrita grande
-\titleformat{\chapter}{\bfseries\Large}{}{0pt}{}
-\titlespacing*{\chapter}{0pt}{-0.5\baselineskip}{1\baselineskip}
-\titleformat{\section}{\bfseries\normalsize}{\thesection}{0.8em}{}
-\titleformat{\subsection}{\bfseries\normalsize}{\thesubsection}{0.8em}{}
+
+% Asegurar que se numeren hasta subsección (capítulo, sección, subsección)
+\setcounter{secnumdepth}{2}
+
+% Capítulos: "1. Título"
+\titleformat{\chapter}[hang]
+  {\bfseries\Large}        % formato
+  {\thechapter.}           % etiqueta (número + punto)
+  {0.6em}                  % separación etiqueta–título
+  {}
+
+% Secciones: "1.1. Título"
+\titleformat{\section}[hang]
+  {\bfseries\normalsize}
+  {\thesection.}
+  {0.6em}
+  {}
+
+% Subsecciones: "1.1.1. Título"
+\titleformat{\subsection}[hang]
+  {\bfseries\normalsize}
+  {\thesubsection.}
+  {0.6em}
+  {}
+
 
 % --- Encabezados y pies ---
 \RequirePackage{fancyhdr}
@@ -117,7 +137,7 @@
 \makeatother
 
 
-% --- Portada (sin logo) ---
+% --- Portada  ---
 \providecommand{\maketitleicontec}{} 
 \renewcommand{\maketitleicontec}{%
   \begin{titlepage}
