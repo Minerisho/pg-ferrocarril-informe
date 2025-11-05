@@ -142,8 +142,100 @@ Probabilidad & Muy poca probabilidad & ... & ... & ... & Altamente probable\\ \h
 
 En segundo lugar, se desarrolló una tabla general de riesgos, en la que se registran los posibles problemas identificados durante el proyecto. Esta tabla incluye los campos Descripción (donde se detalla el problema detectado), Causa, Impacto, Probabilidad, Nivel de riesgo (calculado como la multiplicación entre impacto y probabilidad), Plan de acción (estrategias o medidas a tomar) y Estado (donde se especifica si el riesgo permanece abierto o ya ha sido cerrado).
 
+\begin{landscape}
+\begin{longtable}{|c|p{2.5cm}|p{2.5cm}|c|c|c|p{2.5cm}|c|}
+\caption{Matriz de riesgos del proyecto}\label{tab:matriz-riesgos} \\
+
+\hline
+\textbf{No. Ref} & \textbf{Descripción} & \textbf{Causa} & \textbf{Impacto} & \textbf{Probabilidad} & \textbf{Nivel de Riesgo} & \textbf{Plan de acción} & \textbf{Estado} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{No. Ref} & \textbf{Descripción} & \textbf{Causa} & \textbf{Impacto} & \textbf{Probabilidad} & \textbf{Nivel Riesgo} & \textbf{Plan acción} & \textbf{Estado} \\
+\hline
+\endhead
+
+R1 & El modelo del terreno del mapa de Colombia está mal optimizado & El uso de modelo 3D genera una sobrecarga en la memoria gráfica & 4 & 4 & 16 & Realización de un terreno formal de Unity sin usar Blender. Carga de terreno por bloques. & Cerrado \\ \hline
+R2 & La cámara del jugador puede "atravesar" el terreno. & La cámara no está programada para evadir o chocar con el mapa. & 2 & 5 & 10 & Implementación de una función para aplicar una colisión de cámara con el terreno y evitar el paso. & Abierto \\ \hline
+R3 & Las vías se generan de manera poco natural e inconexa. & Uso de puntos y rectas para la asignación de vías & 5 & 4 & 20 & Cambiar a uso de spline. & Cerrado \\ \hline
+R4 & Terreno con parches o incoherencias. & El DEM utilizado está con ciertos datos erróneos o vacíos. & 2 & 3 & 6 & Cambiar de DEM o arreglar los parches haciendo uso de algoritmos. & Cerrado \\ \hline
+R5 & Textura de vías solapando suelo en plano. & Vía colocada en el punto exacto donde está el terreno, generando solapamiento & 1 & 2 & 2 & Mover las vías generadas una pequeña distancia hacia arriba & Cerrado \\ \hline
+R6 & Las vías no permiten al tren dar vueltas en un circuito cerrado. & Spline no cerrado & 2 & 3 & 6 & Añadir que el circuito detecte cuando se colocan vías cerca al punto inicial, y de ser así cierre el circuito & Cerrado \\ \hline
+R7 & Dificultad para representar todos los ríos y lagos de Colombia en el mapa. & Colombia tiene una gran densidad de elementos hidrológicos, que superan la capacidad de representación fiel en el terreno del videojuego. & 4 & 4 & 16 & Definir criterios de selección: incluir solo ríos principales y lagos mayores. & Abierto \\ \hline
+R8 & Las vías atraviesan montañas & La generación de vías no interpola dichas alturas & 3 & 4 & 12 & Modificar la función de generación de vías, para que, cuando la vía atraviese el terreno, genere un túnel en la zona atravesada. & Cerrado \\ \hline
+R9 & Estadísticas de las locomotoras no son leídas correctamente & Estadísticas guardadas en los GameObject hijos de la Locomotora & 4 & 2 & 8 & Unificar la lógica y estadísticas de las distintas locomotoras en el GameObject padre Locomotora & Cerrado \\ \hline
+R10 & HUD no muestra la vida actual del tren al hacer cambio de locomotora & Dato de vida y estadísticas no leído después del cambio & 2 & 2 & 4 & Crear una función para reiniciar las estadísticas del tren & Cerrado \\ \hline
+R11 & Modelos 3D de los trenes y ciudades se ven a escalas diferentes & Escalas y rotaciones no aplicadas correctamente en Blender & 1 & 3 & 3 & Aplicar escalas y rotaciones a los modelos 3D de los trenes y ciudades & Cerrado \\ \hline
+R12 & Shaders incompatibles y LOD's mal configurados. & Unity tiene valores por defecto en las generaciones de terreno que no siempre es compatible entre shaders y capas de niveles de detalle. & 3 & 3 & 9 & Testear y ajustar shaders, URP, en diferentes escenarios, hasta llegar a la configuración correcta. & Cerrado \\ \hline
+R13 & El videojuego puede andar en muy bajos FPS en los equipos de cómputo de los usuarios. & Al desarrollar el proyecto en equipos con especificaciones mayores a la media, se omite algunos aspectos de optimización. & 5 & 3 & 15 & Investigar las especificaciones de los equipos donde se realizará la prueba y reevaluar riesgos. & Abierto \\ \hline
+\end{longtable}
+\end{landscape}
+
 %al final si van las HU completas, 
 %añadir una fase extra para colocar el diagrama de actividades inicial (el diagrama de actividades es mental)y el diagrama de componentes *el UML grande q urbano ni miró*, hay que explicarlo por partes por lo gigante
+
+Finalmente, se asignaron a las historias de usuario las variables de priorización, identificadas con las letras M, S y C, que representan respectivamente “debe hacerse”, “debería hacerse” y “podría hacerse” (esta última no es indispensable). Asimismo, se estableció la variable de cumplimiento, con valores comprendidos entre 0 y 1, donde 0 indica que la actividad no se ha iniciado y 1 que ha sido completada en su totalidad. Por último, se definió el nivel de complejidad, con una escala de 1 a 5, en la cual 1 corresponde a tareas de baja dificultad y 5 a aquellas de mayor complejidad.
+
+\begin{landscape}
+\begin{longtable}{|c|c|p{8cm}|c|c|c|}
+\caption{Historias de usuario organizadas por épica.} \label{tab:HU-epica} \\
+\hline
+
+\hline
+\textbf{ÉPICA} & \textbf{CÓDIGO} & \textbf{HISTORIA DE USUARIO} & \textbf{PRIORIZACIÓN} & \textbf{CUMPLIMIENTO} & \textbf{COMPLEJIDAD} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{ÉPICA} & \textbf{CÓDIGO} & \textbf{HISTORIA DE USUARIO} & \textbf{PRIORIZACIÓN} & \textbf{CUMPLIMIENTO} & \textbf{COMPLEJIDAD} \\ \hline
+\endhead
+
+\hline
+\multicolumn{6}{r}{\textit{Continúa en la siguiente página}} \\ 
+\endfoot
+
+\hline
+\endlastfoot
+
+1 & HU1 & Como jugador, quiero ver una pantalla de selección de niveles para elegir cuál jugar. & M & 1 & 2 \\ \hline
+1 & HU2 & Como jugador, quiero que al empezar un nivel, se me presente una pantalla de contrato que detalle el presupuesto, los objetivos y los posibles desafíos. & M & 1 & 1 \\ \hline
+2 & HU3 & Como jugador, quiero poder mover la cámara (panorámica) por el mapa para explorar el terreno. & M & 1 & 1 \\ \hline
+2 & HU4 & Como jugador, quiero poder acercar y alejar la vista (zoom) para ver el mapa con diferentes niveles de detalle. & M & 1 & 1 \\ \hline
+2 & HU5 & Como jugador, quiero ver las delimitaciones políticas y ríos. & M & 0,5 & 3 \\ \hline
+2 & HU6 & Como jugador, quiero ver un terreno del nivel a jugar. & M & 1 & 4 \\
+2 & HU7 & Como jugador, quiero poder rotar la cámara para observar el terreno desde distintos ángulos. & S & 1 & 1 \\ \hline
+2 & HU8 & Como jugador, quiero poder activar una capa de vista topográfica para entender el relieve del terreno. & C & 0 & 5 \\ \hline
+3 & H10 & Como jugador, quiero poder construir un tramo de vía férrea entre dos puntos. & M & 1 & 2 \\ \hline
+3 & H11 & Como jugador, quiero poder eliminar un tramo de vía férrea para rediseñar mis rutas. & M & 1 & 1 \\ \hline
+3 & HU12 & Como jugador, quiero que se pueda construya un puente o valles. & M & 1 & 4 \\ \hline
+3 & HU13 & Como jugador, quiero que se construya automáticamente un túnel si mi vía férrea atraviesa una montaña. & M & 1 & 4 \\ \hline
+3 & HU14 & Como jugador, quiero poder construir estaciones en puntos específicos de la vía para definir los puntos de inicio y fin del ciclo. & M & 1 & 3 \\ \hline
+3 & HU15 & Como jugador, quiero que la interfaz muestre mi presupuesto actual en todo momento para controlar mis gastos de construcción. & M & 1 & 2 \\ \hline
+3 & HU16 & Como jugador, quiero poder deshacer mi última acción de construcción para corregir un error rápidamente. & S & 1 & 2 \\ \hline
+4 & HU17 & Como jugador, tras diseñar la ruta, quiero acceder a un menú para seleccionar y comprar la locomotora que usaré. & M & 1 & 3 \\ \hline
+4 & HU18 & Como jugador, quiero poder añadir vagones específicos (pasajeros, carga) a mi locomotora para cumplir los requisitos del contrato. & M & 1 & 2 \\ \hline
+4 & HU19 & Como jugador, quiero que el menú de selección me muestre las locomotoras de la ruta que diseñé. & C & 1 & 2 \\ \hline
+5 & HU20 & Como jugador, durante la simulación, quiero ver una alerta o efecto visual cuando un tren está sufriendo daños al pasar por una zona de evento. & M & 1 & 2 \\ \hline
+5 & HU21 & Como jugador, quiero que el botón de "Hacer Testeo" me informe si me falta algún requisito para iniciar la simulación. & S & 1 & 3 \\ \hline
+5 & HU22 & Como jugador, quiero tener la opción de volver a la fase de construcción después de un testeo para modificar mis rutas antes de la evaluación final. & S & 1 & 1 \\ \hline
+6 & HU23 & Como jugador, al finalizar un nivel, quiero ver una pantalla de puntuación que califique mi desempeño. & M & 0,7 & 3 \\ \hline
+6 & HU24 & Como jugador, quiero que mi puntuación final considere la rentabilidad (costo total vs. valor del contrato). & M & 1 & 3 \\ \hline
+6 & HU25 & Como jugador, quiero que mi puntuación final considere la durabilidad (estado final de mis trenes y vías tras la simulación). & M & 1 & 3 \\ \hline
+6 & HU26 & Como jugador, quiero que mi puntuación final considere la eficiencia (tiempo que tardó el tren en completar el ciclo). & S & 1 & 3 \\ \hline
+6 & HU27 & Como jugador, quiero ver un informe detallado que desglose mi puntuación final para entender cómo mejorar. & S & 0 & 3 \\\hline
+7 & HU28 & Como jugador, quiero que se desbloqueen nuevos niveles en el menú de selección tras completar el contrato actual. & M & 1 & 2 \\\hline
+8 & HU29 & Como jugador, quiero que Don Raíl me presente el contrato al inicio de cada nivel con un diálogo breve, para darme un objetivo narrativo y contexto histórico sobre la región. & S & 0 & 3 \\\hline
+8 & HU30 & Como nuevo jugador, quiero que Don Raíl me guíe a través de un tutorial interactivo en el primer nivel, para aprender las mecánicas del juego de una forma amigable y contextual. & S & 0 & 4 \\\hline
+8 & HU31 & Como jugador, quiero que Don Raíl me dé una advertencia contextual si construyo una vía con una pendiente muy pronunciada o una curva muy cerrada, para que pueda corregir errores de ingeniería antes del testeo. & S & 0 & 4 \\\hline
+8 & HU32 & Como jugador, quiero que al seleccionar una estación o ciudad importante, aparezca un ícono de Don Raíl que pueda clickear para escuchar un dato histórico sobre la importancia ferroviaria de ese lugar. & S & 0 & 4 \\\hline
+8 & HU33 & Como jugador, quiero escuchar o leer un breve comentario de Don Raíl cuando un tren sufre un evento durante la simulación, para aumentar la inmersión. & S & 0 & 3 \\\hline
+8 & HU34 & Como jugador, quiero que Don Raíl comente sobre mi puntuación final, celebrando el éxito con emoción o dándome un consejo en caso de fallar para que la evaluación se sienta más personal. & S & 0 & 2 \\\hline
+8 & HU35 & Como jugador, quiero que durante las pantallas de carga, aparezcan anécdotas cortas o "dichos" de Don Raíl sobre la vida en el ferrocarril, para enriquecer el mundo del juego y aprovechar los tiempos de espera. & M & 0 & 2 \\\hline
+6 & HU36 & Como administrador, quiero adquirir y guardar metadatos de los jugadores en una base de datos para poder generar informes. & M & 0 & 3 \\\hline
+
+\end{longtable}
+\end{landscape}
+
 
 \section{Implementación}
 % (Completar) vendria a ser implementacion
