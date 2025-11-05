@@ -19,14 +19,115 @@ planificar fase de elaboración, pondremos mucho texto inventado y ya, sobre lo 
 
 \section{Diseño}
 % (Completar) vendria a ser elaboracion
-organizar las HU? osea poner lo que esta en la columna de epica, quitar la prioridad, eso de M S C
-explicar epicas tambien la tabla de epicas
+% organizar las HU? osea poner lo que esta en la columna de epica, quitar la prioridad, eso de M S C
+% explicar epicas tambien la tabla de epicas
 
-colocar capturas de los primeros intentos
-capturas de los videos con explicaciones de que tanto se hacia y el como fue la adaptacion, entre esos mencionando el que el mapa antiguo estaba mal y porque y todo eso
+Para organizar el desarrollo del proyecto, se definieron un conjunto de épicas que agrupan las principales funcionalidades del sistema. Estas sirvieron como base para clasificar las historias de usuario y facilitar la planificación y el seguimiento del avance. En la Tabla \ref{tab:epicas} se presentan las épicas establecidas para el proyecto.
 
-le añadimos las columnas a los riesgos, con una nueva *tabla de de que tanto riesgo hay* y con eso definimos la columna nivel de riesgo y pues se pone la tabla entera ahora si, lo hemos puesto abierto y cerrado si ya esta hecho
-que este cerrado es que ya se soluciono o se acepto, como los de poco riesgo, que puede..... osea existen cerrados que es porque el problema es muy minimo, no es tan grave
+\begin{table}[H] \centering \caption{Epicas} \label{tab:epicas} 
+\begin{tabular}{|c|l|} 
+\hline \textbf{Epica} & \textbf{Nombre}\\ \hline 
+1 & Selección de Nivel y Contratos \\ \hline 
+2 & Interacción con el Mapa 3D \\ \hline 
+3 & Sistema de Construcción de Vías \\ \hline 
+4 & Gestión de Material Rodante \\ \hline 
+5 & Motor de Simulación y Eventos \\ \hline 
+6 & Sistema de Evaluación y Puntuación \\ \hline 
+7 & Progresión y Rejugabilidad \\ \hline 
+8 & Narrativa y Mentoría (Don Raíl) \\ \hline 
+\end{tabular} 
+\end{table}
+
+Una vez definidas, se procedió a asignar cada épica a la historia de usuario correspondiente, de acuerdo con la funcionalidad o el componente del sistema al que contribuía. Esta clasificación permitió identificar con claridad el subsistema o área funcional a la que pertenecía cada historia, favoreciendo una organización más coherente del desarrollo y una mejor comprensión del alcance de cada módulo dentro del proyecto.
+
+\begin{longtable}{|c|c|p{10cm}|}
+\caption{Historias de Usuario} \label{tab:hu} \\
+\hline
+\textbf{Épica} & \textbf{Código} & \textbf{Historia de Usuario} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Épica} & \textbf{Código} & \textbf{Historia de Usuario} \\ \hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\textit{Continúa en la siguiente página}} \\ 
+\endfoot
+
+\hline
+\endlastfoot
+1 & HU1 & Como jugador, quiero ver una pantalla de selección de niveles para elegir cuál jugar  \\ \hline
+1 & HU2 & Como jugador, quiero que al empezar un nivel, se me presente una pantalla de contrato que detalle el presupuesto, los objetivos y los posibles desafíos \\ \hline
+2 & HU3 & Como jugador, quiero poder mover la cámara (panorámica) por el mapa para explorar el terreno \\ \hline
+2 & HU4 & Como jugador, quiero poder acercar y alejar la vista (zoom) para ver el mapa con diferentes niveles de detalle \\ \hline
+2 & HU5 & Como jugador, quiero ver las delimitaciones políticas y ríos \\ \hline
+2 & HU6 & Como jugador, quiero ver un terreno del nivel a jugar \\ \hline
+2 & HU7 & Como jugador, quiero poder rotar la cámara para observar el terreno desde distintos ángulos \\ \hline
+2 & HU8 & Como jugador, quiero poder activar una capa de eventos para visualizar las zonas de riesgo y planificar mi ruta en consecuencia \\ \hline
+3 & HU9 & Como jugador, quiero poder construir un tramo de vía férrea entre dos puntos \\ \hline
+3 & HU10 & Como jugador, quiero poder eliminar un tramo de vía férrea para rediseñar mis rutas \\ \hline
+3 & HU11 & Como jugador, quiero que se pueda construya un puente o valles \\ \hline
+3 & HU12 & Como jugador, quiero que se construya automáticamente un túnel si mi vía férrea atraviesa una montaña \\ \hline
+3 & HU13 & Como jugador, quiero poder construir estaciones en puntos específicos de la vía para definir los puntos de inicio y fin del ciclo \\ \hline
+3 & HU14 & Como jugador, quiero que la interfaz muestre mi presupuesto actual en todo momento para controlar mis gastos de construcción \\ \hline
+3 & HU15 & Como jugador, quiero poder deshacer mi última acción de construcción para corregir un error rápidamente \\ \hline
+4 & HU16 & Como jugador, tras diseñar la ruta, quiero acceder a un menú para seleccionar y comprar la locomotora que usaré \\ \hline
+4 & HU17 & Como jugador, quiero poder añadir vagones específicos (pasajeros, carga) a mi locomotora para cumplir los requisitos del contrato \\ \hline
+4 & HU18 & Como jugador, quiero que el menú de selección me muestre las locomotoras de la ruta que diseñé \\ \hline
+5 & HU19 & Como jugador, durante la simulación, quiero ver una alerta o efecto visual cuando un tren está sufriendo daños al pasar por una zona de evento \\ \hline
+5 & HU20 & Como jugador, quiero que el botón de "Hacer Testeo" me informe si me falta algún requisito para iniciar la simulación \\ \hline
+5 & HU21 & Como jugador, quiero tener la opción de volver a la fase de construcción después de un testeo para modificar mis rutas antes de la evaluación final \\ \hline
+6 & HU22 & Como jugador, al finalizar un nivel, quiero ver una pantalla de puntuación que califique mi desempeño \\ \hline
+6 & HU23 & Como jugador, quiero que mi puntuación final considere la rentabilidad (costo total vs. valor del contrato) \\ \hline
+6 & HU24 & Como jugador, quiero que mi puntuación final considere la durabilidad (estado final de mis trenes y vías tras la simulación) \\ \hline
+6 & HU25 & Como jugador, quiero que mi puntuación final considere la eficiencia (tiempo que tardó el tren en completar el ciclo) \\ \hline
+6 & HU26 & Como jugador, quiero ver un informe detallado que desglose mi puntuación final para entender cómo mejorar \\ \hline
+7 & HU27 & Como jugador, quiero que se desbloqueen nuevos niveles en el menú de selección tras completar el contrato actual \\ \hline
+7 & HU28 & Como jugador, quiero que Don Raíl me presente el contrato al inicio de cada nivel con un diálogo breve, para darme un objetivo narrativo y contexto histórico sobre la región \\ \hline
+8 & HU29 & Como nuevo jugador, quiero que Don Raíl me guíe a través de un tutorial interactivo en el primer nivel, para aprender las mecánicas del juego de una forma amigable y contextual \\ \hline
+8 & HU30 & Como jugador, quiero que Don Raíl me dé una advertencia contextual si construyo una vía con una pendiente muy pronunciada o una curva muy cerrada, para que pueda corregir errores de ingeniería antes del testeo \\ \hline
+8 & HU31 & Como jugador, quiero que al seleccionar una estación o ciudad importante, aparezca un ícono de Don Raíl que pueda clickear para escuchar un dato histórico sobre la importancia ferroviaria de ese lugar \\ \hline
+8 & HU32 & Como jugador, quiero escuchar o leer un breve comentario de Don Raíl cuando un tren sufre un evento durante la simulación, para aumentar la inmersión \\ \hline
+8 & HU33 & Como jugador, quiero que Don Raíl comente sobre mi puntuación final, celebrando el éxito con emoción o dándome un consejo en caso de fallar para que la evaluación se sienta más personal \\ \hline
+8 & HU34 & Como jugador, quiero que durante las pantallas de carga, aparezcan anécdotas cortas o "dichos" de Don Raíl sobre la vida en el ferrocarril, para enriquecer el mundo del juego y aprovechar los tiempos de espera \\ \hline
+6 & HU35 & Como administrador, quiero adquirir y guardar metadatos de los jugadores en una base de datos para poder generar informes \\ \hline
+\end{longtable}
+
+%colocar capturas de los primeros intentos
+%capturas de los videos con explicaciones de que tanto se hacia y el como fue la adaptacion, entre esos mencionando el que el mapa antiguo estaba mal y porque y todo eso
+
+En las primeras etapas del desarrollo, el mapa del entorno fue modelado en \textit{Blender} utilizando una técnica de elevación por textura, en la cual se empleó una imagen en escala de grises para representar las variaciones de altura del terreno. Dicha imagen, de resolución limitada, permitió obtener un modelo base del relieve, aunque con una precisión reducida debido a la baja calidad del mapa de elevación. En la Figura \ref{fig:mapa-altura} se presenta la textura empleada y el resultado del modelo tridimensional generado a partir de ella.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/mapa_alturas.png}
+    \caption*{(a) Mapa de elevación en escala de grises.}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/mapa_colombia_v1.jpeg}
+    \caption*{(b) Modelo tridimensional generado en Blender.}
+\end{minipage}
+\caption{Generación del terreno mediante mapa de elevación en Blender.}
+\label{fig:mapa-altura}
+\end{figure}
+
+Sin embargo, el modelo obtenido presentaba una alta densidad de polígonos, con un total de 24.5 millones de vértices, como se muestra en la Figura \ref{fig:rendimiento-terreno}. Debido a ello, durante las pruebas se registró una tasa de cuadros por segundo (\textit{frames per second}, FPS) promedio de 25.9, valor considerablemente inferior al rango óptimo de 30 a 60 FPS recomendado para garantizar una experiencia fluida. Este rendimiento reducido afectaba tanto el desempeño real del sistema como la percepción del usuario, generando una sensación de lentitud e inestabilidad en la simulación.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bajo_rendimiento.jpeg}
+\caption{Ejemplo del alto número de polígonos del modelo 3D que afecta el rendimiento.}
+\label{fig:rendimiento-terreno}
+\end{figure}
+
+Esta situación evidenció que el uso de un modelo tridimensional completo para representar el terreno no era una solución óptima, especialmente considerando los requerimientos de eficiencia y fluidez del entorno de simulación. Por ello, se decidió implementar un método alternativo de generación del mapa, con el fin de mejorar la eficiencia y el rendimiento general del entorno virtual.
+
+
+%le añadimos las columnas a los riesgos, con una nueva *tabla de de que tanto riesgo hay* y con eso definimos la columna nivel de riesgo y pues se pone la tabla entera ahora si, lo hemos puesto abierto y cerrado si ya esta hecho
+%que este cerrado es que ya se soluciono o se acepto, como los de poco riesgo, que puede..... osea existen cerrados que es porque el problema es muy minimo, no es tan grave
 
 al final si van las HU completas, 
 añadir una fase extra para colocar el diagrama de actividades inicial (el diagrama de actividades es mental)y el diagrama de componentes *el UML grande q urbano ni miró*, hay que explicarlo por partes por lo gigante
