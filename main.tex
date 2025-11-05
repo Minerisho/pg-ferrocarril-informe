@@ -6,14 +6,34 @@
 
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage{csquotes}
+\usepackage{etoolbox}
 %referencias bib
 \usepackage[
   backend=biber,
   style=verbose-trad2,    % notas al pie completas + 'Ibíd.' / 'Op. cit.'
   autocite=footnote,      % \autocite => nota al pie
   ibidtracker=context,    % controla cuándo usar Ibíd.
-  pagetracker=true
+  pagetracker=true,
+  dashed=false
 ]{biblatex}
+
+% Controla las separaciones deseadas
+\setlength{\bibitemsep}{12pt} % entre entradas
+\setlength{\bibparsep}{3pt}   % entre párrafos dentro de una entrada
+
+% --- Bibliografía: sin sangría colgante (todo alineado a la izquierda) ---
+\setlength{\bibhang}{0pt}
+\appto{\bibsetup}{%
+  \setlength{\leftmargin}{0pt}% margen izquierdo del entorno
+  \setlength{\itemindent}{0pt}% indentación del ítem
+  \setlength{\listparindent}{0pt}% indentación de párrafos dentro de la entrada
+}
+% Fuerza a que el entorno de bibliografía use esas longitudes
+\appto{\bibsetup}{%
+  \setlength{\itemsep}{\bibitemsep}%
+  \setlength{\parsep}{\bibparsep}%
+}
+
 \addbibresource{referencias.bib}
 
 \AtEveryCite{%
@@ -78,7 +98,7 @@
 \include{chapters/04-resultados} 
 
 % Bibliografía
-\printbibliography[title={Referencias}]
+\printbibliography[title={Bibliografía}]
 
 % (Opcional) Apéndices
 % \appendix
