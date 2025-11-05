@@ -125,12 +125,25 @@ Sin embargo, el modelo obtenido presentaba una alta densidad de polígonos, con 
 
 Esta situación evidenció que el uso de un modelo tridimensional completo para representar el terreno no era una solución óptima, especialmente considerando los requerimientos de eficiencia y fluidez del entorno de simulación. Por ello, se decidió implementar un método alternativo de generación del mapa, con el fin de mejorar la eficiencia y el rendimiento general del entorno virtual.
 
+En un intento por optimizar el proceso de generación del trazado ferroviario, se exploró inicialmente la posibilidad de representar las vías mediante la conexión de puntos y segmentos rectos. Este enfoque, aunque sencillo en su concepción, requería una gran cantidad de puntos para lograr una precisión adecuada en curvas y pendientes, lo cual incrementaba la complejidad del sistema y afectaba el rendimiento general. Ante esta limitación, se consideró el uso de splines, una técnica matemática que permite la creación de curvas suaves a partir de un conjunto reducido de puntos de control. Las splines resultan especialmente adecuadas para la representación de vías férreas, ya que facilitan la generación de trayectorias continuas y realistas sin necesidad de definir manualmente cada punto intermedio, mejorando así tanto la precisión geométrica como la eficiencia del proceso de renderizado.
 
 %le añadimos las columnas a los riesgos, con una nueva *tabla de de que tanto riesgo hay* y con eso definimos la columna nivel de riesgo y pues se pone la tabla entera ahora si, lo hemos puesto abierto y cerrado si ya esta hecho
 %que este cerrado es que ya se soluciono o se acepto, como los de poco riesgo, que puede..... osea existen cerrados que es porque el problema es muy minimo, no es tan grave
 
-al final si van las HU completas, 
-añadir una fase extra para colocar el diagrama de actividades inicial (el diagrama de actividades es mental)y el diagrama de componentes *el UML grande q urbano ni miró*, hay que explicarlo por partes por lo gigante
+Para gestionar adecuadamente los posibles inconvenientes durante el desarrollo del proyecto, se diseñó un sistema de evaluación de riesgos compuesto por dos tablas complementarias. En primer lugar, se elaboró una tabla de niveles de riesgo, donde se definen los valores numéricos del 1 al 5 que representan la magnitud del impacto y la probabilidad de ocurrencia de un evento. En esta escala, el valor 1 indica una afectación mínima o poco probable, mientras que el valor 5 corresponde a un evento con consecuencias críticas o de alta probabilidad.
+
+\begin{table}[H] 
+\centering \caption{Nivel de Riesgo} \label{tab:nivelRiesgo} 
+\begin{tabular}{|c|p{4.5cm}|c|c|c|p{5cm}|} \hline 
+\textbf{*} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5}\\ \hline Impacto & Afecta muy poco al proyecto & ... & ... & ... & Compromete severamente al correcto funcionamiento del proyecto\\ \hline 
+Probabilidad & Muy poca probabilidad & ... & ... & ... & Altamente probable\\ \hline 
+\end{tabular} 
+\end{table}
+
+En segundo lugar, se desarrolló una tabla general de riesgos, en la que se registran los posibles problemas identificados durante el proyecto. Esta tabla incluye los campos Descripción (donde se detalla el problema detectado), Causa, Impacto, Probabilidad, Nivel de riesgo (calculado como la multiplicación entre impacto y probabilidad), Plan de acción (estrategias o medidas a tomar) y Estado (donde se especifica si el riesgo permanece abierto o ya ha sido cerrado).
+
+%al final si van las HU completas, 
+%añadir una fase extra para colocar el diagrama de actividades inicial (el diagrama de actividades es mental)y el diagrama de componentes *el UML grande q urbano ni miró*, hay que explicarlo por partes por lo gigante
 
 \section{Implementación}
 % (Completar) vendria a ser implementacion
