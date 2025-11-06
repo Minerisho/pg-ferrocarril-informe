@@ -55,6 +55,18 @@
 \RequirePackage{booktabs}
 \RequirePackage{enumitem}
 \RequirePackage{xcolor}
+\RequirePackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} % centro H y V
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}} % izquierda H, centro V
+\RequirePackage{etoolbox}
+\BeforeBeginEnvironment{longtable}{\begingroup}
+\AfterEndEnvironment{longtable}{\endgroup}
+\AtBeginEnvironment{longtable}{%
+  \singlespacing                 % interlineado 1.0 dentro de la tabla
+  %\renewcommand{\arraystretch}{1}% compacta altura de filas
+  \setlength{\extrarowheight}{1pt}% puedes subir a 1pt si ves texto “apretado”
+}
+\AtBeginEnvironment{longtable}{\small ...} % o \footnotesize
 
 % --- Formato de títulos ---
 \RequirePackage{titlesec}
