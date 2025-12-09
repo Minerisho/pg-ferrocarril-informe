@@ -17,6 +17,65 @@ identificar riesgos, tabla de riesgos pues los primeras tres columnas hasta caus
 
 planificar fase de elaboración, pondremos mucho texto inventado y ya, sobre lo de que decidimos usar estas HU porque tal y cosas asi
 
+\subsection{Historias de Usuario}
+
+Para el proyecto se recurrió a definir historias de usuario (HU) con el fin de proyectar las necesidades y expectativas desde la perspectiva del usuario final, que en este caso es el jugador del videojuego. Se empezó escribiendo las ideas principales y las mecánicas básicas, después se empezó modificar y/o crear ciertas HU dirigidos a cumplir con los aspectos escenciales para considerar el videojuego como un GBL.
+
+La primera iteración de las HU se redactaron en una tabla simple que contenía únicamente el código y la descripción de cada historia. Esta versión inicial sirvió como base para identificar las funcionalidades clave del sistema y establecer un marco de referencia para el desarrollo posterior. El \ref{tab:hu-inicial} muestra las historias de usuario definidas en la primera iteración.
+
+\begin{longtable}{|c|L{12cm}|}\label{tab:hu-inicial}
+\caption{Primera versión de las Historias de Usuario} \label{tab:hu-inicial} \\
+\hline
+\textbf{Código} & \textbf{Historia de Usuario} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Código} & \textbf{Historia de Usuario} \\ \hline
+\endhead
+
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+
+\hline
+\endlastfoot
+HU1 & Como jugador, quiero ver una pantalla de selección de niveles para elegir cuál jugar  \\ \hline
+HU2 & Como jugador, quiero que al empezar un nivel, se me presente una pantalla de contrato que detalle el presupuesto, los objetivos y los posibles desafíos \\ \hline
+HU3 & Como jugador, quiero poder mover la cámara (panorámica) por el mapa para explorar el terreno \\ \hline
+HU4 & Como jugador, quiero poder acercar y alejar la vista (zoom) para ver el mapa con diferentes niveles de detalle \\ \hline
+HU5 & Como jugador, quiero ver las delimitaciones políticas y ríos \\ \hline
+HU6 & Como jugador, quiero ver un terreno del nivel a jugar \\ \hline
+HU7 & Como jugador, quiero poder rotar la cámara para observar el terreno desde distintos ángulos \\ \hline
+HU8 & Como jugador, quiero poder activar una capa de eventos para visualizar las zonas de riesgo y planificar mi ruta en consecuencia \\ \hline
+HU9 & Como jugador, quiero poder construir un tramo de vía férrea entre dos puntos \\ \hline
+HU10 & Como jugador, quiero poder eliminar un tramo de vía férrea para rediseñar mis rutas \\ \hline
+HU11 & Como jugador, quiero que se pueda construya un puente o valles \\ \hline
+HU12 & Como jugador, quiero que se construya automáticamente un túnel si mi vía férrea atraviesa una montaña \\ \hline
+HU13 & Como jugador, quiero poder construir estaciones en puntos específicos de la vía para definir los puntos de inicio y fin del ciclo \\ \hline
+HU14 & Como jugador, quiero que la interfaz muestre mi presupuesto actual en todo momento para controlar mis gastos de construcción \\ \hline
+HU15 & Como jugador, quiero poder deshacer mi última acción de construcción para corregir un error rápidamente \\ \hline
+HU16 & Como jugador, tras diseñar la ruta, quiero acceder a un menú para seleccionar y comprar la locomotora que usaré \\ \hline
+HU17 & Como jugador, quiero poder añadir vagones específicos (pasajeros, carga) a mi locomotora para cumplir los requisitos del contrato \\ \hline
+HU18 & Como jugador, quiero que el menú de selección me muestre las locomotoras de la ruta que diseñé \\ \hline
+HU19 & Como jugador, durante la simulación, quiero ver una alerta o efecto visual cuando un tren está sufriendo daños al pasar por una zona de evento \\ \hline
+HU20 & Como jugador, quiero que el botón de "Hacer Testeo" me informe si me falta algún requisito para iniciar la simulación \\ \hline
+HU21 & Como jugador, quiero tener la opción de volver a la fase de construcción después de un testeo para modificar mis rutas antes de la evaluación final \\ \hline
+HU22 & Como jugador, al finalizar un nivel, quiero ver una pantalla de puntuación que califique mi desempeño \\ \hline
+HU23 & Como jugador, quiero que mi puntuación final considere la rentabilidad (costo total vs. valor del contrato) \\ \hline
+HU24 & Como jugador, quiero que mi puntuación final considere la durabilidad (estado final de mis trenes y vías tras la simulación) \\ \hline
+HU25 & Como jugador, quiero que mi puntuación final considere la eficiencia (tiempo que tardó el tren en completar el ciclo) \\ \hline
+HU26 & Como jugador, quiero ver un informe detallado que desglose mi puntuación final para entender cómo mejorar \\ \hline
+HU27 & Como jugador, quiero que se desbloqueen nuevos niveles en el menú de selección tras completar el contrato actual \\ \hline
+HU28 & Como jugador, quiero que Don Raíl me presente el contrato al inicio de cada nivel con un diálogo breve, para darme un objetivo narrativo y contexto histórico sobre la región \\ \hline
+HU29 & Como nuevo jugador, quiero que Don Raíl me guíe a través de un tutorial interactivo en el primer nivel, para aprender las mecánicas del juego de una forma amigable y contextual \\ \hline
+HU30 & Como jugador, quiero que Don Raíl me dé una advertencia contextual si construyo una vía con una pendiente muy pronunciada o una curva muy cerrada, para que pueda corregir errores de ingeniería antes del testeo \\ \hline
+HU31 & Como jugador, quiero que al seleccionar una estación o ciudad importante, aparezca un ícono de Don Raíl que pueda clickear para escuchar un dato histórico sobre la importancia ferroviaria de ese lugar \\ \hline
+HU32 & Como jugador, quiero escuchar o leer un breve comentario de Don Raíl cuando un tren sufre un evento durante la simulación, para aumentar la inmersión \\ \hline
+HU33 & Como jugador, quiero que Don Raíl comente sobre mi puntuación final, celebrando el éxito con emoción o dándome un consejo en caso de fallar para que la evaluación se sienta más personal \\ \hline
+HU34 & Como jugador, quiero que durante las pantallas de carga, aparezcan anécdotas cortas o "dichos" de Don Raíl sobre la vida en el ferrocarril, para enriquecer el mundo del juego y aprovechar los tiempos de espera \\ \hline
+HU35 & Como administrador, quiero adquirir y guardar metadatos de los jugadores en una base de datos para poder generar informes \\ \hline
+\end{longtable}
+
 \section{Diseño}
 % (Completar) vendria a ser elaboracion
 % organizar las HU? osea poner lo que esta en la columna de epica, quitar la prioridad, eso de M S C
