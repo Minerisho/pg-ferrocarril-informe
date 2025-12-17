@@ -401,13 +401,172 @@ Por último, se definió el nivel de complejidad, con una escala de 1 a 5, en la
 
 \section{Implementación}
 % (Completar) vendria a ser implementacion
-poner el tablero kanban, hay que inventarse que hizo cada uno pq no hay registro, tiene que tener semanas, inventadas si no recordamos / tipo semana 1, semana 2, semana 3-5, semana 6 a 7 y asi hasta que la columna de finalizado este completa.
-mejor dicho de la semana tal a tal se hizo esto, de esta a esta se hizo esto.
-poner entre semanas y narrar un poco el progreso, sucedieron estos problemas, decidimos hacer ciertos cambiso a tal cosa
 
-hay mas libertad la vdd, asi q esto es un comodin *BALATRO REFERENCIA*
+\subsection{Configuración inicial del proyecto y control de versiones}
 
-estaria bien colocar el diagrama de componentes aca si terminado final y explicado a detalle
+El proyecto fue desarrollado utilizando el motor Unity, configurado desde una etapa temprana con control de versiones mediante Git. Esta decisión permitió llevar un registro detallado del avance del desarrollo, facilitar el trabajo colaborativo y realizar integraciones progresivas entre los distintos sistemas del juego.
+
+Adicionalmente, se configuró el uso de Git Large File Storage (LFS) para la gestión de prefabs y recursos de gran tamaño, lo cual permitió mantener un repositorio organizado y evitar problemas asociados al manejo de archivos pesados.
+
+\subsection{Implementación del mapa}
+
+Durante las primeras etapas de desarrollo del proyecto se abordó la implementación del entorno geográfico mediante un modelo tridimensional del mapa de Colombia, construido como una malla 3D independiente en Blender, comos se puede ver en la Figura~\ref{fig:mapa_inicial}. Esta primera versión del mapa fue utilizada para realizar pruebas funcionales básicas del sistema, limitadas al control de la cámara (desplazamiento y rotación). Durante estas pruebas se evidencio que el rendimiento obtenido en esta etapa fue deficiente, presentando una baja tasa de fotogramas que dificultaba la interacción incluso en escenarios simples.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/mapa_inicial.jpeg}
+\caption{Modelo tridimensional inicial del mapa de Colombia utilizado en las primeras pruebas funcionales.}
+\label{fig:mapa_inicial}
+\end{figure}
+
+Con el fin de mejorar el desempeño del sistema, se desarrolló una segunda versión del mapa basada en un enfoque \textit{low poly}, reduciendo de manera considerable la complejidad geométrica del modelo. Esta iteración, mostrada en la Figura~\ref{fig:mapa_lowpoly}, produjo una mejora perceptible en el rendimiento, permitiendo una experiencia de navegación más fluida y funcional, aunque aún lejos de ser óptima. No obstante, este resultado permitió confirmar que la complejidad geométrica influía de forma directa en el comportamiento del sistema.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/mapa_lowpoly.jpeg}
+\caption{Versión del mapa basada en un estilo \textit{low poly}, empleada durante las primeras iteraciones de optimización.}
+\label{fig:mapa_lowpoly}
+\end{figure}
+
+Posteriormente, se aplicaron técnicas de suavizado sobre el modelo \textit{low poly}, utilizando un modificador de subdivisión de superficie (\textit{Subdivision Surface}), con el objetivo de mejorar la calidad visual del terreno. En esta etapa se incorporaron adicionalmente modelos tridimensionales de los principales ríos del país. El resultado de esta iteración se presenta en la Figura~\ref{fig:mapa_suavizado}. A pesar de que esta versión contaba con una cantidad de polígonos inferior a la del modelo inicial, el rendimiento obtenido fue considerablemente peor, presentando una degradación significativa en la tasa de fotogramas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/mapa_suavizado.jpeg}
+\caption{Mapa tridimensional con suavizado aplicado mediante subdivisión de superficie, incluyendo elementos visuales adicionales como los ríos.}
+\label{fig:mapa_suavizado}
+\end{figure}
+
+Con el propósito de aislar la causa de este comportamiento, se realizaron pruebas adicionales eliminando los modelos de los ríos. Si bien esta modificación produjo una leve mejora, el rendimiento continuó siendo bajo, con valores similares a los obtenidos en la versión \textit{low poly}. Estos resultados permitieron identificar que, aunque los ríos contribuían negativamente al desempeño, el problema principal persistía debido a la naturaleza del modelo tridimensional completo.
+
+Ante la persistencia de estas limitaciones, se decidió realizar una prueba adicional consistente en el uso de un fragmento del mapa tridimensional, empleando únicamente una sección reducida del territorio para evaluar la viabilidad del enfoque basado en modelos 3D. La Figura~\ref{fig:mapa_fragmento} muestra el fragmento utilizado durante esta evaluación. Los resultados obtenidos evidenciaron que, aun con una porción significativamente menor del mapa, el rendimiento continuaba siendo insatisfactorio, lo que permitió descartar definitivamente el uso de un modelo tridimensional completo como solución viable.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/mapa_fragmento.jpeg}
+\caption{Fragmento del mapa tridimensional utilizado para evaluar el impacto del tamaño del entorno en el rendimiento del sistema.}
+\label{fig:mapa_fragmento}
+\end{figure}
+
+A partir de este análisis, se concluyó que el problema no residía exclusivamente en la cantidad de polígonos, sino en el hecho de que el modelo tridimensional debía mantenerse cargado en su totalidad durante la ejecución del sistema, sin contar con mecanismos de optimización como niveles de detalle (\textit{Level of Detail}, LOD) o segmentación dinámica del entorno. Como consecuencia, se tomó la decisión de cambiar la estrategia de implementación del entorno geográfico, adoptando el sistema de Terrenos de Unity como alternativa técnica más eficiente y escalable. Este sistema permitió modelar el relieve de forma más precisa y eficiente, facilitando la integración de ríos, lagos, fronteras políticas y elementos naturales. La implementación final del entorno utilizando este enfoque se presenta en la Figura~\ref{fig:mapa_unity}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/mapa_unity.jpeg}
+\caption{Implementación final del entorno geográfico utilizando el sistema de Terrenos de Unity.}
+\label{fig:mapa_unity}
+\end{figure}
+
+\subsection{Implementación del sistema ferroviario}
+
+Durante las primeras etapas del desarrollo se implementó una versión inicial del sistema ferroviario, orientada a permitir la construcción dinámica de vías férreas mediante la interacción del jugador. En una primera aproximación, las vías se generaban a partir de puntos discretos que se conectaban entre sí mediante segmentos lineales, lo que permitía una alta precisión en la colocación del trazado.
+
+No obstante, este enfoque implicaba la creación de una gran cantidad de objetos individuales en la escena, lo cual produjo un impacto negativo considerable en el rendimiento del sistema. A medida que el jugador extendía la red ferroviaria, el número de elementos aumentaba de forma significativa, generando una degradación progresiva del desempeño y limitando la escalabilidad del sistema.
+
+Con el fin de solucionar este problema, se adoptó un enfoque basado en splines para la generación de las vías férreas, utilizando el paquete \textit{Dreamteck Splines}. Este enfoque permitió definir trayectorias continuas mediante un número reducido de puntos de control, garantizando un trazado más eficiente y un desplazamiento suave a lo largo de las vías. Adicionalmente, dicho paquete proporcionaba una plantilla funcional para sistemas ferroviarios, la cual fue utilizada como base para el desarrollo del comportamiento del tren.
+
+Una vez estabilizado el sistema de construcción de vías, se procedió a la implementación del tren. En una primera versión, se desarrolló una locomotora única que recorría el spline a una velocidad constante. En este modelo, el tren se detenía de forma inmediata cuando la pendiente del terreno superaba un umbral predefinido. Si bien este enfoque resultó sencillo de implementar y permitió validar la navegación sobre las vías, producía un comportamiento poco natural, especialmente en transiciones abruptas de pendiente.
+
+Posteriormente, se exploró un segundo enfoque basado en la simulación física del tren, incorporando variables como peso, aceleración y fuerzas asociadas al movimiento. Aunque este modelo buscaba una mayor fidelidad al comportamiento real, presentó múltiples inconvenientes: su implementación resultó considerablemente más compleja, el rendimiento del sistema se vio afectado de manera negativa y, en ciertos casos, el tren permanecía detenido incluso en tramos rectos, lo que evidenciaba problemas de estabilidad en la simulación.
+
+Finalmente, se adoptó un tercer enfoque que equilibraba simplicidad, rendimiento y comportamiento realista. En el sistema actual, cada tren cuenta con una velocidad máxima, un ángulo máximo de pendiente que puede soportar la locomotora y un factor de desaceleración influenciado tanto por la inclinación del terreno como por la cantidad de vagones acoplados. En este modelo, el número de vagones afecta directamente el desempeño del tren, reduciendo progresivamente su velocidad hasta un máximo de tres vagones.
+
+Este enfoque permitió obtener un comportamiento más natural y consistente, en el cual la velocidad del tren varía de forma gradual en función del terreno, y las pendientes excesivas generan una desaceleración progresiva en lugar de una detención abrupta. Como resultado, este sistema se consolidó como la solución más satisfactoria para el proyecto, ofreciendo un balance adecuado entre realismo, control y eficiencia computacional.
+
+% \subsection{Limitaciones del modelo tridimensional y cambio de enfoque}
+
+% A medida que el proyecto avanzó, se identificaron limitaciones técnicas en el uso de un modelo tridimensional estático para representar un territorio de gran escala. Entre estas limitaciones se encontraron dificultades de rendimiento, escalabilidad y adaptación del terreno a las necesidades del sistema ferroviario.
+
+% Debido a estas restricciones, se tomó la decisión de replantear la forma en que se representaba el entorno geográfico, optando por una solución más flexible que permitiera un mayor control sobre el relieve y la interacción con el sistema de vías.
+
+% \subsection{Implementación del entorno mediante el sistema de Terrenos de Unity}
+
+% Como resultado del cambio de enfoque, la implementación del entorno fue delegada a otro integrante del equipo, quien desarrolló el mapa utilizando el sistema de Terrenos de Unity. Este sistema permitió modelar el relieve de forma más precisa y eficiente, facilitando la integración de ríos, lagos, fronteras políticas y elementos naturales.
+
+% El uso de terrenos permitió además aplicar restricciones de construcción, evitando la colocación de vías sobre cuerpos de agua y zonas no permitidas.
+
+\subsection{Integración de elementos geográficos y restricciones de construcción}
+
+Una vez consolidado el entorno geográfico definitivo y estabilizado el funcionamiento del sistema ferroviario, se procedió a la integración de restricciones de construcción basadas en las características del terreno. Estas restricciones cumplen un doble propósito: por un lado, mejorar el realismo del sistema al impedir construcciones inviables, y por otro, introducir un componente estratégico que obliga al jugador a planificar cuidadosamente el trazado de las vías.
+
+Para este fin, se implementó un sistema de previsualización de la vía férrea antes de su colocación definitiva. Este sistema muestra al jugador un segmento de vía en tiempo real, el cual sigue la posición del cursor y permite anticipar la forma que tendrá el trazado. Dicha previsualización utiliza retroalimentación visual mediante códigos de color: el segmento se muestra en color verde cuando la construcción es válida y en color rojo cuando no cumple las condiciones establecidas.
+
+La validación de la construcción se realiza evaluando el punto final del segmento de previsualización, el cual corresponde a la posición actual del cursor sobre el terreno. Si este punto se encuentra sobre una zona marcada como obstáculo, la construcción es automáticamente invalidada. Para la identificación de estas zonas se empleó el sistema de etiquetas (\textit{tags}) de Unity, permitiendo clasificar cualquier objeto del entorno como no construible.
+
+Este enfoque facilita la definición de áreas restringidas tales como océanos, ríos u otros elementos geográficos relevantes, sin necesidad de implementar lógica específica para cada tipo de obstáculo. Basta con asignar la etiqueta correspondiente al objeto para que el sistema de construcción lo reconozca como una zona no válida. De esta manera, se logró un sistema flexible y fácilmente extensible, capaz de adaptarse a nuevos elementos del entorno sin modificar la lógica central de construcción.
+
+La integración de estas restricciones contribuye significativamente a la coherencia del mundo del juego, evitando situaciones visualmente inconsistentes y reforzando la sensación de control y retroalimentación inmediata para el jugador durante el proceso de construcción.
+
+\subsection{Sistemas de interacción, interfaz y retroalimentación al jugador}
+
+Con el fin de garantizar una experiencia de usuario clara, accesible y coherente, se desarrollaron diversos sistemas de interacción e interfaz gráfica que permiten al jugador comprender, controlar y evaluar su desempeño dentro del juego. Estos sistemas abarcan tanto los elementos necesarios para la interacción directa durante el nivel, como aquellos orientados a la navegación general y la retroalimentación visual y sonora.
+
+Durante la ejecución de un nivel, se implementó un conjunto de botones que permiten al jugador acceder a las principales acciones del sistema. Entre estas acciones se encuentra la activación del modo de construcción de vías férreas, la opción para eliminar la última vía generada, y el acceso al modo de generación de estructuras especiales. Este último permite la creación automática de túneles o puentes en función de la presencia o ausencia de terreno entre los puntos de inicio y fin del trazado, facilitando la continuidad de la red ferroviaria en zonas geográficamente complejas.
+
+Adicionalmente, se desarrolló un panel de selección de tren que guía al jugador a través de un proceso secuencial de configuración. En primer lugar, el jugador debe seleccionar una locomotora, la cual determina las capacidades básicas del tren. Posteriormente, se define la cantidad de vagones acoplados, lo que influye directamente en el desempeño del tren durante la simulación. Finalmente, se permite seleccionar el tipo de vagón, opción que cobra relevancia principalmente en el caso del tren de carga, el cual admite múltiples configuraciones. Cabe destacar que, si bien esta última elección no afecta de forma directa el comportamiento del tren, contribuye a la personalización y coherencia visual del sistema.
+
+Una vez configurado el tren, el jugador puede iniciar la simulación mediante un botón dedicado, dando comienzo a la ejecución del nivel y a la evaluación de las decisiones tomadas durante la fase de planificación.
+
+En cuanto al control general del juego, se incorporó un botón de pausa que despliega un menú contextual desde el cual el jugador puede reiniciar el nivel, acceder a una guía explicativa o regresar al menú principal. Este sistema permite interrumpir la simulación sin pérdida de información, ofreciendo una experiencia más flexible y controlada.
+
+Como apoyo a la orientación espacial, se implementó un mapa en vista aérea que representa el territorio colombiano, en el cual se destacan distintos puntos de interés. Entre estos se incluyen ciudades relevantes, la posición actual del jugador y la ubicación del tren durante la simulación, permitiendo una comprensión global del entorno y del progreso del nivel.
+
+Asimismo, se integró un panel de contrato que permite al jugador consultar en cualquier momento los objetivos del nivel, mostrando nuevamente la información presentada al inicio de la partida. Este elemento refuerza la claridad de las metas y reduce la posibilidad de confusión durante la ejecución.
+
+Finalmente, se desarrolló un menú principal que centraliza la navegación general del sistema. Desde este menú, el jugador puede acceder al selector de niveles, consultar los créditos del proyecto, modificar opciones de configuración y cerrar la aplicación. En conjunto, estos sistemas de interfaz y retroalimentación contribuyen a una experiencia de usuario estructurada, intuitiva y alineada con los objetivos educativos y lúdicos del proyecto.
+
+\subsection{Implementación del sistema de tren y condiciones de victoria}
+
+El sistema de tren constituye uno de los componentes centrales del juego, no solo por su rol en la simulación del movimiento, sino también por su integración directa con las condiciones de victoria y los mecanismos de evaluación del desempeño del jugador. Estas condiciones se definieron a partir de los objetivos establecidos en cada contrato, los cuales determinan los requisitos necesarios para la finalización exitosa de un nivel.
+
+Para que se declare la victoria, el sistema valida el cumplimiento de una serie de condiciones específicas: el recorrido debe iniciar y finalizar en los puntos establecidos por el contrato, deben haberse atravesado correctamente los puntos intermedios cuando estos existen, y la locomotora utilizada debe coincidir con la solicitada. Solo cuando todas estas condiciones son satisfechas, el nivel se considera completado de forma exitosa y se activa la interfaz de finalización.
+
+Una vez alcanzada la victoria, se despliega una interfaz de cierre del nivel en la cual se presentan los resultados obtenidos por el jugador. En esta interfaz se implementó un sistema de calificación basado en estrellas, compuesto por un máximo de cuatro estrellas, cada una asociada a un criterio de desempeño independiente. La primera estrella, denominada \textbf{estrella por completado}, se otorga automáticamente al cumplir correctamente el contrato. La \textbf{estrella de vida} se obtiene cuando el tren finaliza el recorrido sin haber sufrido daños. La \textbf{estrella de presupuesto} se concede si el jugador completa el nivel manteniendo un saldo positivo de dinero. Finalmente, la \textbf{estrella de tiempo} se obtiene cuando el recorrido se completa dentro del tiempo objetivo propuesto por el contrato.
+
+Como complemento al sistema de estrellas, el cual ofrece una evaluación cualitativa del cumplimiento de los objetivos del contrato, se implementó un sistema de puntuación numérica orientado a medir de forma más precisa el desempeño global del jugador. Este puntaje permite diferenciar distintos niveles de eficiencia incluso entre partidas exitosas.
+
+La puntuación se obtiene a partir de una fórmula matemática que combina múltiples factores del juego, los cuales son previamente normalizados para garantizar una evaluación equilibrada. Entre estos factores se consideran el tiempo empleado en completar el recorrido, comparado con el tiempo objetivo definido por el contrato; la cantidad de vagones utilizados, incentivando configuraciones de mayor riesgo y complejidad operativa; el dinero restante al finalizar el nivel; y el estado de la vida del tren al concluir la simulación.
+
+\begin{equation}
+S_{tiempo} = \frac{1}{1 + \frac{tiempoUsado}{tiempoObjetivo}}
+\end{equation}
+
+\begin{equation}
+S_{vagones} = \frac{cantidadVagones}{3}
+\end{equation}
+
+\begin{equation}
+S_{presupuesto} =
+\frac{\left| dineroUsado - dineroPresupuestado \right|}{dineroPresupuestado}
+\end{equation}
+
+\begin{equation}
+S_{vida} = \frac{vidaActual}{vidaMaxima}
+\end{equation}
+
+\begin{equation}
+\label{eq:puntaje_final}
+P = \left\lfloor 1000 \cdot \left(
+1.35 \cdot S_{tiempo} +
+1.25 \cdot S_{vagones} +
+1.15 \cdot S_{presupuesto} +
+1.25 \cdot S_{vida}
+\right) \right\rceil
+\end{equation}
+
+
+Cada uno de estos factores contribuye de manera ponderada al puntaje final, el cual se escala a un valor máximo de referencia. Este enfoque permite reflejar de forma cuantitativa las decisiones tomadas por el jugador durante la fase de planificación y ejecución, promoviendo estrategias que optimicen tanto el rendimiento como la eficiencia.
+
+Al finalizar el cálculo de estrellas y puntaje, la interfaz de victoria presenta dos opciones adicionales: el acceso al modo libre y la opción de regresar al menú principal. El modo libre permite al jugador continuar explorando el escenario sin restricciones ni interfaces activas, mientras que la opción de menú finaliza la simulación y retorna al flujo principal del juego.
+
+De forma complementaria, se implementó una interfaz de derrota que se activa cuando no se cumplen las condiciones del contrato. Esta interfaz informa al jugador la causa específica de la derrota y ofrece las mismas opciones de navegación que la interfaz de victoria, manteniendo la coherencia visual y funcional del sistema.
+
+\subsection{Integración final y versiones jugables de prueba}
+
+Finalmente, el proyecto pasó por múltiples etapas de integración, en las cuales se unificaron los sistemas desarrollados de manera independiente. Como resultado, se generaron versiones jugables de prueba que permitieron validar la estabilidad y coherencia general del sistema.
+
+Estas versiones sirvieron como base para la evaluación del funcionamiento del juego en condiciones similares a las del producto final.
+
 
 \section{Pruebas}
 % (Completar) vendria a ser evaluacion
@@ -416,6 +575,4 @@ publicarlo en internet
 
 obtener resultados de envuesta de jugadores
 
-analizar los resultados, nadie jugo el 3 nivel, pirobos
-
-*unificar actividades* A1
+analizar los resultados, nadie jugo el 3 nivel cosas asi
