@@ -85,7 +85,6 @@ HU35 & Como administrador, quiero adquirir y guardar metadatos de los jugadores 
 \section{Diseño}
 % (Completar) vendria a ser elaboracion
 % organizar las HU?
-osea poner lo que esta en la columna de epica, quitar la prioridad, eso de M S C
 % explicar epicas tambien la tabla de epicas
 \subsection{Organización de las HU}
 Para organizar el desarrollo del proyecto, se definieron un conjunto de épicas que agrupan las principales funcionalidades del sistema.
@@ -465,13 +464,37 @@ No obstante, este enfoque implicaba la creación de una gran cantidad de objetos
 
 Con el fin de solucionar este problema, se adoptó un enfoque basado en splines para la generación de las vías férreas, utilizando el paquete \textit{Dreamteck Splines}. Este enfoque permitió definir trayectorias continuas mediante un número reducido de puntos de control, garantizando un trazado más eficiente y un desplazamiento suave a lo largo de las vías. Adicionalmente, dicho paquete proporcionaba una plantilla funcional para sistemas ferroviarios, la cual fue utilizada como base para el desarrollo del comportamiento del tren.
 
-Una vez estabilizado el sistema de construcción de vías, se procedió a la implementación del tren. En una primera versión, se desarrolló una locomotora única que recorría el spline a una velocidad constante. En este modelo, el tren se detenía de forma inmediata cuando la pendiente del terreno superaba un umbral predefinido. Si bien este enfoque resultó sencillo de implementar y permitió validar la navegación sobre las vías, producía un comportamiento poco natural, especialmente en transiciones abruptas de pendiente.
+Como parte del proceso de implementación visual, se desarrollaron modelos tridimensionales propios para los trenes utilizados en el juego. Estos modelos fueron creados con el objetivo de representar de forma coherente las distintas locomotoras y configuraciones de vagones disponibles para el jugador.
+
+El uso de modelos 3D personalizados permitió una mejor integración visual con el entorno del juego y facilitó la diferenciación entre tipos de trenes, reforzando tanto la identidad visual del sistema como la comprensión de las capacidades asociadas a cada locomotora. La Figura~\ref{fig:tren_modelo} presenta uno de los modelos de tren utilizados durante la simulación.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/tren_modelo.jpeg}
+\caption{Modelo tridimensional de los trenes implementados en el juego.}
+\label{fig:tren_modelo}
+\end{figure}
+
+Una vez estabilizado el sistema de construcción de vías y creados los modelos 3d de los trenes, se procedió a la implementación del tren. En una primera versión, se desarrolló una locomotora única que recorría el spline a una velocidad constante. En este modelo, el tren se detenía de forma inmediata cuando la pendiente del terreno superaba un umbral predefinido. Si bien este enfoque resultó sencillo de implementar y permitió validar la navegación sobre las vías, producía un comportamiento poco natural, especialmente en transiciones abruptas de pendiente.
 
 Posteriormente, se exploró un segundo enfoque basado en la simulación física del tren, incorporando variables como peso, aceleración y fuerzas asociadas al movimiento. Aunque este modelo buscaba una mayor fidelidad al comportamiento real, presentó múltiples inconvenientes: su implementación resultó considerablemente más compleja, el rendimiento del sistema se vio afectado de manera negativa y, en ciertos casos, el tren permanecía detenido incluso en tramos rectos, lo que evidenciaba problemas de estabilidad en la simulación.
 
 Finalmente, se adoptó un tercer enfoque que equilibraba simplicidad, rendimiento y comportamiento realista. En el sistema actual, cada tren cuenta con una velocidad máxima, un ángulo máximo de pendiente que puede soportar la locomotora y un factor de desaceleración influenciado tanto por la inclinación del terreno como por la cantidad de vagones acoplados. En este modelo, el número de vagones afecta directamente el desempeño del tren, reduciendo progresivamente su velocidad hasta un máximo de tres vagones.
 
 Este enfoque permitió obtener un comportamiento más natural y consistente, en el cual la velocidad del tren varía de forma gradual en función del terreno, y las pendientes excesivas generan una desaceleración progresiva en lugar de una detención abrupta. Como resultado, este sistema se consolidó como la solución más satisfactoria para el proyecto, ofreciendo un balance adecuado entre realismo, control y eficiencia computacional.
+
+Adicionalmente, se implementó un sistema de zonas de daño asociado al recorrido del tren, con el objetivo de penalizar trazados ferroviarios mal planificados y reforzar la toma de decisiones durante la fase de construcción. Estas zonas de daño se implementaron como modelos tridimensionales simples, representados visualmente mediante volúmenes cilíndricos de color rojo, los cuales actúan como áreas de riesgo dentro del entorno.
+
+Cuando el tren atraviesa una de estas zonas, se activa un sistema de detección de colisiones que provoca una reducción directa en la vida del tren. Este daño se aplica de forma inmediata, denotado como una pequeña explosion en la locomotora, asi como una reduccion visual en la vida del tren, como se puede ver en la Figura~\ref{fig:trenExplota}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/trenExplota.png}
+\caption{Tren sufriendo daño al cruzar una zona de daño}
+\label{fig:trenExplota}
+\end{figure}
+
+Este enfoque permite representar de manera visual y tangible sectores peligrosos del trazado, facilitando al jugador la identificación de errores de planificación, tales como curvas cerradas o pendientes excesivas. Asimismo, la vida del tren se integra directamente con las condiciones de victoria del nivel, haciendo que la correcta gestión del recorrido sea un factor determinante para el éxito del contrato.
 
 % \subsection{Limitaciones del modelo tridimensional y cambio de enfoque}
 
@@ -560,6 +583,23 @@ Cada uno de estos factores contribuye de manera ponderada al puntaje final, el c
 Al finalizar el cálculo de estrellas y puntaje, la interfaz de victoria presenta dos opciones adicionales: el acceso al modo libre y la opción de regresar al menú principal. El modo libre permite al jugador continuar explorando el escenario sin restricciones ni interfaces activas, mientras que la opción de menú finaliza la simulación y retorna al flujo principal del juego.
 
 De forma complementaria, se implementó una interfaz de derrota que se activa cuando no se cumplen las condiciones del contrato. Esta interfaz informa al jugador la causa específica de la derrota y ofrece las mismas opciones de navegación que la interfaz de victoria, manteniendo la coherencia visual y funcional del sistema.
+
+\subsection{Implementación del sistema de tutorial}
+
+Con el fin de facilitar la curva de aprendizaje del jugador y garantizar una correcta comprensión de las mecánicas principales del juego, se desarrolló un sistema de tutorial interactivo integrado en las primeras etapas de la experiencia.
+
+Este sistema guía al jugador a través de las acciones fundamentales, tales como la construcción de vías, la selección de trenes y el inicio de la simulación, presentando instrucciones de forma progresiva y contextual. De esta manera, el tutorial permite que el jugador aprenda mediante la práctica, reduciendo la dependencia de explicaciones externas.
+
+Como elemento central del tutorial, se creó un personaje guía denominado \textit{Don Rail}, el cual actúa como intermediario entre el sistema y el jugador. Este personaje fue modelado en Blender y cumple la función de presentar indicaciones, consejos y advertencias a lo largo del proceso de aprendizaje. La inclusión de un personaje dedicado permitió humanizar la experiencia y mejorar la claridad de la información transmitida.
+
+La Figura~\ref{fig:don_rail} muestra el modelo tridimensional del personaje Don Rail utilizado durante el tutorial.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/don_rail.png}
+\caption{Modelo tridimensional del personaje Don Rail, utilizado como guía durante el tutorial.}
+\label{fig:don_rail}
+\end{figure}
 
 \subsection{Integración final y versiones jugables de prueba}
 
