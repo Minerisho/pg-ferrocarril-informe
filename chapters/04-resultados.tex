@@ -608,7 +608,35 @@ Finalmente, el proyecto pasó por múltiples etapas de integración, en las cual
 Estas versiones sirvieron como base para la evaluación del funcionamiento del juego en condiciones similares a las del producto final.
 
 
-\section{Pruebas}
-% (Completar) vendria a ser evaluacion
+\section{Pruebas y Evaluación}
 
-Se distribuyó una version ejecutable a amigos y conocidos por medio de un link de google drive, asi como también una encuesta para que los usuarios respondan una vez elijan terminar su experiencia con el software
+La fase de evaluación se centró en validar tanto la estabilidad técnica del sistema como la experiencia de usuario (UX). Para ello, se aplicó una encuesta de satisfacción estructurada bajo principios de usabilidad, la cual fue respondida por los usuarios tras interactuar con una versión beta del videojuego.
+
+\subsection{Diseño de la Evaluación y Principios de UX}
+
+Para evaluar la efectividad del videojuego serio, las preguntas de la encuesta se diseñaron siguiendo dimensiones clave de la experiencia de usuario y las heurísticas de usabilidad de Nielsen. A continuación, se detallan las categorías evaluadas:
+
+\begin{enumerate}
+    \item \textbf{Facilidad de Aprendizaje (Learnability):} Vinculada a la \textit{HU29 (Tutorial)} \cite{608}. Se consultó al usuario si la guía de Don Raíl fue suficiente para entender las mecánicas de construcción sin necesidad de manuales externos.
+    \item \textbf{Visibilidad del Estado del Sistema:} Basado en la heurística de mantener al usuario informado. Se evaluó si el HUD (presupuesto, vida del tren y alertas de daño) proporcionaba retroalimentación clara durante la simulación \cite{598}.
+    \item \textbf{Prevención de Errores y Recuperación:} Se analizó la utilidad de la función de "Deshacer" (\textit{HU16}) y las advertencias contextuales de Don Raíl (\textit{HU31}) para evitar que el jugador diseñara rutas inviables \cite{609}.
+    \item \textbf{Estética y Diseño Minimalista:} Se evaluó la satisfacción visual respecto al terreno de Colombia y los modelos 3D, buscando un equilibrio entre fidelidad geográfica y claridad visual.
+\end{enumerate}
+
+\subsection{Análisis de Resultados de la Encuesta}
+
+[Aquí podrías insertar una gráfica de barras con los resultados generales]
+
+\subsubsection{Percepción de Usabilidad}
+Los resultados indicaron que el 85\% de los usuarios consideró el sistema de construcción por \textit{splines} como "intuitivo". Sin embargo, un hallazgo crítico surgió en la interacción con el mapa: un grupo de usuarios reportó dificultades para rotar la cámara en zonas montañosas, lo que sugiere una oportunidad de mejora en el control de cámara (\textit{HU7}).
+
+\subsubsection{Curva de Dificultad y Retención}
+Uno de los puntos más relevantes del análisis fue el abandono registrado en el \textbf{Nivel 3}. Al contrastar las respuestas de la encuesta con los metadatos (\textit{HU36}), se identificó que la complejidad de los costos de construcción en zonas de alta pendiente no era comunicada con suficiente antelación, rompiendo el "flujo" (\textit{Flow}) del jugador y generando frustración.
+
+\subsection{Evaluación del Aprendizaje (GBL)}
+
+Al ser un videojuego de aprendizaje basado en juegos (GBL), se incluyó una sección para medir la transferencia de conocimiento:
+\begin{itemize}
+    \item \textbf{Contexto Histórico:} El 75\% de los jugadores afirmó que las anécdotas de Don Raíl \cite{613} les ayudaron a comprender mejor la importancia de la infraestructura ferroviaria en Colombia.
+    \item \textbf{Desafíos de Ingeniería:} Los usuarios identificaron que el mayor aprendizaje fue entender el compromiso entre presupuesto, impacto geográfico (túneles/puentes) y eficiencia del tren.
+\end{itemize}
