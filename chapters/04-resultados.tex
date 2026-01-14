@@ -103,7 +103,7 @@ Las funcionalidades del videojuego se consolidaron en un conjunto de Historias d
 5 & HU20 & Como jugador, quiero ver alertas visuales si el tren sufre daños. & M & 2 \\ \hline
 6 & HU23 & Como jugador, quiero recibir una calificación basada en mi desempeño. & M & 3 \\ \hline
 6 & HU24 & Como jugador, quiero que la puntuación considere la rentabilidad y durabilidad. & M & 3 \\ \hline
-8 & HU29 & Como nuevo jugador, quiero un tutorial interactivo con "Don Raíl". & S & 4 \\ \hline
+8 & HU29 & Como nuevo jugador, quiero un tutorial interactivo con \textit{Don Raíl}. & S & 4 \\ \hline
 8 & HU30 & Como jugador, quiero recibir advertencias sobre pendientes pronunciadas. & S & 4 \\ \hline
 6 & HU36 & Como administrador, quiero guardar metadatos de las partidas en una base de datos. & M & 3 \\ \hline
 
@@ -158,7 +158,28 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
 \section{Implementación y Desarrollo}
 
-La fase de implementación se llevó a cabo utilizando el motor Unity (versión 2022 LTS), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+
+\subsection{Configuración del Espacio de Trabajo en Unity}
+
+Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado en Unity 6.0, diseñado para gestionar la complejidad del mapa de Colombia y la lógica de los sistemas ferroviarios. En la Figura \ref{fig:interfaz_unity} se observa la disposición de las herramientas y la interacción entre las ventanas del editor:
+
+\begin{enumerate}
+    \item \textbf{Jerarquía (Hierarchy):} En esta sección se evidencia el uso de un flujo de trabajo basado en múltiples escenas cargadas simultáneamente (\textit{Multi-Scene Editing}), como \textit{MapaCompleto}, \textit{Nivel 1} y \textit{Nivel 2}. Cada escena agrupa sus propios componentes y lógica de forma independiente. En este caso, se encuentra desplegado el \textbf{Nivel 2}, donde se ha seleccionado el objeto \textbf{Locomotora}, permitiendo una edición focalizada sin alterar el resto del entorno global.
+    
+    \item \textbf{Vista de Escena y Juego (Scene \& Game View):} El área central permite alternar entre la edición y la visualización final. La pestaña activa (\textit{Scene}) muestra el espacio tridimensional donde se realiza el ensamblaje del relieve y la ubicación de objetos. Adyacente a esta, se encuentra la pestaña \textit{Game}, la cual permite previsualizar la cámara del jugador y la interfaz de usuario final para realizar pruebas de ejecución inmediatas.
+    
+    \item \textbf{Inspector:} Esta ventana actúa de forma reactiva a la selección realizada en la Jerarquía. Al estar señalada la \textbf{Locomotora}, el Inspector despliega todos los componentes asignados a dicho objeto. Desde aquí se gestionan propiedades como el \textit{Transform}, el sistema de audio y las variables físicas del motor del tren, permitiendo ajustar el comportamiento del vehículo en tiempo real.
+    
+    \item \textbf{Explorador de Proyecto (Project Window):} Contiene la biblioteca de archivos del juego organizada mediante una estructura de carpetas estandarizada (\textit{Meshes, Prefabs, Scripts, Settings}). Esta organización es fundamental para el control de versiones, asegurando que todos los activos del mapa de Colombia y los modelos ferroviarios estén correctamente indexados.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/interfaz_unity.jpeg}
+\caption{Interfaz de desarrollo en Unity: 1) Jerarquía con edición multiescena, 2) Pestañas de Escena y Juego, 3) Inspector de componentes de la locomotora, 4) Gestión de activos.}
+\label{fig:interfaz_unity}
+\end{figure}
 
 \subsection{Construcción del Entorno Geográfico}
 
@@ -218,7 +239,7 @@ Para la representación visual, se modelaron trenes propios (Figura \ref{fig:tre
 \section{Pruebas y Análisis de Resultados}
 
 Para validar la efectividad del prototipo como herramienta de aprendizaje y su calidad como software, se realizó una prueba piloto controlada.
-La fase de pruebas tuvo una duración de **4 días**, contando con la participación voluntaria de \textbf{[INSERTAR NÚMERO TOTAL]} estudiantes universitarios.
+La fase de pruebas tuvo una duración de \textbf{4 días}, contando con la participación voluntaria de \textbf{22} personas de la comunidad universitaria.
 
 El proceso de recolección de datos fue híbrido:
 \begin{itemize}
@@ -261,7 +282,7 @@ Los datos sugieren que los jugadores tendieron a sacrificar presupuesto (constru
 Tras finalizar la prueba, los participantes evaluaron la usabilidad y el valor educativo del prototipo.
 
 \subsubsection{Usabilidad y Experiencia de Usuario}
-Se preguntó sobre la facilidad de uso de las herramientas de construcción. El [XX]\% de los encuestados calificó el sistema de splines como "Intuitivo" o "Muy Intuitivo". Sin embargo, un [XX]\% reportó dificultades con la cámara en dispositivos con pantallas pequeñas.
+Se preguntó sobre la facilidad de uso de las herramientas de construcción. El [XX]\% de los encuestados calificó el sistema de splines como \textit{Intuitivo} o \textit{Muy Intuitivo}. Sin embargo, un [XX]\% reportó dificultades con la cámara en dispositivos con pantallas pequeñas.
 
 \begin{figure}[H]
 \centering
@@ -291,14 +312,16 @@ A partir del análisis de los resultados cuantitativos y cualitativos, se han id
 \subsection{Errores Detectados}
 Durante la prueba piloto de 4 días, se reportaron los siguientes fallos que requieren corrección:
 \begin{itemize}
-    \item \textbf{Cámara en límites del mapa:} En ocasiones, la cámara permite visualizar el "vacío" si el jugador se desplaza a los bordes extremos del mapa. Se requiere implementar límites rígidos (*clamping*) en las coordenadas de la cámara.
-    \item \textbf{Colisiones fantasma:} En el 2\% de las partidas registradas por la API, el tren detectó daño sin haber una colisión visual clara. Esto sugiere la necesidad de refinar los *colliders* de las zonas de riesgo.
+    \item \textbf{Cámara en límites del mapa:} En ocasiones, la cámara permite visualizar el \textit{vacío} si el jugador se desplaza a los bordes extremos del mapa. Se requiere implementar límites rígidos (\textbf{clamping}) en las coordenadas de la cámara.
+    \item \textbf{Colisiones fantasma:} En el 2\% de las partidas registradas por la API, el tren detectó daño sin haber una colisión visual clara. Esto sugiere la necesidad de refinar los \textbf{colliders} de las zonas de riesgo.
 \end{itemize}
 
 \subsection{Mejoras y Trabajo Futuro}
 Para expandir el alcance del videojuego serio, se proponen las siguientes líneas de trabajo:
 \begin{enumerate}
-    \item \textbf{Expansión del contenido histórico:} Incluir más narrativa sobre la historia real de los Ferrocarriles Nacionales de Colombia, desbloqueable mediante coleccionables en el mapa.
+    \item \textbf{Expansión del contenido histórico:} Incluir más narrativa sobre la historia real de los Ferrocarriles Nacionales de Colombia, desbloqueable mediante coleccionables en el mapa y mediante dialogos proporcionados por Don Raíl.
+    \item \textbf{Expansión del contenido jugable:} Incorporar niveles adicionales con una progresión de dificultad más gradual, de modo que la transición entre etapas sea más equilibrada y se eviten saltos bruscos en el reto para el jugador.
     \item \textbf{Modo "Sandbox":} Habilitar un modo sin restricciones económicas para fomentar la creatividad libre del usuario.
     \item \textbf{Portabilidad WebGL:} Optimizar los recursos gráficos para permitir la ejecución del juego directamente en navegadores web, facilitando su acceso en entornos educativos sin necesidad de instalación.
+    \item \textbf{Mejoras de calidad de vida:} Implementar diversas optimizaciones orientadas a la experiencia del usuario, tales como la inclusión de un cronómetro al inicio del recorrido del tren, una mayor visibilidad en las zonas de daño, opciones de configuración de pantalla que permitan elegir entre modo ventana o pantalla completa, así como la incorporación de atajos de teclado para agilizar acciones frecuentes (por ejemplo, utilizar \texttt{Ctrl+Z} para borrar el ultimo tramo creado).
 \end{enumerate}
