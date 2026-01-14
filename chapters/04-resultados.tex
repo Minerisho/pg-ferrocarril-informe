@@ -246,7 +246,7 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 \end{enumerate}
 
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; es decir, durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Los videojuegos hoy en día en la industria suelen utilizar en su mayoría bases de datos no relacionales.
-\section{Implementación y Desarrollo}
+\section{Implementación}
 La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
@@ -277,11 +277,11 @@ El mapa de Colombia representa el tablero de juego principal. Su implementación
 Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la Figura \ref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS.
 
 Tras experimentar con versiones *low-poly* y fragmentadas que no solucionaron los problemas de *draw-calls*, se optó por la solución definitiva: el **Sistema de Terrenos de Unity**. Esta herramienta permitió:
-\begin{itemize}
+\begin{enumerate}
     \item Esculpir el relieve de la cordillera de los Andes con precisión topográfica pero optimizada mediante LOD (*Level of Detail*).
     \item Pintar texturas según la altura y la biome (selva, montaña, llanura).
     \item Integrar cuerpos de agua y vegetación sin sacrificar el rendimiento, alcanzando una tasa estable de 60 FPS en equipos de gama media.
-\end{itemize}
+\end{enumerate}
 
 La Figura \ref{fig:mapa_unity} muestra el resultado final del entorno implementado.
 
@@ -292,7 +292,7 @@ La Figura \ref{fig:mapa_unity} muestra el resultado final del entorno implementa
 \label{fig:mapa_unity}
 \end{figure}
 
-\subsection{Sistema Ferroviario y Físicas}
+\subsection{Desarrollo del Sistema Ferroviario y Leyes Físicas}
 
 La mecánica central del juego es la construcción y simulación de trenes. Para evitar la rigidez de un sistema basado en tramos rectos, se implementó una solución basada en **Splines** (curvas matemáticas suaves).
 
@@ -328,7 +328,7 @@ Para la representación visual, se modelaron trenes propios (Figura \ref{fig:tre
 \section{Pruebas y Análisis de Resultados}
 
 Para validar la efectividad del prototipo como herramienta de aprendizaje y su calidad como software, se realizó una prueba piloto controlada.
-La fase de pruebas tuvo una duración de \textbf{4 días}, contando con la participación voluntaria de \textbf{22} personas de la comunidad universitaria.
+La fase de pruebas contó con la participación voluntaria de \textbf{22} personas de la comunidad universitaria.
 
 El proceso de recolección de datos fue híbrido:
 \begin{itemize}
