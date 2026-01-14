@@ -84,27 +84,50 @@ R5 & Textura de vías solapada & Vía al mismo nivel del suelo & 1 & 2 & 2 & Mov
 \end{longtable}
 \end{landscape}
 
-\subsection{Historias de Usuario (HU)}
+\subsection{Definición de Épicas e Historias de Usuario}
 
-Las funcionalidades del videojuego se consolidaron en un conjunto de Historias de Usuario, priorizadas mediante la técnica MoSCoW (Must, Should, Could, Won't) para asegurar el cumplimiento de los objetivos pedagógicos mínimos viables. La Tabla \ref{tab:HU-final} muestra el listado final implementado.
+Con el objetivo de garantizar que el videojuego cumpliera con los lineamientos del Aprendizaje Basado en Juegos (GBL), el proceso de definición de requisitos comenzó con la elaboración de un conjunto preliminar de Historias de Usuario (HU). Este primer barrido buscó capturar todas las funcionalidades necesarias para cubrir tanto las mecánicas lúdicas como los objetivos pedagógicos del proyecto.
+
+Posteriormente, para facilitar la gestión del desarrollo y la planificación de las iteraciones, estas historias de usuario fueron analizadas y agrupadas en categorías de alto nivel denominadas \textbf{Épicas}. Esta organización permitió clasificar los requisitos de manera lógica según el subsistema o área funcional a la que pertenecían.
+
+En la Tabla \ref{tab:epicas} se presentan las 8 épicas resultantes de esta categorización.
+
+\begin{table}[H] 
+\centering 
+\caption{Listado de Épicas del proyecto.} \label{tab:epicas} 
+\begin{tabular}{|c|l|} 
+\hline 
+\textbf{ID} & \textbf{Nombre de la Épica}\\ \hline 
+1 & Selección de Nivel y Contratos \\ \hline 
+2 & Interacción con el Mapa 3D \\ \hline 
+3 & Sistema de Construcción de Vías \\ \hline 
+4 & Gestión de Material Rodante \\ \hline 
+5 & Motor de Simulación y Eventos \\ \hline 
+6 & Sistema de Evaluación y Puntuación \\ \hline 
+7 & Progresión y Rejugabilidad \\ \hline 
+8 & Narrativa y Mentoría\\ \hline 
+\end{tabular} 
+\end{table}
+
+Una vez estructuradas, las Historias de Usuario definitivas fueron priorizadas utilizando el método MoSCoW (\textit{Must have, Should have, Could have, Won't have}) y se les asignó un nivel de complejidad estimado. La Tabla \ref{tab:HU-final} detalla la totalidad de los requisitos implementados en la versión final del prototipo, organizados según su Épica correspondiente.
 
 \begin{landscape}
-\begin{longtable}{|M{1.2cm}|M{1.5cm}|L{9cm}|M{2cm}|M{1.5cm}|}
-\caption{Historias de Usuario Finales e Implementadas.} \label{tab:HU-final} \\
+\begin{longtable}{|M{1.2cm}|M{1.8cm}|L{10cm}|M{2.2cm}|M{2cm}|}
+\caption{Tabla final de historias de usuario implementadas.} \label{tab:HU-final} \\
 \hline
 \multicolumn{1}{|c|}{\textbf{ÉPICA}} &
-\multicolumn{1}{c|}{\textbf{ID}} &
+\multicolumn{1}{c|}{\textbf{CÓDIGO}} &
 \multicolumn{1}{c|}{\textbf{HISTORIA DE USUARIO}} &
 \multicolumn{1}{c|}{\textbf{PRIORIDAD}} &
-\multicolumn{1}{c|}{\textbf{COMPL.}} \\ \hline
+\multicolumn{1}{c|}{\textbf{COMPLEJIDAD}} \\ \hline
 \endfirsthead
 
 \hline
 \multicolumn{1}{|c|}{\textbf{ÉPICA}} &
-\multicolumn{1}{c|}{\textbf{ID}} &
+\multicolumn{1}{c|}{\textbf{CÓDIGO}} &
 \multicolumn{1}{c|}{\textbf{HISTORIA DE USUARIO}} &
 \multicolumn{1}{c|}{\textbf{PRIORIDAD}} &
-\multicolumn{1}{c|}{\textbf{COMPL.}} \\ \hline
+\multicolumn{1}{c|}{\textbf{COMPLEJIDAD}} \\ \hline
 \endhead
 
 \hline
@@ -115,60 +138,102 @@ Las funcionalidades del videojuego se consolidaron en un conjunto de Historias d
 \endlastfoot
 
 1 & HU1  & Como jugador, quiero ver una pantalla de selección de niveles para elegir cuál jugar. & M & 2 \\ \hline
-1 & HU2  & Como jugador, quiero ver un contrato con presupuesto y objetivos al iniciar. & M & 1 \\ \hline
-2 & HU3  & Como jugador, quiero mover la cámara para explorar el mapa. & M & 1 \\ \hline
-2 & HU4  & Como jugador, quiero hacer zoom para ver detalles. & M & 1 \\ \hline
-2 & HU6  & Como jugador, quiero visualizar el terreno 3D de Colombia. & M & 4 \\ \hline
-3 & HU10 & Como jugador, quiero construir tramos de vía entre dos puntos. & M & 2 \\ \hline
-3 & HU12 & Como jugador, quiero que se generen túneles automáticamente en montañas. & M & 4 \\ \hline
-3 & HU13 & Como jugador, quiero construir estaciones para definir inicio y fin. & M & 3 \\ \hline
-3 & HU15 & Como jugador, quiero ver mi presupuesto actualizado en tiempo real. & M & 2 \\ \hline
-4 & HU17 & Como jugador, quiero seleccionar y comprar locomotoras. & M & 3 \\ \hline
-4 & HU18 & Como jugador, quiero añadir vagones de carga o pasajeros. & M & 2 \\ \hline
-5 & HU20 & Como jugador, quiero ver alertas visuales si el tren sufre daños. & M & 2 \\ \hline
-6 & HU23 & Como jugador, quiero recibir una calificación basada en mi desempeño. & M & 3 \\ \hline
-6 & HU24 & Como jugador, quiero que la puntuación considere la rentabilidad y durabilidad. & M & 3 \\ \hline
-8 & HU29 & Como nuevo jugador, quiero un tutorial interactivo con \textit{Don Raíl}. & S & 4 \\ \hline
-8 & HU30 & Como jugador, quiero recibir advertencias sobre pendientes pronunciadas. & S & 4 \\ \hline
-6 & HU36 & Como administrador, quiero guardar metadatos de las partidas en una base de datos. & M & 3 \\ \hline
+1 & HU2  & Como jugador, quiero que al empezar un nivel, se me presente una pantalla de contrato con presupuesto y objetivos. & M & 1 \\ \hline
+2 & HU3  & Como jugador, quiero poder mover la cámara (panorámica) por el mapa para explorar el terreno. & M & 1 \\ \hline
+2 & HU4  & Como jugador, quiero poder acercar y alejar la vista (zoom) para ver el mapa con diferentes niveles de detalle. & M & 1 \\ \hline
+2 & HU5  & Como jugador, quiero ver las delimitaciones políticas y ríos en el mapa. & M & 3 \\ \hline
+2 & HU6  & Como jugador, quiero ver un terreno en 3D del nivel a jugar. & M & 4 \\ \hline
+2 & HU7  & Como jugador, quiero poder rotar la cámara para observar el terreno desde distintos ángulos. & S & 1 \\ \hline
+2 & HU8  & Como jugador, quiero poder activar una capa de vista topográfica para entender el relieve. & C & 5 \\ \hline
+3 & HU10 & Como jugador, quiero poder construir un tramo de vía férrea entre dos puntos. & M & 2 \\ \hline
+3 & HU11 & Como jugador, quiero poder eliminar un tramo de vía férrea para rediseñar mis rutas. & M & 1 \\ \hline
+3 & HU12 & Como jugador, quiero que se construyan puentes automáticamente al cruzar valles. & M & 4 \\ \hline
+3 & HU13 & Como jugador, quiero que se construya automáticamente un túnel si mi vía férrea atraviesa una montaña. & M & 4 \\ \hline
+3 & HU14 & Como jugador, quiero poder construir estaciones para definir los puntos de inicio y fin. & M & 3 \\ \hline
+3 & HU15 & Como jugador, quiero ver mi presupuesto actual en todo momento. & M & 2 \\ \hline
+3 & HU16 & Como jugador, quiero poder deshacer mi última acción de construcción. & S & 2 \\ \hline
+4 & HU17 & Como jugador, quiero acceder a un menú para seleccionar y comprar la locomotora. & M & 3 \\ \hline
+4 & HU18 & Como jugador, quiero añadir vagones específicos (pasajeros, carga) a mi locomotora. & M & 2 \\ \hline
+4 & HU19 & Como jugador, quiero que el menú me muestre solo las locomotoras aptas para la ruta diseñada. & C & 2 \\ \hline
+5 & HU20 & Como jugador, quiero ver una alerta visual cuando el tren sufre daños en zonas de evento. & M & 2 \\ \hline
+5 & HU21 & Como jugador, quiero que el botón de "Testeo" me informe si falta algún requisito. & S & 3 \\ \hline
+5 & HU22 & Como jugador, quiero volver a la construcción después de un testeo para corregir la ruta. & S & 1 \\ \hline
+6 & HU23 & Como jugador, al finalizar un nivel, quiero ver una pantalla de puntuación. & M & 3 \\ \hline
+6 & HU24 & Como jugador, quiero que la puntuación considere la rentabilidad (costo vs. contrato) y durabilidad. & M & 3 \\ \hline
+6 & HU25 & Como jugador, quiero que la puntuación considere la eficiencia (tiempo empleado). & S & 3 \\ \hline
+6 & HU26 & Como jugador, quiero ver un informe detallado que desglose mi puntuación final. & S & 3 \\ \hline
+7 & HU27 & Como jugador, quiero desbloquear nuevos niveles tras completar el contrato actual. & M & 2 \\ \hline
+8 & HU28 & Como jugador, quiero que Don Raíl presente el contrato con un diálogo breve y contexto histórico. & S & 3 \\ \hline
+8 & HU29 & Como nuevo jugador, quiero que Don Raíl me guíe con un tutorial interactivo en el primer nivel. & S & 4 \\ \hline
+8 & HU30 & Como jugador, quiero recibir advertencias contextuales sobre pendientes pronunciadas. & S & 4 \\ \hline
+8 & HU31 & Como jugador, quiero ver datos históricos al seleccionar una ciudad importante. & S & 4 \\ \hline
+8 & HU32 & Como jugador, quiero comentarios de Don Raíl cuando el tren sufre un evento. & S & 3 \\ \hline
+8 & HU33 & Como jugador, quiero que Don Raíl comente mi puntuación final (éxito o consejo). & S & 2 \\ \hline
+8 & HU34 & Como jugador, quiero ver anécdotas ferroviarias en las pantallas de carga. & M & 2 \\ \hline
+6 & HU35 & Como administrador, quiero guardar metadatos de los jugadores en una base de datos. & M & 3 \\ \hline
 
 \end{longtable}
 \end{landscape}
 
-\section{Diseño del Sistema}
+\section{Diseño}
 
-Para garantizar la escalabilidad y el cumplimiento de los requisitos educativos, se diseñó una arquitectura de software que integra el motor de videojuego con servicios externos de gestión de datos.
+El diseño de la arquitectura de software se fundamentó en la creación de un prototipo funcional mínimo viable. El objetivo principal de esta etapa no consistió en maximizar los aspectos lúdicos o de entretenimiento inmediato, sino en establecer una base técnica robusta, modular y escalable que cumpla con los lineamientos del marco GBL (Game-Based Learning). Esta estructura busca garantizar que el sistema pueda operar correctamente bajo las reglas de simulación ferroviaria y permitir futuras expansiones o mejoras en las mecánicas educativas sin comprometer la estabilidad del software.
 
-\subsection{Diagrama de Componentes}
+\subsection{Arquitectura de Escenas en Unity}
 
-El diseño interno del videojuego se estructuró bajo un enfoque modular dentro de Unity, separando la lógica de simulación, la interfaz de usuario y la gestión de datos. A continuación, se describen los componentes principales ilustrados en la Figura \ref{fig:diagrama_componentes}:
+Para optimizar el uso de memoria y organizar lógicamente los componentes del videojuego, se optó por una arquitectura basada en escenas aditivas. En lugar de cargar un entorno monolítico único, el sistema gestiona la carga y descarga de escenas de manera superpuesta. Esto permite separar la lógica de la interfaz de usuario, el entorno geográfico pesado y las mecánicas específicas de cada nivel. En la Figura \ref{fig:escenas_aditivas} se ejemplifica este diseño.
 
 \begin{figure}[H]
 \centering
-% \includegraphics[width=0.9\textwidth]{figures/diagrama_componentes.png} % DESCOMENTAR Y AGREGAR IMAGEN
-\framebox[0.9\textwidth]{\rule{0pt}{8cm} [INSERTAR DIAGRAMA DE COMPONENTES AQUÍ]}
-\caption{Diagrama de componentes del videojuego serio.}
-\label{fig:diagrama_componentes}
+\includegraphics[width=0.9\textwidth]{figures/escenas_aditivas.png}
+\caption{Diagrama de la arquitectura basada en escenas aditivas.}
+\label{fig:escenas_aditivas}
 \end{figure}
 
-\begin{itemize}
-    \item \textbf{GameManager:} Es el núcleo orquestador del ciclo de vida del juego. Administra los estados (Menú, Construcción, Simulación, Pausa, Resultados) y coordina la comunicación entre los demás subsistemas.
-    \item \textbf{Sistema de Construcción (Spline System):} Encargado de la lógica matemática para la generación de curvas Bézier, validación de pendientes y la instanciación de mallas procedimentales para vías, túneles y puentes.
-    \item \textbf{Simulador de Física (Train Controller):} Gestiona el movimiento del tren a lo largo del spline, calculando velocidad, aceleración y detectando colisiones con zonas de evento o descarrilamientos.
-    \item \textbf{Interfaz de Usuario (UI Manager):} Controla todos los elementos visuales en pantalla (HUD), incluyendo el feedback del tutorial de Don Raíl, los paneles de contrato y las pantallas de victoria/derrota.
-    \item \textbf{Gestor de Datos (Data Handler):} Módulo responsable de serializar la información de la partida y comunicarse con la API externa para el registro de métricas.
-\end{itemize}
+El flujo de ejecución comienza con la carga simultánea de las escenas \textit{MainMenu} y \textit{MapaMenu}. Posteriormente, al iniciar la partida, se descarga la escena decorativa y se carga la escena \textit{MapaCompleto} junto con la escena del nivel correspondiente (por ejemplo, \textit{Nivel 1 Tutorial}), manteniendo siempre activa la escena base de gestión.
+
+A continuación, se describen las 8 escenas que componen el videojuego serio dentro de Unity:
+
+\begin{description}
+    \item[MainMenu:] Es la escena persistente que contiene el lienzo (\textit{Canvas}) principal de la interfaz y los gestores globales del sistema. Los objetos instanciados aquí están configurados para no destruirse entre cargas (\textit{DontDestroyOnLoad}), asegurando la continuidad de la música, los datos del jugador y la gestión de estados.
+    
+    \item[MapaMenu:] Funciona como una escena puramente decorativa para el fondo del menú principal. Consiste en un fragmento extraído del mapa completo (exactamente 1 \textit{tile} de terreno) en el cual se ejecutan animaciones de trenes en bucle, brindando contexto visual sin cargar la totalidad de la geografía.
+    
+    \item[MapaCompleto:] Es la escena más compleja y pesada del sistema, encargada de contener la totalidad de la representación geográfica. Esta escena incluye:
+    \begin{itemize}
+        \item La malla del terreno dividida en una cuadrícula de $16 \times 16$ \textit{tiles} de Unity.
+        \item La red hidrográfica completa, compuesta por 9972 objetos de ríos lineales (\textit{agua\_lineal}) y 40899 cuerpos de agua anchos o lagos (\textit{agua\_area}).
+        \item Las delimitaciones políticas, incluyendo fronteras nacionales, departamentales y municipales.
+        \item El etiquetado geográfico de todos los municipios de Colombia, posicionados sobre el terreno.
+    \end{itemize}
+    Cabe mencionar que, como decisión de diseño para la implementación, este mapa se construyó a una escala de 1:128 (1 unidad de Unity equivale a 128 metros reales) para equilibrar la precisión con el rendimiento.
+    
+    \item[Niveles (1 al 5):] Corresponden a 5 escenas independientes (\textit{Nivel 1 Tutorial}, \textit{Nivel 2}, etc.) que se cargan de forma aditiva sobre el mapa completo. Estas escenas contienen únicamente los objetos necesarios para la jugabilidad específica de ese contrato: los puntos de inicio y fin, la configuración de las mecánicas, los gestores de eventos locales y los \textit{Canvas} específicos de la misión.
+\end{description}
+
+\subsection{Diagrama de Componentes}
+
+Dada la complejidad del sistema y su división en múltiples escenas, el diseño detallado de los scripts y sus interacciones se presenta mediante un diagrama de componentes. Debido a su extensión, este diagrama se ha visualizado de manera apaisada para facilitar la lectura de los módulos correspondientes a la gestión del mapa, la simulación del tren y la interfaz de usuario. Más adelante se detallará cada escena y sus componentes principales.
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+% REEMPLAZA ESTA LÍNEA CON TU DIAGRAMA DE COMPONENTES GIGANTE
+\framebox[\linewidth]{\rule{0pt}{14cm} [INSERTAR AQUÍ EL DIAGRAMA DE COMPONENTES POR ESCENAS]}
+\caption{Diagrama de componentes del sistema organizado por escenas de Unity.}
+\label{fig:diagrama_componentes}
+\end{figure}
+\end{landscape}
 
 \subsection{Arquitectura del Sistema y API de Informes}
 
-Dado que uno de los objetivos del proyecto es evaluar el aprendizaje y comportamiento de los jugadores, se implementó una arquitectura Cliente-Servidor. El cliente (el videojuego desarrollado en Unity) se comunica con un servidor backend encargado de procesar y almacenar la telemetría de las sesiones.
+Dado que uno de los requisitos del juego para considerarse GBL es evaluar el aprendizaje y comportamiento de los jugadores, se implementó una arquitectura Cliente-Servidor. El cliente (el videojuego desarrollado en Unity) se comunica con un servidor backend encargado de procesar y almacenar la telemetría de las sesiones.
 
 La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
 \begin{figure}[H]
 \centering
-% \includegraphics[width=0.9\textwidth]{figures/arquitectura_sistema.png} % DESCOMENTAR Y AGREGAR IMAGEN
-\framebox[0.9\textwidth]{\rule{0pt}{8cm} [INSERTAR DIAGRAMA DE ARQUITECTURA + API AQUÍ]}
+\includegraphics[width=0.9\textwidth]{figures/diseño_preliminar.png} 
 \caption{Arquitectura del sistema e integración con la API de informes.}
 \label{fig:arquitectura_api}
 \end{figure}
@@ -176,13 +241,12 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 \begin{enumerate}
     \item \textbf{Cliente Unity (C\#):} Al finalizar un nivel, el cliente recopila métricas clave (tiempo, presupuesto usado, daños, puntuación) y empaqueta estos datos en un objeto JSON.
     \item \textbf{API REST:} Se desarrolló una API intermedia que recibe las peticiones POST provenientes del videojuego. Esta API valida la integridad de los datos y gestiona la seguridad de las transacciones.
-    \item \textbf{Base de Datos:} Los registros se almacenan en una base de datos relacional/no-relacional [ESPECIFICAR TIPO, EJ: SQL/MongoDB], permitiendo la persistencia histórica de los intentos de los jugadores.
+    \item \textbf{Base de Datos:} Los registros se almacenan en una base de datos No-SQL (FireBase), permitiendo la persistencia histórica de los intentos de los jugadores.
     \item \textbf{Módulo de Generación de Informes:} Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
 \end{enumerate}
 
-
+La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; es decir, durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Los videojuegos hoy en día en la industria suelen utilizar en su mayoría bases de datos no relacionales.
 \section{Implementación y Desarrollo}
-
 La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
