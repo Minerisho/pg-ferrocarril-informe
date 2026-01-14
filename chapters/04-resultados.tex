@@ -2,19 +2,28 @@
 
 \chapter{Resultados}
 
-En este capítulo se presentan los productos resultantes del proceso de desarrollo del videojuego serio, abarcando desde la consolidación de los requerimientos y el diseño de la arquitectura, hasta la implementación del prototipo y el análisis de los datos obtenidos durante la prueba piloto.
+En este capítulo se presentan los productos resultantes del proceso de desarrollo del prototipo del videojuego serio, abarcando desde la consolidación de los requerimientos y el diseño de la arquitectura, hasta la implementación del prototipo y el análisis de los datos obtenidos durante la prueba piloto.
 
-\section{Requerimientos Consolidados}
+\section{Requerimientos}
 
-Como resultado de la fase de inicio y elaboración descrita en la metodología, se obtuvieron los artefactos finales que guiaron la construcción del software. A diferencia de las iteraciones iniciales, estos artefactos representan la versión refinada y aprobada de los requisitos funcionales y el análisis de riesgos.
+Los artefactos presentados a continuación son el producto de un proceso de refinamiento continuo llevado a cabo durante las fases de inicio y elaboración. Tras múltiples ciclos de iteración y ajuste, se obtuvieron estos documentos que constituyen la versión final y consolidada de los requisitos funcionales y el análisis de riesgos que guiaron la construcción del software.
 
-\subsection{Matriz de Riesgos Final}
+\subsection{Matriz de Riesgos}
 
-Durante la planificación, se identificaron y evaluaron los posibles obstáculos técnicos y de diseño. La Tabla \ref{tab:matriz-riesgos-final} presenta la matriz de riesgos definitiva, incluyendo el estado de cierre de cada riesgo al finalizar el desarrollo. Los niveles de riesgo se calcularon basándose en el impacto y la probabilidad de ocurrencia (Escala 1-5).
+La gestión de riesgos fue un proceso continuo durante el desarrollo. Para la evaluación final, se utilizó la escala de medición definida en la etapa de planificación, donde el nivel de riesgo se determina por el producto del Impacto por la Probabilidad de ocurrencia (ver Figura \ref{fig:escala_riesgos}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/linea de impacto-probabilidad.png}
+\caption{Escala de evaluación de riesgos utilizada durante el proyecto.}
+\label{fig:escala_riesgos}
+\end{figure}
 
+La Tabla \ref{tab:matriz-riesgos-final} presenta la matriz de riesgos. Es importante destacar que, tras las iteraciones de desarrollo y las correcciones implementadas en la fase de implementación, todos los riesgos técnicos críticos fueron mitigados y cerrados exitosamente antes de la prueba piloto. La columna \textit{Estado} detalla la solución final aplicada para cada caso.
+
+% Ajuste de ancho de columnas para acomodar el texto descriptivo
 \begin{landscape}
-\begin{longtable}{|c|L{2.8cm}|L{2.8cm}|c|c|c|L{3.2cm}|c|}
-\caption{Matriz de riesgos final del proyecto}\label{tab:matriz-riesgos-final} \\
+\begin{longtable}{|c|L{2.5cm}|L{2.5cm}|c|c|c|L{3cm}|L{4.5cm}|}
+\caption{Matriz de riesgos del proyecto.}\label{tab:matriz-riesgos-final} \\
 \hline
 \multicolumn{1}{|c|}{\textbf{Ref}} &
 \multicolumn{1}{c|}{\textbf{Descripción}} &
@@ -46,16 +55,32 @@ Durante la planificación, se identificaron y evaluaron los posibles obstáculos
 \hline
 \endlastfoot
 
-R1 & El modelo del terreno está mal optimizado & Sobrecarga en memoria gráfica por modelo 3D denso & 4 & 4 & 16 & Uso de Terrenos nativos de Unity y carga por bloques (LOD). & Cerrado \\ \hline
-R2 & La cámara atraviesa el terreno & Falta de colisión en la cámara & 2 & 5 & 10 & Implementación de *Clamping* y colisionadores para la cámara. & Abierto \\ \hline
-R3 & Vías poco naturales e inconexas & Uso de rectas para generar vías & 5 & 4 & 20 & Implementación de curvas Bézier y Splines. & Cerrado \\ \hline
-R4 & Terreno con parches o vacíos & DEM con datos erróneos & 2 & 3 & 6 & Corrección mediante algoritmos de suavizado de terreno. & Cerrado \\ \hline
-R5 & Textura de vías solapada (Z-fighting) & Vía al mismo nivel del suelo & 1 & 2 & 2 & Offset vertical en la generación de la malla de la vía. & Cerrado \\ \hline
-R6 & Circuito cerrado no detectado & Spline no configurado como 'Loop' & 2 & 3 & 6 & Detección de proximidad de nodos inicial/final para cerrar el ciclo. & Cerrado \\ \hline
-R7 & Dificultad para representar hidrografía completa & Densidad excesiva de ríos en Colombia & 4 & 4 & 16 & Selección de ríos principales y lagos mayores únicamente. & Abierto \\ \hline
-R8 & Las vías atraviesan montañas sin túnel & Falta de interpolación de alturas & 3 & 4 & 12 & Generación automática de túneles al detectar colisión con terreno. & Cerrado \\ \hline
-R12 & Incompatibilidad de Shaders y URP & Configuración por defecto de Unity & 3 & 3 & 9 & Ajuste manual de materiales para el *Universal Render Pipeline*. & Cerrado \\ \hline
-R13 & Bajos FPS en equipos de gama baja & Desarrollo en equipos de gama alta & 5 & 3 & 15 & Optimización de *draw calls* y reducción de polígonos. & Abierto \\ \hline
+R3 & Vías poco naturales e inconexas & Uso de rectas para generar vías & 5 & 4 & 20 & Implementación de curvas Bézier y Splines. & Cerrado. Se implementó la herramienta Dreamteck Splines para generar curvas suaves y continuas. \\ \hline
+
+R1 & El modelo del terreno está mal optimizado & Sobrecarga en memoria gráfica por modelo 3D denso & 4 & 4 & 16 & Uso de Terrenos nativos de Unity y carga por bloques (LOD). & Cerrado. Migración completa al sistema de Terrenos de Unity con optimización LOD. \\ \hline
+
+R7 & Dificultad para representar hidrografía completa & Densidad excesiva de ríos en Colombia & 4 & 4 & 16 & Selección de ríos principales y lagos mayores únicamente. & Cerrado. Se representaron solo los cuerpos de agua principales mediante texturas y shaders, sin colisión física compleja. \\ \hline
+
+R13 & Bajos FPS en equipos de gama baja & Desarrollo en equipos de gama alta & 5 & 3 & 15 & Optimización de draw calls y reducción de polígonos. & Cerrado. Se añadieron opciones de calidad gráfica que permiten rendimiento estable en equipos de especificaciones medias. \\ \hline
+
+R8 & Las vías atraviesan montañas & Falta de interpolación de alturas & 3 & 4 & 12 & Generación automática de túneles al detectar colisión con terreno. & Cerrado. El sistema instancia automáticamente prefabs de túneles cuando la vía intersecta el terreno. \\ \hline
+
+R2 & La cámara atraviesa el terreno & Falta de colisión en la cámara & 2 & 5 & 10 & Implementación de Clamping y colisionadores para la cámara. & Cerrado. Se restringieron las coordenadas de la cámara para impedir que cruce la malla del suelo. \\ \hline
+
+R12 & Incompatibilidad de Shaders y URP & Configuración por defecto de Unity & 3 & 3 & 9 & Ajuste manual de materiales para el Universal Render Pipeline. & Cerrado. Todos los materiales fueron actualizados para ser compatibles con URP. \\ \hline
+
+R9 & Estadísticas de locomotoras no leídas & Datos dispersos en hijos del GameObject & 4 & 2 & 8 & Unificar la lógica en el script controlador padre. & Cerrado. Se centralizó la gestión de estadísticas en un único controlador en la raíz del objeto. \\ \hline
+
+R4 & Terreno con parches o vacíos & DEM con datos erróneos & 2 & 3 & 6 & Corrección mediante algoritmos de suavizado. & Cerrado. Corrección manual de imperfecciones utilizando las herramientas de escultura del editor. \\ \hline
+
+R6 & Circuito cerrado no detectado & Spline no cerrado & 2 & 3 & 6 & Detección de proximidad de nodos inicial/final. & Cerrado. Validación por código que cierra el spline automáticamente al acercar los extremos. \\ \hline
+
+R10 & HUD no muestra vida tras cambio & Referencias perdidas al cambiar locomotora & 2 & 2 & 4 & Función para reiniciar estadísticas al instanciar. & Cerrado. Se fuerza la actualización de la UI cada vez que se genera un nuevo tren. \\ \hline
+
+R11 & Modelos 3D con escalas erróneas & Exportación incorrecta desde Blender & 1 & 3 & 3 & Aplicar escalas y rotaciones antes de exportar. & Cerrado. Normalización de escala (1,1,1) en todos los modelos importados. \\ \hline
+
+R5 & Textura de vías solapada & Vía al mismo nivel del suelo & 1 & 2 & 2 & Mover las vías generadas una pequeña distancia hacia arriba. & Cerrado. Se aplicó un offset vertical de 0.05 unidades a la malla de la vía. \\ \hline
+
 \end{longtable}
 \end{landscape}
 
