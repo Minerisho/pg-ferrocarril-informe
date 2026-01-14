@@ -275,12 +275,32 @@ El mapa de Colombia representa el tablero de juego principal. Su implementación
 
 Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la Figura \ref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS.
 
-Tras experimentar con versiones *low-poly* y fragmentadas que no solucionaron los problemas de *draw-calls*, se optó por la solución definitiva: el **Sistema de Terrenos de Unity**. Esta herramienta permitió:
-\begin{itemize}
-    \item Esculpir el relieve de la cordillera de los Andes con precisión topográfica pero optimizada mediante LOD (*Level of Detail*).
-    \item Pintar texturas según la altura y la biome (selva, montaña, llanura).
-    \item Integrar cuerpos de agua y vegetación sin sacrificar el rendimiento, alcanzando una tasa estable de 60 FPS en equipos de gama media.
-\end{itemize}
+Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly}) y fragmentadas que no solucionaron los problemas de latancia en las llamadas de renderizado(\textit{draw-calls}), se optó por la solución de usar el sistema de terrenos nativo de Unity.
+
+\subsection{Construcción del Entorno Geográfico}
+
+El mapa de Colombia representa el tablero de juego principal y su implementación requirió un equilibrio cuidadoso entre fidelidad geográfica y rendimiento técnico.
+
+Inicialmente, se intentó importar un modelo 3D de alta resolución generado en Blender. Como se observa en la Figura \ref{fig:mapa_inicial}, aunque este enfoque ofrecía un gran detalle visual, resultó inviable técnicamente: la carga de 24.5 millones de vértices saturó la memoria gráfica, reduciendo la tasa de refresco a menos de 26 FPS. Tras experimentar con versiones de baja poligonización (\textit{low-poly}) y modelos fragmentados que no lograron solucionar el cuello de botella en las llamadas de renderizado (\textit{draw-calls}), se optó por migrar al **sistema de terrenos nativo de Unity**.
+
+\subsubsection{Automatización y Procesamiento de Datos Geográficos}
+
+Para la implementación definitiva, no se esculpió el terreno manualmente. En su lugar, se desarrolló un flujo de trabajo automatizado mediante \textit{scripts} en C\# que generaban la topografía a partir de datos reales.
+
+Una herramienta fundamental en esta etapa fue el software SIG (Sistema de Información Geográfica) **QGIS**. Esta herramienta permitió procesar y alinear todas las capas de información —fronteras municipales, hidrografía (ríos y lagos) y elevación— bajo un Sistema de Referencia de Coordenadas unificado, específicamente el **EPSG:9377** (MAGNA-SIRGAS Origen Nacional). Esto garantizó que todos los elementos geográficos mantuvieran su posición relativa correcta al ser importados al motor de videojuego.
+
+El Modelo Digital de Elevación (DEM) utilizado como base fue obtenido a través del \textit{General Bathymetric Chart of the Oceans} \autocite{GEBCO}. Dada la extensión del territorio, se decidió segmentar este DEM en una cuadrícula de $16 \times 16$ secciones, generando terrenos interconectados dentro de Unity.
+
+\subsubsection{Estrategia de Segmentación (Chunks)}
+
+Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inicial de optimización basada en la carga dinámica de \textit{chunks}. En este contexto, un \textit{chunk} se definió como una unidad lógica compuesta por un fragmento de terreno y la totalidad de los objetos (vegetación, estructuras, marcadores) situados sobre él. La intención original era cargar y descargar estos bloques de memoria en tiempo real según la posición del jugador.
+
+Sin embargo, durante las pruebas de integración, se observó que el rendimiento del sistema era estable incluso con la totalidad del mapa cargado en memoria. Por consiguiente, se descartó el sistema de carga dinámica para reducir la complejidad del código, aunque se mantuvo la estructura modular de $16 \times 16$ por las ventajas organizativas que ofrecía durante la edición.
+
+\subsubsection{Texturizado y Restricciones de Construcción}
+
+Finalmente, el terreno fue texturizado automáticamente aplicando capas de material según la altura (nieves perpetuas, montaña, llanura). Para garantizar la coherencia de la jugabilidad, se implementaron dos mecanismos de restricción de construcción:
+
 
 La Figura \ref{fig:mapa_unity} muestra el resultado final del entorno implementado.
 
@@ -393,8 +413,11 @@ Respecto al componente educativo, la Figura \ref{fig:encuesta_aprendizaje} refle
 
 Los participantes destacaron principalmente la comprensión de la relación entre la topografía (pendientes) y la capacidad de carga del tren, validando el objetivo pedagógico de la simulación física.
 
-\section{Errores Detectados}
+\section{Discusión y Trabajo Futuro}
 
+A partir del análisis de los resultados cuantitativos y cualitativos, se han identificado oportunidades de mejora para futuras iteraciones del proyecto.
+
+\subsection{Errores Detectados}
 Durante la prueba piloto de 4 días, se reportaron los siguientes fallos que requieren corrección:
 \begin{itemize}
     \item \textbf{Cámara en límites del mapa:} En ocasiones, la cámara permite visualizar el \textit{vacío} si el jugador se desplaza a los bordes extremos del mapa. Se requiere implementar límites rígidos (\textbf{clamping}) en las coordenadas de la cámara.
