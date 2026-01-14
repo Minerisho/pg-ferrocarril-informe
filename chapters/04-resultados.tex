@@ -218,8 +218,7 @@ Dada la complejidad del sistema y su división en múltiples escenas, el diseño
 \begin{landscape}
 \begin{figure}[H]
 \centering
-% REEMPLAZA ESTA LÍNEA CON TU DIAGRAMA DE COMPONENTES GIGANTE
-\framebox[\linewidth]{\rule{0pt}{14cm} [INSERTAR AQUÍ EL DIAGRAMA DE COMPONENTES POR ESCENAS]}
+\includegraphics[width=0.9\textwidth]{figures/test_DiagramaComponentes.png}
 \caption{Diagrama de componentes del sistema organizado por escenas de Unity.}
 \label{fig:diagrama_componentes}
 \end{figure}
@@ -245,7 +244,7 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
     \item \textbf{Módulo de Generación de Informes:} Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
 \end{enumerate}
 
-La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; es decir, durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Los videojuegos hoy en día en la industria suelen utilizar en su mayoría bases de datos no relacionales.
+La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; es decir, durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
 \section{Implementación y Desarrollo}
 La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
