@@ -454,7 +454,14 @@ A continuación, se detalla la función de cada atributo definido en el esquema:
 \end{enumerate}
 
 \section{Implementación}
-La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git (ver figura \ref{fig:interfaz_git}) para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/interfaz_git.png}
+\caption{Interfaz del repositorio git}
+\label{fig:interfaz_git}
+\end{figure}
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
 
@@ -513,7 +520,7 @@ Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inic
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{figures/codigo_importador_terrenos.png}
+\includegraphics[width=0.9\textwidth]{figures/codigo_importador_terrenos.png}
 \caption{Fragmento del código del script que automatizaba la importación de terrenos desde archivos .raw a la escena en Unity.}
 \label{fig:cod_1}
 \end{figure}
