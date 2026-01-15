@@ -12,30 +12,32 @@
 \usepackage{longtable}
 \usepackage{pdflscape}
 \usepackage[table]{xcolor}
-%referencias bib
+
+% --- REFERENCIAS BIB ---
 \usepackage[
   backend=biber,
-  style=verbose-trad2,    % notas al pie completas + 'Ibíd.' / 'Op. cit.'
-  autocite=footnote,      % \autocite => nota al pie
-  ibidtracker=context,    % controla cuándo usar Ibíd.
+  style=verbose-trad2,
+  autocite=footnote,
+  ibidtracker=context,
   pagetracker=true,
   dashed=false
 ]{biblatex}
+
+% Evitar líneas viudas y huérfanas
 \widowpenalty=10000
 \clubpenalty=10000
 
-% Controla las separaciones deseadas
-\setlength{\bibitemsep}{12pt} % entre entradas
-\setlength{\bibparsep}{1em}   % entre párrafos dentro de una entrada
+% Controla las separaciones deseadas en bibliografía
+\setlength{\bibitemsep}{12pt} 
+\setlength{\bibparsep}{1em}   
 
-% --- Bibliografía: sin sangría colgante (todo alineado a la izquierda) ---
+% Bibliografía: sin sangría colgante
 \setlength{\bibhang}{0pt}
 \appto{\bibsetup}{%
-  \setlength{\leftmargin}{0pt}% margen izquierdo del entorno
-  \setlength{\itemindent}{0pt}% indentación del ítem
-  \setlength{\listparindent}{0pt}% indentación de párrafos dentro de la entrada
+  \setlength{\leftmargin}{0pt}%
+  \setlength{\itemindent}{0pt}%
+  \setlength{\listparindent}{0pt}%
 }
-% Fuerza a que el entorno de bibliografía use esas longitudes
 \appto{\bibsetup}{%
   \setlength{\itemsep}{\bibitemsep}%
   \setlength{\parsep}{\bibparsep}%
@@ -48,13 +50,11 @@
   \togglefalse{bbx:doi}%
   \togglefalse{bbx:eprint}%
   \togglefalse{bbx:isbn}%
-  \renewbibmacro*{url+urldate}{}% suprime tanto la URL como la fecha de consulta en la nota
+  \renewbibmacro*{url+urldate}{}%
 }
 
 \usepackage{icontec_style}
 \usepackage[hidelinks]{hyperref}
-
-%Ajustes de cleveref
 \usepackage[spanish,noabbrev,nameinlink]{cleveref}
 
 %Configuraciones extra para referencias al español
@@ -66,12 +66,16 @@
 
 \usepackage[hang,flushmargin]{footmisc}
 % --- Espaciado de notas al pie ---
-\setlength{\footnotesep}{14pt}              % separación ENTRE notas
-\setlength{\skip\footins}{14pt plus 4pt}    % separación del texto al bloque de notas
+\setlength{\footnotesep}{14pt}
+\setlength{\skip\footins}{14pt plus 4pt}
 \renewcommand{\footnotelayout}{\setstretch{1}}
-\setlist[enumerate]{nosep} % Aplica a todas las listas numeradas
-\setlist[itemize]{nosep}   % Aplica a todas las listas con viñetas
-% Metadatos portada:
+
+% --- Listas sin espacio extra ---
+\setlist[enumerate]{nosep} 
+\setlist[itemize]{nosep}   
+\setlength{\parskip}{1em} % Espaciado entre párrafos (como habíamos acordado)
+
+% --- Metadatos portada ---
 \icontecsetup{
   universidad = {Universidad Industrial de Santander},
   facultad    = {Facultad de Ingenierías Fisicomecánicas},
@@ -80,37 +84,58 @@
   autores     = {\\Miguel Ángel Plata Rodríguez -- 2190050\\Mateo Salazar Serrano -- 2200135},
   director    = {\\Urbano Eliécer Gómez Prada, PhD},
   ciudad      = {Bucaramanga},
-  anio        = {\textit{(poner fecha de entrega)}}
+  anio        = {15 de Enero del 2025}
 }
 
+% ==========================================
+%           INICIO DEL DOCUMENTO
+% ==========================================
 \begin{document}
 
-% Portada
+% 1. PORTADA
 \maketitleicontec
 
-%Agradecimientos / Resumen / Abstract
-% \chapter*{Agradecimientos}\addcontentsline{toc}{chapter}{Agradecimientos}
-% \begin{resumen} ... \keywords{...} \end{resumen}
-% \begin{abstractES} ... \keywords{...} \end{abstractES}
+% Configuración de páginas preliminares (números romanos: i, ii, iii...)
+\pagenumbering{roman}
 
-% Índices
+% 2. DEDICATORIA
+\clearpage
+\chapter*{Dedicatoria} % Título sin número y sin salir en índice
+\input{preliminares/0_dedicatoria}
+
+% 3. AGRADECIMIENTOS
+\clearpage
+\chapter*{Agradecimientos} % Título sin número y sin salir en índice
+\input{preliminares/1_agradecimientos}
+
+% 4. ÍNDICES
+\clearpage
 \tableofcontents
 \listoffigures
 \listoftables
+
+% 5. RESUMEN (Español e Inglés)
+\clearpage
+\chapter*{Resumen} % Título sin número y sin salir en índice
+\input{preliminares/2_resumen}
+
 \clearpage
 
-% ===== Contenido =====
+% ==========================================
+%           CONTENIDO PRINCIPAL
+% ==========================================
+\clearpage
+\pagenumbering{arabic} % Reinicia contador a 1, 2, 3...
+\setcounter{page}{1}   
+
+% 7. CAPÍTULOS
 \include{chapters/01-introduccion}
 \include{chapters/02-marco-de-referencia}
 \include{chapters/03-metodologia}
 \include{chapters/04-resultados} 
 \include{chapters/05-conclusiones} 
 
-% Bibliografía
+% BIBLIOGRAFÍA
 \printbibliography[title={Bibliografía}]
-
-% (Opcional) Apéndices
-% \appendix
-% \include{appendices/apendice-a}
 
 \end{document}
