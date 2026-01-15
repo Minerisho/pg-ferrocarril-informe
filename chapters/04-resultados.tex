@@ -238,17 +238,17 @@ Dada la división en múltiples escenas y el diseño detallado de los scripts e 
 
 \subsubsection{Main Menu}
 
-El Main Menu es la escena encargada de mostrar la interfaz inicial que vera el jugador al abrir el juego serio, desde esta escena es que se podrán acceder a los niveles y las Configuraciones.
+El Main Menu es la escena encargada de mostrar la interfaz inicial que verá el jugador al abrir el juego serio, desde esta escena es que se podrán acceder a los niveles y las Configuraciones.
 
 En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
   \item \textbf{SaveSystem: } Es el encargado de manejar el archivo de guardado del progreso del jugador.
   \item \textbf{System\_SceneLoader: } Se encarga de manejar la carga de las distintas escenas que utilizarán.
-  \item \textbf{TutorialManager: } Se encarga de los dialogos y controles durante el tutorial la primera vez que se ejecuta el juego.
+  \item \textbf{TutorialManager: } Se encarga de los diálogos y controles durante el tutorial la primera vez que se ejecuta el juego.
   \item \textbf{EventSystem: } Un componente nativo de unity usado para la deteccion de interacciones.
-  \item \textbf{MusicaSonido y UISonido: } Encargados del manejo del sonido tanto musical como de interacción.
-  \item \textbf{Canvas: } componente que se encarga de todo lo visual y de interaccion en el menú, como son los botones, sliders, etc.
+  \item \textbf{MúsicaSonido y UISonido: } Encargados del manejo del sonido tanto musical como de interacción.
+  \item \textbf{Canvas: } componente que se encarga de todo lo visual y de interacción en el menú, como son los botones, sliders, etc.
 \end{enumerate}
 
 \begin{landscape}
@@ -262,14 +262,14 @@ En esta escena podemos encontrar componentes como:
 
 \subsubsection{Mapa Menu}
 
-La escena de Mapa Menu es la encargada de mostrar el mapa que se ve de fondo cuando el jugador esta en el menu principal, conteniendo tanto el mapa como los trenes en movimiento.
+La escena de Mapa Menu es la encargada de mostrar el mapa que se ve de fondo cuando el jugador esta en el menú principal, conteniendo tanto el mapa como los trenes en movimiento.
 
 En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
   \item \textbf{Terreno\_ColombiaV2: } Contenedor del fragmento del mapa que vemos en el menu.
-  \item \textbf{Agua: } Se encarga de almacenar los rios.
-  \item \textbf{PathSplineMenu: } Se encarga de gestionar los spline de las vias por las que los trenes transitan.
+  \item \textbf{Agua: } Se encarga de almacenar los ríos.
+  \item \textbf{PathSplineMenu: } Se encarga de gestionar los spline de las vías por las que los trenes transitan.
   \item \textbf{Tren1, Tren2 y Tren3: } Son las 3 variantes de trenes junto a sus respectivos vagones.
   \item \textbf{Infraestructura: } Contiene los puentes y tuneles por los que vemos a los trenes transitar.
   \item \textbf{Bandera: } El simbolo patrio, contiene su modelo y su animacion de ser meneada por el viento.
@@ -292,12 +292,12 @@ En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
   \item \textbf{Terreno\_ColombiaV2: } Contenedor del mapa completo del país, contando con 256 fragmentos del mapa que conectados forman toda la extension territorial de Colombia.
-  \item \textbf{Agua: } Se encarga de almacenar los rios, lagos y otros cuerpos de agua, contando con mas de 40,000 cuerpos de agua almacenados.
+  \item \textbf{Agua: } Se encarga de almacenar los ríos, lagos y otros cuerpos de agua, contando con mas de 40,000 cuerpos de agua almacenados.
   \item \textbf{Fronteras Municipales: } En este estan contenidas todas las fronteras de los municipios.
   \item \textbf{Fronteras Departamentales: } En este estan contenidas todas las fronteras de los departamentos.
-  \item \textbf{Fronteras Nacional: } En este estan contenidas las fronteras nacionales con otros paises como lo son Panamá, Peru, Brazil, Venezuela, y Ecuador.
-  \item \textbf{Etiquetas Municipios: } Contiene las estiquetas de todos los municipios de Colombia, teniendo etiquetas desde Abejorral hasta Zipaquira.
-  \item \textbf{Etiquetas Departamentales: } Contiene las estiquetas de todos los departamentos de Colombia, teniendo etiquetas desde Amazonas hasta Vichada.
+  \item \textbf{Fronteras Nacional: } En este estan contenidas las fronteras nacionales con otros paises como lo son Panamá, Peru, Brasil, Venezuela, y Ecuador.
+  \item \textbf{Etiquetas Municipios: } Contiene las etiquetas de todos los municipios de Colombia, teniendo etiquetas desde Abejorral hasta Zipaquira.
+  \item \textbf{Etiquetas Departamentales: } Contiene las etiquetas de todos los departamentos de Colombia, teniendo etiquetas desde Amazonas hasta Vichada.
   \item \textbf{PlanoOceanoNoContruye: } Un plano 3D gigante, con textura transparente, que cubre el area de todo el pais, asignado a la altura 0, es usado como freno para que los jugadores no construyan en el oceano.
   \item \textbf{LevelLoader: } Este elemento esta encargado de manejar la carga de diferentes escenas.
 \end{enumerate}
@@ -314,32 +314,36 @@ En esta escena podemos encontrar componentes como:
 
 \subsubsection{Nivel 1 Tutorial}
 
-En esta escena se encuentran objetos tanto de visibilidad del jugador como de analisis y calculos de resultados, asi como tambien manejar el tutorial para guiar al jugador durante su primera experiencia con el videojuego serio
+En esta escena se encuentran objetos tanto de visibilidad del jugador como de analisis y calculos de resultados, asi como también manejar el tutorial para guiar al jugador durante su primera experiencia con el videojuego serio
 
 \begin{enumerate}
+<<<<<<< HEAD
   \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vias.
+=======
+  \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
+>>>>>>> 4d7b37fd655364939d062c57e76f996598d31c97
   \begin{enumerate}
       \item \textbf{Controlador de movimiento: } Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
-      \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, tambien cuenta con una cámara secundaria que actua como vista aerea encima del país
-      \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vias férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
+      \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
+      \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
     \end{enumerate}
 
   \item \textbf{Terreno: } En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
   \item \textbf{Canvas Nivel: } En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
   \begin{enumerate}
       \item \textbf{Nivel: } Este componente contiene todos los elementos que el jugador puede ver durante el desarrollo normal del nivel, entre estos elementos se encuentran las interfaces de vida y dinero, los botones para la activación de modo de construccion y la selección de trenes.
-      \item \textbf{Pausa: } Encargado de almacenar los componentes del menu de pausa, tales como los botones de reinicio, guia y volver al menú principal.
+      \item \textbf{Pausa: } Encargado de almacenar los componentes del menú de pausa, tales como los botones de reinicio, guia y volver al menú principal.
       \item \textbf{Fin de Nivel: } Aqui se encuentran las interfaces de victoria y derrota.
       \item \textbf{Tutorial: } Encargado de almacenar los elementos de la interfaz del tutorial, como lo son los cuadros de dialogo y los sprites de "Don Raíl".
       \item \textbf{ContrataciónLvl: } Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
     \end{enumerate}
   \item \textbf{Tren: } Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
-  \item \textbf{Managers: } Aqui esta almacenada la logica interna y de gestión del nivel, cuenta con los siguientes componentes
+  \item \textbf{Managers: } Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
   \begin{enumerate}
       \item \textbf{SplineLevel: } Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
       \item \textbf{Map Manager: } Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
-      \item \textbf{AudioManager: } Encargado de la gestion de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
-      \item \textbf{TutorialManager: } En él se encuentran almacenados los dialogos y acciones que se espera que el jugador realice durante el desarrollo del tutorial
+      \item \textbf{AudioManager: } Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
+      \item \textbf{TutorialManager: } En él se encuentran almacenados los diálogos y acciones que se espera que el jugador realice durante el desarrollo del tutorial
       \item \textbf{EconomiaManager: } Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
     \end{enumerate}
 \end{enumerate}
@@ -358,11 +362,19 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
 Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura similar, los cambios más destacables son la remoción del tutorial y cambios individuales a cada nivel para determinar los objetivos del mismo
 
 \begin{enumerate}
+<<<<<<< HEAD
   \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vias.
   \begin{enumerate}
       \item \textbf{Controlador de movimiento: } Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
       \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, tambien cuenta con una cámara secundaria que actua como vista aerea encima del país
       \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vias férreas, la previsualización de construccion y la construcción de estructuras como tuneles y puentes.
+=======
+  \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
+  \begin{enumerate}
+      \item \textbf{Controlador de movimiento: } Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
+      \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
+      \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
+>>>>>>> 4d7b37fd655364939d062c57e76f996598d31c97
     \end{enumerate}
 
   \item \textbf{Terreno: } En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
@@ -374,11 +386,11 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
       \item \textbf{ContrataciónLvl: } Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
     \end{enumerate}
   \item \textbf{Tren: } Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
-  \item \textbf{Managers: } Aqui esta almacenada la logica interna y de gestión del nivel, cuenta con los siguientes componentes
+  \item \textbf{Managers: } Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
   \begin{enumerate}
       \item \textbf{SplineLevel: } Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
       \item \textbf{Map Manager: } Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
-      \item \textbf{AudioManager: } Encargado de la gestion de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
+      \item \textbf{AudioManager: } Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
       \item \textbf{EconomiaManager: } Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
     \end{enumerate}
 \end{enumerate}
@@ -497,7 +509,7 @@ Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a
 \label{fig:mapa_inicial}
 \end{figure}
 
-Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly}) y fragmentadas que no solucionaron los problemas de latancia en las llamadas de renderizado(\textit{draw-calls}), se optó por la solución de usar el sistema de terrenos nativo de Unity.
+Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly}) y fragmentadas que no solucionaron los problemas de latencia en las llamadas de renderizado(\textit{draw-calls}), se optó por la solución de usar el sistema de terrenos nativo de Unity.
 
 \subsubsection{Automatización y Procesamiento de Datos Geográficos}
 
@@ -624,7 +636,7 @@ La gestión financiera es administrada por la clase \texttt{EconomiaManager}, la
 El cálculo del saldo disponible se realiza mediante la siguiente sumatoria:
 
 \begin{equation}
-    S_{remantente} = P_{inicial} - (C_{vias} + C_{estructuras} + C_{tren})
+    S_{remantente} = P_{inicial} - (C_{vías} + C_{estructuras} + C_{tren})
 \end{equation}
 
 Un aspecto fundamental de la experiencia de usuario (UX) en esta implementación es la ausencia de bloqueos restrictivos. A diferencia de los simuladores tradicionales que impiden la construcción al llegar a cero, el sistema permite que el jugador continúe extendiendo la vía incluso si el saldo entra en valores negativos. Esta decisión de diseño prioriza la finalización del nivel y la libertad creativa; sin embargo, incurrir en deuda tiene una consecuencia punitiva en la fase de evaluación, resultando en la pérdida automática de la \textit{Estrella de Economía} (más adelante se detallará sobre esto) y reduciendo drásticamente el puntaje final.
