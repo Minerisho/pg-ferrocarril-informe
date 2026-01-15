@@ -33,7 +33,7 @@ La Tabla \cref{tab:matriz-riesgos-final} presenta la matriz de riesgos, donde la
 
 Tras las iteraciones de desarrollo y las correcciones implementadas en la fase de implementación, todos los riesgos técnicos críticos fueron mitigados y cerrados exitosamente antes de la fase de evaluación.
 \pagebreak
-\begin{landscape} 
+\begin{landscapefull} 
 \begin{longtable}{|c|L{5cm}|L{5cm}|c|c|c|L{5cm}|c|}
 \caption{Matriz de riesgos del proyecto.}\label{tab:matriz-riesgos-final} \\
 \hline
@@ -94,7 +94,7 @@ R11 & Modelos 3D con escalas erróneas & Exportación incorrecta desde Blender &
 R5 & Textura de vías solapada & Vía al mismo nivel del suelo & 1 & 2 & 2 & Mover las vías generadas una pequeña distancia hacia arriba. & Cerrado \\ \hline
 
 \end{longtable}
-\end{landscape} 
+\end{landscapefull} 
 \subsection{Definición de Épicas e Historias de Usuario}
 
 Con el objetivo de garantizar que el videojuego cumpliera con los lineamientos del Aprendizaje Basado en Juegos (GBL), el proceso de definición de requisitos comenzó con la elaboración de un conjunto preliminar de Historias de Usuario (HU). Este primer barrido buscó capturar todas las funcionalidades necesarias para cubrir tanto las mecánicas básicas como los objetivos del proyecto.\\
@@ -130,7 +130,7 @@ La Tabla \cref{tab:HU-final} presenta el formato consolidado de las historias de
     \item \textbf{Complejidad:} Valor numérico en una escala de 1 a 5 que estima el grado de dificultad técnica y el esfuerzo requerido para la implementación de la funcionalidad.
 \end{enumerate}
 \pagebreak
-\begin{landscape} 
+\begin{landscapefull} 
 \begin{longtable}{|c|c|L{15cm}|c|c|}
 \caption{Tabla final de historias de usuario implementadas.} \label{tab:HU-final} \\
 \hline
@@ -192,7 +192,7 @@ La Tabla \cref{tab:HU-final} presenta el formato consolidado de las historias de
 6 & HU35 & Como administrador, quiero guardar metadatos de los jugadores en una base de datos. & M & 3 \\ \hline
 
 \end{longtable}
-\end{landscape} 
+\end{landscapefull} 
 
 \section{Diseño}
 
@@ -227,14 +227,18 @@ A continuación, se describen las 8 escenas que componen el videojuego serio den
 
 Dada la división en múltiples escenas y el diseño detallado de los scripts e iteraciones del sistema, se optó por representar esta estructura en un diagrama de componentes. Con el fin de facilitar la lectura, dicho diagrama se fragmentó en módulos que corresponden a cada escena como lo son la gestión del mapa, el diseño de niveles y la interfaz de usuario. Más adelante se presentará la descripción a detalle de cada escena junto con sus componentes principales.
 
-\begin{landscape} 
-\begin{figure}[H]
-\centering
-\includegraphics[width=1.5\textwidth]{figures/test_DiagramaComponentes.png}
-\caption{Diagrama de componentes organizado por escenas de Unity.}
-\label{fig:diagrama_componentes}
-\end{figure}
-\end{landscape} 
+\begin{landscapefull} 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/test_DiagramaComponentes.png}
+        \caption{Diagrama de componentes organizado por escenas de Unity.}
+        \label{fig:diagrama_componentes}
+    \end{figure}
+\end{landscapefull} 
 
 \subsubsection{Main Menu}
 
@@ -251,14 +255,18 @@ En esta escena podemos encontrar componentes como:
   \item \textbf{Canvas: } componente que se encarga de todo lo visual y de interacción en el menú, como son los botones, sliders, etc.
 \end{enumerate}
 
-\begin{landscape}
+\begin{landscapefull}
 \begin{figure}[p] % 'p' sugiere que ocupe una página completa
 \centering
-\includegraphics[width=1.4\textheight]{figures/mainmenu.png} % Nota: width basado en textheight porque la página está rotada
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/mainmenu.png} % Nota: width basado en textheight porque la página está rotada
 \caption{Diagrama de componentes del Menú Principal}
 \label{fig:diagrama_mainmenu}
 \end{figure}
-\end{landscape}
+\end{landscapefull}
 
 \subsubsection{Mapa Menu}
 
@@ -275,14 +283,18 @@ En esta escena podemos encontrar componentes como:
   \item \textbf{Bandera: } El simbolo patrio, contiene su modelo y su animacion de ser meneada por el viento.
 \end{enumerate}
 
-\begin{landscape}
+\begin{landscapefull}
 \begin{figure}[p] % 'p' sugiere que ocupe una página completa
 \centering
-\includegraphics[width=1.4\textheight]{figures/mapamenu.png} 
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/mapamenu.png} 
 \caption{Diagrama de componentes del Mapa del Menu}
 \label{fig:diagrama_mapamenu}
 \end{figure}
-\end{landscape}
+\end{landscapefull}
 
 \subsubsection{MapaCompleto}
 
@@ -303,14 +315,18 @@ En esta escena podemos encontrar componentes como:
 \end{enumerate}
 
 
-\begin{landscape}
+\begin{landscapefull}
 \begin{figure}[p] % 'p' sugiere que ocupe una página completa
 \centering
-\includegraphics[width=1.4\textheight]{figures/mapacompleto.png} 
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/mapacompleto.png} 
 \caption{Diagrama de componentes del Mapa completo}
 \label{fig:diagrama_mapacompleto}
 \end{figure}
-\end{landscape}
+\end{landscapefull}
 
 \subsubsection{Nivel 1 Tutorial}
 
@@ -344,14 +360,18 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
     \end{enumerate}
 \end{enumerate}
 
-\begin{landscape}
+\begin{landscapefull}
 \begin{figure}[p] % 'p' sugiere que ocupe una página completa
 \centering
-\includegraphics[width=1.4\textheight]{figures/niveltutorial.png} 
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/niveltutorial.png} 
 \caption{Diagrama de componentes del Nivel 1 Tutorial}
 \label{fig:diagrama_niveltutorial}
 \end{figure}
-\end{landscape}
+\end{landscapefull}
 
 \subsubsection{Niveles 2 a 5}
 
@@ -383,14 +403,18 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
     \end{enumerate}
 \end{enumerate}
 
-\begin{landscape}
+\begin{landscapefull}
 \begin{figure}[p] % 'p' sugiere que ocupe una página completa
 \centering
-\includegraphics[width=1.4\textheight]{figures/niveles25.png} 
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+        ]{figures/niveles25.png} 
 \caption{Diagrama de componentes de los niveles 2 a 5}
 \label{fig:diagrama_niveles25}
 \end{figure}
-\end{landscape}
+\end{landscapefull}
 
 \subsection{Arquitectura del Sistema y API de Informes}
 
@@ -537,12 +561,8 @@ Finalmente, el terreno fue texturizado automáticamente aplicando un material au
     \label{fig:inspector_colores}
 \end{figure}
 
-<<<<<<< HEAD
-La  \cref{fig:mapa_unity} muestra el resultado final del terreno implementado.
-=======
 
-La Figura \ref{fig:mapa_unity} muestra el resultado final del terreno implementado.
->>>>>>> 60b03cd04511da083334ea52cbfbf23aeea7cc6e
+La \cref{fig:mapa_unity} muestra el resultado final del terreno implementado.
 
 \begin{figure}[H]
 \centering
@@ -714,11 +734,7 @@ Funcionalmente, el menú dispone de tres puntos de interacción principales:
 \begin{enumerate}
     \item Jugar: Inicia la transición hacia la escena del \textit{Selector de Niveles}, cambiando el contexto hacia el mapa geográfico de Colombia para que el usuario elija su contrato.
     
-<<<<<<< HEAD
-    \item \textbf{Opciones:} Despliega una ventana emergente (\textit{pop-up}) dedicada a la conción del sistema. En la versión actual del prototipo, este módulo se centra exclusivamente en la gestión del \textit{AudioManager}, permitiendo al usuario ajustar de manera independiente el volumen de la música de fondo y de los efectos de sonido (SFX) mediante deslizadores (\textit{sliders}).
-=======
     \item Opciones: Despliega una ventana emergente (\textit{pop-up}) dedicada a la configuración del sistema. En la versión actual del prototipo, este módulo se centra exclusivamente en la gestión del \textit{AudioManager}, permitiendo al usuario ajustar de manera independiente el volumen de la música de fondo y de los efectos de sonido (SFX) mediante deslizadores (\textit{sliders}).
->>>>>>> 60b03cd04511da083334ea52cbfbf23aeea7cc6e
     
     \item Salir: Ejecuta la instrucción de finalización del ciclo de vida de la aplicación, cerrando el juego y devolviendo el control al sistema operativo.
 \end{enumerate}

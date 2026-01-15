@@ -151,40 +151,42 @@
 \newcommand{\icontecsetup}[1]{\setkeys{icontec}{#1}}
 \makeatother
 
-% --- Portada UIS Estilo Tesis ---
+% --- Portada UIS Estilo Tesis (Ajustada) ---
 \providecommand{\maketitleicontec}{} 
 \renewcommand{\maketitleicontec}{%
   \begin{titlepage}
     \centering
-    % 1. TÍTULO DEL PROYECTO (ARRIBA)
-    \vspace*{2cm}
-    {\bfseries\Large \titulo\par}
+    % El \vspace*{} define cuánto baja el título desde el margen superior
+    % Si lo sientes muy arriba, cambia 0cm por 1cm.
+    \vspace*{0cm} 
     
-    \vspace{3.5cm} % Espacio flexible
+    % 1. TÍTULO (Ahora en \normalsize y negrita)
+    % Si quieres quitar la negrita, borra \bfseries
+    {\normalsize {\titulo}\par}
+    
+    \vfill % Espacio flexible 1
     
     % 2. AUTORES
     {\normalsize \autor\par}
     
-    \vspace{3cm}
+    \vspace{2cm} % Espacio fijo moderado
     
     % 3. LEYENDA DE GRADO
     {\normalsize Trabajo de Grado para Optar al Título de \carrera\par}
     
-    \vspace{2.5cm}
+    \vspace{2cm} % Espacio fijo moderado
     
     % 4. DIRECTOR
     {\normalsize Director\par}
-    \vspace{0.3em}
+    \vspace{0.5em} % Pequeño espacio entre etiqueta y nombre
     {\normalsize \asesor\par}
     
-    \vfill % Empuja todo lo siguiente al final de la página
+    \vfill % Espacio flexible 2 (Empuja lo institucional al fondo)
     
-    % 5. BLOQUE INSTITUCIONAL (ABAJO)
+    % 5. BLOQUE INSTITUCIONAL
     {\normalsize \universidad\par}
     {\normalsize \facultad\par}
     {\normalsize \programa\par}
-    {\normalsize \carrera\par}
-    \vspace{0.5cm}
     {\normalsize \ciudad\par}
     {\normalsize \anio\par}
   \end{titlepage}
@@ -205,4 +207,15 @@
     \includegraphics[width=#1]{#2}
     \caption{#3}\label{#4}
   \end{figure}
+}
+
+% --- Entorno para Paisaje con Márgenes Reducidos ---
+% Requiere: \usepackage{pdflscape} y \usepackage{geometry}
+\newenvironment{landscapefull}{%
+  \clearpage
+  \newgeometry{margin=1.5cm} % Márgenes reducidos (ajusta a tu gusto)
+  \begin{landscape}
+}{%
+  \end{landscape}
+  \restoregeometry
 }
