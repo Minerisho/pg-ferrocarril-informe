@@ -809,16 +809,16 @@ La puntuación numérica $P_{total}$ se complementa con un sistema de calificaci
 Los criterios de obtención para cada insignia son:
 
 \begin{itemize}
-    \item \textbf{Estrella por Completado (Cumplimiento):} Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con el destino válido.
+    \item \textbf{Estrella por Completado (Cumplimiento):} Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con los destinos correspondientes.
     
     \item \textbf{Estrella de Presupuesto (Eficiencia Económica):} Evalúa la gestión financiera. Se obtiene únicamente si el jugador logra finalizar la obra manteniendo un saldo positivo en la billetera virtual ($Presupuesto_{final} > 0$).
     
-    \item \textbf{Estrella de Vida (Seguridad Operativa):} Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber sufrido ningún tipo de daño por colisiones o descarrilamientos parciales durante el trayecto.
+    \item \textbf{Estrella de Vida (Seguridad Operativa):} Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber perdido vida por atravezar zonas de daño durante el trayecto.
     
-    \item \textbf{Estrella de Tiempo (Eficiencia Temporal):} Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de conducción adecuada.
+    \item \textbf{Estrella de Tiempo (Eficiencia Temporal):} Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de locomotora adecuada.
 \end{itemize}
 
-Finalmente, la Figura \ref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza la sumatoria de estas calificaciones junto con el puntaje numérico global.
+Finalmente, la Figura \ref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza el puntaje numérico global junto con la cantidad de estrellas obtuvidas.
 
 \begin{figure}[H]
     \centering
@@ -829,7 +829,7 @@ Finalmente, la Figura \ref{fig:victoria} muestra la pantalla de consolidación d
 
 \subsection{Pruebas y Análisis de Resultados}
 
-Para validar el prototipo como herramienta de aprendizaje y software funcional, se realizó una prueba piloto con \textbf{22 voluntarios} de la comunidad universitaria. El proceso de recolección de datos siguió un enfoque mixto: los datos \textbf{cuantitativos} fueron extraídos directamente de la API de informes (telemetría), mientras que los \textbf{cualitativos} se obtuvieron mediante una encuesta de percepción aplicada tras la sesión de juego.
+Para validar el prototipo como herramienta de aprendizaje y software funcional, se realizó una prueba unitaria con 28 voluntarios de la comunidad universitaria. El proceso de recolección de datos siguió un enfoque mixto: los datos cuantitativos fueron extraídos directamente de la API de informes (telemetría), mientras que los ualitativos se obtuvieron mediante una encuesta de percepción aplicada tras la sesión de juego.
 
 \subsection{Análisis de Telemetría (Datos de la API)}
 
@@ -906,7 +906,7 @@ La identificación de los túneles y puentes como los mayores focos de gasto (Fi
 \label{fig:dineroyesfuerzo}
 \end{figure}
 \section{Errores Detectados}
-Durante la prueba piloto, se reportaron los siguientes fallos que requieren corrección:
+Durante la prueba unitaria, se reportaron los siguientes fallos que requieren corrección:
 \begin{itemize}
     \item \textbf{Cámara en límites del mapa:} La cámara permite visualizar el \textit{vacío} en los bordes extremos. Se requiere implementar \textit{clamping} en las coordenadas.
     \item \textbf{Colisiones fantasma:} El tren detectó daño en el 2\% de las partidas sin colisión visual clara[cite: 131]. Se deben refinar los \textit{colliders}.
