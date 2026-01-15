@@ -21,10 +21,12 @@
   pagetracker=true,
   dashed=false
 ]{biblatex}
+\widowpenalty=10000
+\clubpenalty=10000
 
 % Controla las separaciones deseadas
 \setlength{\bibitemsep}{12pt} % entre entradas
-\setlength{\bibparsep}{3pt}   % entre párrafos dentro de una entrada
+\setlength{\bibparsep}{1em}   % entre párrafos dentro de una entrada
 
 % --- Bibliografía: sin sangría colgante (todo alineado a la izquierda) ---
 \setlength{\bibhang}{0pt}
@@ -67,7 +69,8 @@
 \setlength{\footnotesep}{14pt}              % separación ENTRE notas
 \setlength{\skip\footins}{14pt plus 4pt}    % separación del texto al bloque de notas
 \renewcommand{\footnotelayout}{\setstretch{1}}
-
+\setlist[enumerate]{nosep} % Aplica a todas las listas numeradas
+\setlist[itemize]{nosep}   % Aplica a todas las listas con viñetas
 % Metadatos portada:
 \icontecsetup{
   universidad = {Universidad Industrial de Santander},
