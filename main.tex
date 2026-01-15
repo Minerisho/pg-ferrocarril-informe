@@ -57,7 +57,9 @@
 \usepackage{icontec_style}
 \usepackage[hidelinks]{hyperref}
 \usepackage[spanish,noabbrev,nameinlink]{cleveref}
-
+\DefineBibliographyStrings{spanish}{%
+  andothers = {et\addabbrvspace al\adddot}
+}
 %Configuraciones extra para referencias al español
 \DefineBibliographyStrings{spanish}{references = {Referencias},}
 \DefineBibliographyStrings{spanish}{
@@ -84,13 +86,16 @@
   universidad = {Universidad Industrial de Santander},
   facultad    = {Facultad de Ingenierías Fisicomecánicas},
   programa    = {Escuela de Ingeniería de Sistemas e Informática},
-  titulo      = {PROTOTIPO DE UN VIDEOJUEGO SERIO SOBRE SISTEMAS FERROVIARIOS EN COLOMBIA},
-  autores     = {\\Miguel Ángel Plata Rodríguez -- 2190050\\Mateo Salazar Serrano -- 2200135},
-  director    = {\\Urbano Eliécer Gómez Prada, PhD},
+  carrera     = {Ingeniero de Sistemas}, % <--- AGREGAR ESTO
+  titulo      = {Prototipo de un videojuego serio sobre sistemas ferroviarios en Colombia},
+  % Quita las "\\" del inicio de los autores para que se centren bien
+  autores     = {Miguel Ángel Plata Rodríguez\\Mateo Salazar Serrano},
+  % Separa el nombre del título con "\\"
+  director    = {Urbano Eliécer Gómez Prada\\Doctor en Tecnología Educativa},
   ciudad      = {Bucaramanga},
-  anio        = {15 de Enero del 2025}
+  anio        = {2026}
+  
 }
-
 % ==========================================
 %           INICIO DEL DOCUMENTO
 % ==========================================

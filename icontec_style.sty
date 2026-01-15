@@ -123,53 +123,73 @@
 \setlength{\parskip}{0pt}
 
 % ================== Metadatos portada ==================
-% Definiciones vacías (para rellenar desde main.tex)
+% Definiciones vacías
 \providecommand{\universidad}{}
 \providecommand{\facultad}{}
 \providecommand{\programa}{}
+\providecommand{\carrera}{} % <--- NUEVA VARIABLE
 \providecommand{\titulo}{}
-\providecommand{\autor}{}   % acepta una o varias líneas
+\providecommand{\autor}{}   
 \providecommand{\asesor}{}  
 \providecommand{\ciudad}{}
 \providecommand{\anio}{}
 
-% Interfaz cómoda por claves: \icontecsetup{universidad={...}, titulo={...}, ...}
+% Interfaz por claves
 \RequirePackage{xkeyval}
 \makeatletter
 \define@key{icontec}{universidad}{\renewcommand{\universidad}{#1}}
 \define@key{icontec}{facultad}{\renewcommand{\facultad}{#1}}
 \define@key{icontec}{programa}{\renewcommand{\programa}{#1}}
+\define@key{icontec}{carrera}{\renewcommand{\carrera}{#1}} % <--- NUEVA CLAVE
 \define@key{icontec}{titulo}{\renewcommand{\titulo}{#1}}
 \define@key{icontec}{autor}{\renewcommand{\autor}{#1}}
-\define@key{icontec}{autores}{\renewcommand{\autor}{#1}}   % alias
-\define@key{icontec}{director}{\renewcommand{\asesor}{#1}} % alias a \asesor
+\define@key{icontec}{autores}{\renewcommand{\autor}{#1}}   
+\define@key{icontec}{director}{\renewcommand{\asesor}{#1}} 
 \define@key{icontec}{asesor}{\renewcommand{\asesor}{#1}}
 \define@key{icontec}{ciudad}{\renewcommand{\ciudad}{#1}}
 \define@key{icontec}{anio}{\renewcommand{\anio}{#1}}
 \newcommand{\icontecsetup}[1]{\setkeys{icontec}{#1}}
 \makeatother
 
-
-% --- Portada  ---
+% --- Portada UIS Estilo Tesis ---
 \providecommand{\maketitleicontec}{} 
 \renewcommand{\maketitleicontec}{%
   \begin{titlepage}
     \centering
-    \vspace*{1cm}
-    {\Large \textbf{\universidad}\par}
+    % 1. TÍTULO DEL PROYECTO (ARRIBA)
+    \vspace*{2cm}
+    {\bfseries\Large \titulo\par}
+    
+    \vspace{3.5cm} % Espacio flexible
+    
+    % 2. AUTORES
+    {\normalsize \autor\par}
+    
+    \vspace{3cm}
+    
+    % 3. LEYENDA DE GRADO
+    {\normalsize Trabajo de Grado para Optar al Título de \carrera\par}
+    
+    \vspace{2.5cm}
+    
+    % 4. DIRECTOR
+    {\normalsize Director\par}
+    \vspace{0.3em}
+    {\normalsize \asesor\par}
+    
+    \vfill % Empuja todo lo siguiente al final de la página
+    
+    % 5. BLOQUE INSTITUCIONAL (ABAJO)
+    {\normalsize \universidad\par}
     {\normalsize \facultad\par}
     {\normalsize \programa\par}
-    \vfill
-    {\bfseries\Large \titulo\par}
-    \vspace{1.2cm}
-    {\normalsize \textbf{Autores:} \autor\par}
-    {\normalsize \textbf{Director:} \asesor\par}
-    \vfill
-    {\normalsize \ciudad, \anio\par}
+    {\normalsize \carrera\par}
+    \vspace{0.5cm}
+    {\normalsize \ciudad\par}
+    {\normalsize \anio\par}
   \end{titlepage}
   \clearpage
 }
-
 % --- Resumen / Abstract ---
 \newenvironment{resumen}{%
   \chapter*{Resumen}\addcontentsline{toc}{chapter}{Resumen}%
