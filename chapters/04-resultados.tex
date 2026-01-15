@@ -578,8 +578,17 @@ Una vez definida la infraestructura, el sistema permite la selección de la loco
 \end{minipage}
 \end{figure}
 
-\subsection{Recursos}
-La gestión de recursos dentro del juego se centra en un presupuesto monetario virtual asignado al inicio de cada nivel. Este capital disminuye en tiempo real conforme el jugador construye tramos de vía, túneles o puentes, y al adquirir locomotoras y vagones. El diseño impone una restricción dura: si el saldo llega a cero antes de completar el objetivo, se impide la construcción de nuevos segmentos, obligando al jugador a optimizar el trazado o reiniciar el nivel.
+\subsubsection{Economía}
+
+La gestión financiera es administrada por la clase \texttt{EconomiaManager}, la cual opera en tiempo real durante el ciclo \texttt{Update} para recalcular el costo total de la infraestructura desplegada. Siguiendo el patrón de diseño orientado a datos, este componente no almacena los precios de los activos internamente; en su lugar, consume una referencia externa al \textit{Scriptable Object} \texttt{CondicionesGlobales}, lo que permite ajustar la inflación o el costo de los materiales (vías por metro, precio por puente/túnel) en un solo archivo para todo el juego.
+
+El cálculo del saldo disponible se realiza mediante la siguiente sumatoria:
+
+\begin{equation}
+    S_{remantente} = P_{inicial} - (C_{vias} + C_{estructuras} + C_{tren})
+\end{equation}
+
+Un aspecto fundamental de la experiencia de usuario (UX) en esta implementación es la ausencia de bloqueos restrictivos. A diferencia de los simuladores tradicionales que impiden la construcción al llegar a cero, el sistema permite que el jugador continúe extendiendo la vía incluso si el saldo entra en valores negativos (bancarrota). Esta decisión de diseño prioriza la finalización del nivel y la libertad creativa; sin embargo, incurrir en deuda tiene una consecuencia punitiva en la fase de evaluación, resultando en la pérdida automática de la \textit{Estrella de Economía} y reduciendo drásticamente el puntaje final.
 
 \subsection{Zonas de daño y prohibición}
 Para garantizar la coherencia geográfica y aumentar la dificultad, se implementaron volúmenes de control invisibles en el mapa. Las "zonas de prohibición" impiden la construcción de infraestructura en áreas reservadas (como cascos urbanos densos o reservas naturales), mientras que las "zonas de daño" detectan colisiones físicas del tren. Si el vehículo impacta contra obstáculos no previstos o se descarrila por exceso de velocidad en una curva, el sistema activa el estado de fallo del nivel.
