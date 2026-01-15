@@ -33,7 +33,7 @@ La Tabla \ref{tab:matriz-riesgos-final} presenta la matriz de riesgos, donde las
 
 Tras las iteraciones de desarrollo y las correcciones implementadas en la fase de implementación, todos los riesgos técnicos críticos fueron mitigados y cerrados exitosamente antes de la fase de evaluación.
 \pagebreak
-\begin{landscape}
+\begin{landscape} 
 \begin{longtable}{|c|L{5cm}|L{5cm}|c|c|c|L{5cm}|c|}
 \caption{Matriz de riesgos del proyecto.}\label{tab:matriz-riesgos-final} \\
 \hline
@@ -94,7 +94,7 @@ R11 & Modelos 3D con escalas erróneas & Exportación incorrecta desde Blender &
 R5 & Textura de vías solapada & Vía al mismo nivel del suelo & 1 & 2 & 2 & Mover las vías generadas una pequeña distancia hacia arriba. & Cerrado \\ \hline
 
 \end{longtable}
-\end{landscape}
+\end{landscape} 
 \subsection{Definición de Épicas e Historias de Usuario}
 
 Con el objetivo de garantizar que el videojuego cumpliera con los lineamientos del Aprendizaje Basado en Juegos (GBL), el proceso de definición de requisitos comenzó con la elaboración de un conjunto preliminar de Historias de Usuario (HU). Este primer barrido buscó capturar todas las funcionalidades necesarias para cubrir tanto las mecánicas básicas como los objetivos del proyecto.\\
@@ -120,7 +120,7 @@ En la Tabla \ref{tab:epicas} se presentan las 8 épicas resultantes de esta cate
 \end{tabular} 
 \end{table}
 
-La Tabla \ref{tab:HU-final} presenta el formato consolidado de las historias de usuario tras el proceso de refinamiento continuo tras cada iteración durante las fases del proyecto. Se define las columnas de la siguiente manera:\\
+La Tabla \ref{tab:HU-final} presenta el formato consolidado de las historias de usuario tras el proceso de refinamiento continuo tras cada iteración durante las fases del proyecto. Se define las columnas de la siguiente manera:
 
 \begin{enumerate}
     \item \textbf{Épica:} Categoría funcional de alto nivel que agrupa un conjunto de historias de usuario relacionadas con un mismo módulo o subsistema del proyecto definidas anteriormente.
@@ -130,7 +130,7 @@ La Tabla \ref{tab:HU-final} presenta el formato consolidado de las historias de 
     \item \textbf{Complejidad:} Valor numérico en una escala de 1 a 5 que estima el grado de dificultad técnica y el esfuerzo requerido para la implementación de la funcionalidad.
 \end{enumerate}
 \pagebreak
-\begin{landscape}
+\begin{landscape} 
 \begin{longtable}{|c|c|L{15cm}|c|c|}
 \caption{Tabla final de historias de usuario implementadas.} \label{tab:HU-final} \\
 \hline
@@ -192,11 +192,11 @@ La Tabla \ref{tab:HU-final} presenta el formato consolidado de las historias de 
 6 & HU35 & Como administrador, quiero guardar metadatos de los jugadores en una base de datos. & M & 3 \\ \hline
 
 \end{longtable}
-\end{landscape}
+\end{landscape} 
 
 \section{Diseño}
 
-El diseño de la arquitectura de software se fundamentó en la creación de un prototipo funcional mínimo viable. El objetivo principal de esta etapa no consistió en maximizar los aspectos lúdicos o de entretenimiento inmediato, sino en establecer una base técnica robusta, modular y escalable que cumpla con los lineamientos del marco GBL (Game-Based Learning). Esta estructura busca garantizar que el sistema pueda operar correctamente bajo las reglas de simulación ferroviaria y permitir futuras expansiones o mejoras en las mecánicas educativas sin comprometer la estabilidad del software.
+El diseño de la arquitectura de software un videojuego serio, se orientó a satisfacer los requisitos fundamentales del marco GBL, priorizando la articulación coherente de las HU y la mitigación efectiva de los riesgos técnicos identificados previamente. Más allá de la estabilidad funcional, esta estructura se concibió para soportar una integración transversal con servicios externos, garantizando que la simulación ferroviaria gestione eficientemente el intercambio de datos vía API para la telemetría del jugador y la generación posterior de informes de auditoría.
 
 \subsection{Arquitectura de Escenas en Unity}
 
@@ -213,35 +213,28 @@ El flujo de ejecución comienza con la carga simultánea de las escenas \textit{
 
 A continuación, se describen las 8 escenas que componen el videojuego serio dentro de Unity:
 
-\begin{description}
-    \item[MainMenu:] Es la escena persistente que contiene el lienzo (\textit{Canvas}) principal de la interfaz y los gestores globales del sistema. Los objetos instanciados aquí están configurados para no destruirse entre cargas (\textit{DontDestroyOnLoad}), asegurando la continuidad de la música, los datos del jugador y la gestión de estados.
+\begin{enumerate}
+    \item \textbf{MainMenu:} Es la escena persistente que contiene el lienzo (\textit{Canvas}) principal de la interfaz y los gestores globales del sistema. Los objetos instanciados aquí están configurados para no destruirse entre cargas (\textit{DontDestroyOnLoad}), asegurando la continuidad de la música, los datos del jugador y la gestión de estados.
     
-    \item[MapaMenu:] Funciona como una escena puramente decorativa para el fondo del menú principal. Consiste en un fragmento extraído del mapa completo (exactamente 1 \textit{tile} de terreno) en el cual se ejecutan animaciones de trenes en bucle, brindando contexto visual sin cargar la totalidad de la geografía.
+    \item \textbf{MapaMenu:} Funciona como una escena puramente decorativa para el fondo del menú principal. Consiste en un fragmento extraído del mapa completo (exactamente 1 \textit{tile} de terreno) en el cual se ejecutan animaciones de trenes en bucle, brindando contexto visual sin cargar la totalidad de la geografía.
     
-    \item[MapaCompleto:] Es la escena más compleja y pesada del sistema, encargada de contener la totalidad de la representación geográfica. Esta escena incluye:
-    \begin{itemize}
-        \item La malla del terreno dividida en una cuadrícula de $16 \times 16$ \textit{tiles} de Unity.
-        \item La red hidrográfica completa, compuesta por 9972 objetos de ríos lineales (\textit{agua\_lineal}) y 40899 cuerpos de agua anchos o lagos (\textit{agua\_area}).
-        \item Las delimitaciones políticas, incluyendo fronteras nacionales, departamentales y municipales.
-        \item El etiquetado geográfico de todos los municipios de Colombia, posicionados sobre el terreno.
-    \end{itemize}
-    Cabe mencionar que, como decisión de diseño para la implementación, este mapa se construyó a una escala de 1:128 (1 unidad de Unity equivale a 128 metros reales) para equilibrar la precisión con el rendimiento.
+    \item \textbf{MapaCompleto:} Es la escena más compleja y pesada del sistema, encargada de contener la totalidad de la representación geográfica. Esta escena integra la malla del terreno dividida en una cuadrícula de $16 \times 16$ \textit{tiles}, la red hidrográfica completa (ríos lineales y cuerpos de agua), las delimitaciones políticas administrativas y el etiquetado geográfico de todos los municipios posicionados sobre la topografía.
     
-    \item[Niveles (1 al 5):] Corresponden a 5 escenas independientes (\textit{Nivel 1 Tutorial}, \textit{Nivel 2}, etc.) que se cargan de forma aditiva sobre el mapa completo. Estas escenas contienen únicamente los objetos necesarios para la jugabilidad específica de ese contrato: los puntos de inicio y fin, la configuración de las mecánicas, los gestores de eventos locales y los \textit{Canvas} específicos de la misión.
-\end{description}
+    \item \textbf{Niveles (1 al 5):} Corresponden a 5 escenas independientes (\textit{Nivel 1 Tutorial}, \textit{Nivel 2}, etc.) que se cargan de forma aditiva sobre el mapa completo. Estas escenas contienen únicamente los objetos necesarios para la jugabilidad específica de ese contrato: los puntos de inicio y fin, la configuración de las mecánicas, los gestores de eventos locales y los \textit{Canvas} específicos de la misión.
+\end{enumerate}
 
 \subsection{Diagrama de Componentes}
 
 Dada la división en múltiples escenas y el diseño detallado de los scripts e iteraciones del sistema, se optó por representar esta estructura en un diagrama de componentes. Con el fin de facilitar la lectura, dicho diagrama se fragmentó en módulos que corresponden a cada escena como lo son la gestión del mapa, el diseño de niveles y la interfaz de usuario. Más adelante se presentará la descripción a detalle de cada escena junto con sus componentes principales.
 
-\begin{landscape}
+\begin{landscape} 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.5\textwidth]{figures/test_DiagramaComponentes.png}
 \caption{Diagrama de componentes del sistema organizado por escenas de Unity.}
 \label{fig:diagrama_componentes}
 \end{figure}
-\end{landscape}
+\end{landscape} 
 
 \subsubsection{Main Menu}
 
@@ -401,7 +394,7 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
 
 \subsection{Arquitectura del Sistema y API de Informes}
 
-Dado que uno de los requisitos del juego para considerarse GBL es evaluar el aprendizaje y comportamiento de los jugadores, se implementó una arquitectura Cliente-Servidor. El cliente (el videojuego desarrollado en Unity) se comunica con un servidor backend encargado de procesar y almacenar la telemetría de las sesiones.
+Con el propósito de fortalecer el componente de \textit{Apoyo al Aprendizaje}, requisito fundamental en el diseño GBL, y trascender el sistema básico de puntuación numérica y por estrellas, se implementó una arquitectura Cliente-Servidor para la gestión de datos telemétricos. En este esquema, el cliente (videojuego en Unity) se comunica con un servidor \textit{backend} responsable de procesar y almacenar la actividad de las sesiones. Esto faculta al administrador para analizar los resultados y potenciar la realimentación hacia el jugador mediante la generación de informes detallados.
 
 La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
@@ -413,24 +406,16 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 \end{figure}
 
 \begin{enumerate}
-    \item \textbf{Cliente Unity (C\#):} Al finalizar un nivel, el cliente recopila métricas clave (tiempo, presupuesto usado, daños, puntuación) y empaqueta estos datos en un objeto JSON.
+    \item \textbf{Cliente Unity (C\#):} Al finalizar un nivel, el cliente recopila métricas clave y empaqueta estos datos en un objeto JSON.
     \item \textbf{API REST:} Se desarrolló una API intermedia que recibe las peticiones POST provenientes del videojuego. Esta API valida la integridad de los datos y gestiona la seguridad de las transacciones.
     \item \textbf{Base de Datos:} Los registros se almacenan en una base de datos No-SQL (FireBase), permitiendo la persistencia histórica de los intentos de los jugadores.
     \item \textbf{Módulo de Generación de Informes:} Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
 \end{enumerate}
 
+\subsubsection{Arquitectura de datos}
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
-
-\section{implementación}
-
-La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git (ver Figura \ref{fig:interfaz_Git}) para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\textwidth]{figures/interfaz_git.png}
-\caption{Interfaz del repositorio Git}
-\label{fig:interfaz_Git}
-\end{figure}
+\section{Implementación y Desarrollo}
+La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
 
@@ -515,9 +500,9 @@ La Figura \ref{fig:mapa_unity} muestra el resultado final del terreno implementa
 \label{fig:mapa_unity}
 \end{figure}
 
-\subsection{Desarrollo de Sistema Ferroviario}
+\subsection{Sistema Ferroviario y Físicas}
 
-La mecánica central del juego es la construcción y simulación de trenes. Para evitar la rigidez de un sistema basado en tramos rectos, se implementó una solución basada en **Splines** (curvas matemáticas suaves).
+La mecánica central del juego es la construcción y simulación de trenes. Para evitar la rigidez de un sistema basado en tramos rectos, se implementó una solución basada en \textit{Splines} (curvas matemáticas suaves).
 
 Se utilizó el paquete \textit{Dreamteck Splines} como base matemática, sobre la cual se programó la lógica de negocio del juego:
 \begin{enumerate}

@@ -96,8 +96,8 @@
 % 1. PORTADA
 \maketitleicontec
 
-% Configuración de páginas preliminares (números romanos: i, ii, iii...)
-\pagenumbering{roman}
+\pagenumbering{arabic} % Reinicia contador a 1, 2, 3...
+\setcounter{page}{1} 
 
 % 2. DEDICATORIA
 \clearpage
@@ -130,8 +130,7 @@
 %           CONTENIDO PRINCIPAL
 % ==========================================
 \clearpage
-\pagenumbering{arabic} % Reinicia contador a 1, 2, 3...
-\setcounter{page}{1}   
+  
 
 % 7. CAPÍTULOS
 \include{chapters/01-introduccion}
