@@ -548,20 +548,19 @@ La Figura \ref{fig:mapa_unity} muestra el resultado final del terreno implementa
 
 \subsection{Desarrollo del Sistema Ferroviario}
 
-La mecánica central del juego es la construcción y simulación de trenes. Para evitar la rigidez de un sistema basado en tramos rectos, se implementó una solución basada en \textit{Splines} (curvas matemáticas suaves).
+La implementación del sistema ferroviario se subdividió en tres retos técnicos principales: la generación procedural de las vías, la gestión de estructuras complejas y la sincronización del movimiento de los trenes. A continuación se detalla la solución técnica para cada componente.
 
-Se utilizó el paquete \textit{Dreamteck Splines} como base matemática, sobre la cual se programó la lógica de negocio del juego:
-\begin{enumerate}
-    \item \textbf{Generación Procedimental:} Al trazar una ruta, el sistema instancia automáticamente durmientes, rieles y balasto adaptándose a la curvatura del spline.
-    \item \textbf{Lógica de Túneles y Puentes:} Mediante *Raycasting*, el sistema detecta si la vía atraviesa una montaña o un abismo. Si detecta terreno por encima de la vía, reemplaza el modelo de vía estándar por un túnel; si no detecta terreno por debajo, instancia pilares para crear un puente.
-    \item \textbf{Movimiento del Tren:} El tren no utiliza físicas de ruedas complejas (que son costosas computacionalmente), sino que se proyecta a lo largo del spline. Sin embargo, se simulan variables físicas como la inercia y la fricción. La velocidad se calcula en función de la pendiente:
-    \begin{equation}
-        Vel_{actual} = Vel_{motor} - (Inclinacion \times Factor_{carga} \times Num_{vagones})
-    \end{equation}
-    Esto obliga al jugador a pensar como ingeniero: si la pendiente es muy alta y el tren lleva mucha carga, la velocidad puede llegar a cero, impidiendo completar el nivel.
-\end{enumerate}
+\subsubsection{Generación de Vías y Optimización}
 
-Para la representación visual, se modelaron trenes propios (Figura \ref{fig:tren_modelo}) y se implementó un sistema de daño visual (explosiones y humo) que se activa cuando el tren pasa por zonas de riesgo a alta velocidad (Figura \ref{fig:trenExplota}).
+Para resolver la lógica matemática del trazado y el seguimiento de los vagones, se utilizó la librería \textit{Dreamteck Splines} como base. Dado que esta herramienta ofrecía funcionalidades preexistentes, el trabajo se centró en modificar y adaptar su código fuente para que fuera compatible con los modelos de vagones propios del proyecto. Sin embargo, por razones de optimización y rendimiento, se decidió prescindir del sistema de curvado suave de mallas, optando en su lugar por una generación de vías con ángulos agresivos y tramos rectos, visualizados mediante planos texturizados que simulan el balasto y los rieles.
+
+\subsubsection{Sistemas de Construcción y Estructuras}
+
+La interacción para la construcción opera mediante un sistema de dos puntos: el primer clic sobre el terreno establece el nodo de inicio del spline y el segundo define el destino, momento en el cual el algoritmo interpola puntos intermedios para ajustar la vía a la topografía del suelo. El desafío mayor surgió con la implementación de estructuras para atravesar accidentes geográficos como valles, cuerpos de agua o montañas. Para solucionar esto, se desarrolló un modo de construcción estructural que ignora la adaptación al terreno intermedia, forzando una conexión recta entre los puntos. Mediante el uso de \textit{Raycasting}, el sistema analiza el entorno de este vector: si detecta terreno por encima de la vía, instancia automáticamente un túnel; si detecta vacío por debajo, genera los pilares correspondientes para formar un puente.
+
+\subsubsection{Lógica y Datos de los Trenes}
+
+Una vez definida la infraestructura, el sistema permite la selección de la locomotora y los vagones, cuyo costo en recursos varía según su tipología. La arquitectura de datos de estas unidades se gestionó mediante \textit{Scriptable Objects}, lo que permitió modularizar estadísticas inmutables como el precio, la salud, la velocidad máxima y el tipo de carga. Finalmente, toda esta lógica se vinculó a la interfaz de usuario (Canvas) del nivel para permitir la interacción en tiempo real, añadiendo detalles de retroalimentación visual como sistemas de partículas que se activan cuando el tren recibe daño durante el recorrido.
 
 \begin{figure}[H]
 \centering
@@ -579,7 +578,125 @@ Para la representación visual, se modelaron trenes propios (Figura \ref{fig:tre
 \end{minipage}
 \end{figure}
 
-\section{Pruebas y Análisis de Resultados}
+\subsection{Recursos}
+La gestión de recursos dentro del juego se centra en un presupuesto monetario virtual asignado al inicio de cada nivel. Este capital disminuye en tiempo real conforme el jugador construye tramos de vía, túneles o puentes, y al adquirir locomotoras y vagones. El diseño impone una restricción dura: si el saldo llega a cero antes de completar el objetivo, se impide la construcción de nuevos segmentos, obligando al jugador a optimizar el trazado o reiniciar el nivel.
+
+\subsection{Zonas de daño y prohibición}
+Para garantizar la coherencia geográfica y aumentar la dificultad, se implementaron volúmenes de control invisibles en el mapa. Las "zonas de prohibición" impiden la construcción de infraestructura en áreas reservadas (como cascos urbanos densos o reservas naturales), mientras que las "zonas de daño" detectan colisiones físicas del tren. Si el vehículo impacta contra obstáculos no previstos o se descarrila por exceso de velocidad en una curva, el sistema activa el estado de fallo del nivel.
+
+\subsection{Managers}
+La arquitectura del juego se orquesta a través de una serie de clases controladoras (\textit{Managers}) que centralizan la lógica de negocio y mantienen el estado global de la aplicación.
+
+\subsubsection{Economía}
+Este módulo es responsable de calcular el costo dinámico de la infraestructura. Aplica tarifas diferenciadas según el tipo de construcción (vía en superficie, estructura de puente o excavación de túnel) y gestiona las transacciones de compra de los trenes, actualizando la interfaz de usuario (UI) en cada fotograma.
+
+\subsubsection{Sistema de Guardado}
+Se diseñó un sistema de persistencia híbrido. La progresión local (niveles desbloqueados y configuración) se almacena mediante archivos binarios en el dispositivo del usuario, mientras que, como se mencionó anteriormente, la telemetría detallada de las sesiones se sincroniza con la base de datos en la nube.
+
+\subsubsection{Nivel}
+
+La clase \texttt{NivelSpline} actúa como el orquestador central o máquina de estados finitos de la sesión de juego. Su diseño sigue un patrón orientado a datos (\textit{Data-Driven}), delegando la configuración de reglas (tiempo límite, presupuesto inicial) y fórmulas matemáticas a dependencias externas inyectadas mediante \textit{Scriptable Objects} (\texttt{CondicionesNivel} y \texttt{CondicionesGlobales}). Esto permite ajustar el balance del juego sin modificar el código fuente.
+
+El ciclo de vida gestionado por este componente se divide en tres etapas críticas:
+
+\begin{itemize}
+    \item \textbf{Gestión Temporal:} Distingue entre el tiempo de ``Planeación'' (desde la carga de la escena) y el tiempo de ``Simulación'' (activación del tren), lo cual es vital para no penalizar al jugador mientras diseña la vía.
+    \item \textbf{Validación de Ruta:} Implementa un sistema de control de puntos de paso (\textit{Checkpoints}). Mediante la detección de colisiones, verifica que el tren recorra la ruta geográfica obligatoria en el orden correcto, impidiendo atajos no válidos.
+    \item \textbf{Resolución de Estado:} Al finalizar el recorrido, centraliza la información de los demás gestores (economía, integridad del tren y tiempo), ejecuta el algoritmo de puntuación descrito anteriormente y orquesta la persistencia de datos, enviando los resultados tanto al sistema de guardado local como al servicio de telemetría en la nube.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pantalla_fallar.png}
+    \caption{Interfaz de retroalimentación desplegada por el gestor de nivel tras un evento de derrota (descarrilamiento).}
+    \label{fig:estado_nivel}
+\end{figure}
+
+\subsubsection{Telemetría}
+Este componente opera en segundo plano recopilando datos críticos (clics, tiempo, presupuesto) y los empaqueta en objetos JSON. Al finalizar la partida, se encarga de la comunicación asíncrona con la API para el envío seguro de la información.
+
+\subsubsection{Tutorial}
+El sistema de tutorial no es una escena separada, sino una capa lógica superpuesta en el primer nivel. Utiliza disparadores (\textit{triggers}) espaciales y de eventos para pausar el juego momentáneamente y guiar al usuario mediante ayudas visuales y cuadros de texto, enseñando las mecánicas básicas de cámara y construcción de forma progresiva.
+
+\subsection{Menú Principal}
+El punto de entrada a la experiencia es una escena ligera diseñada para la navegación rápida. Desde aquí, el usuario puede acceder a la configuración, créditos y al inicio del juego. La interfaz, mostrada en la Figura \ref{fig:menu_principal}, mantiene la estética \textit{low-poly} del proyecto presentando una vista previa animada del entorno.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/menu_ferro.png}
+    \caption{Interfaz del Menú Principal con el título y opciones de navegación.}
+    \label{fig:menu_principal}
+\end{figure}
+
+\subsubsection{Guía}
+Se incluye un módulo de referencia documental dentro del juego (Gladiolo), accesible desde el menú. Esta sección ofrece al jugador explicaciones estáticas sobre los controles y la simbología del juego, sirviendo como manual de usuario consultable en cualquier momento.
+
+\subsection{Selector de Niveles}
+Para contextualizar geográficamente al jugador, la selección de misiones no se realiza mediante una lista tradicional, sino a través de un mapa interactivo de Colombia (Figura \ref{fig:selector}). Los marcadores sobre el territorio indican la ubicación real de los contratos ferroviarios, reforzando el componente educativo de geografía nacional.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/selectorNiveles.png}
+    \caption{Escena de selección de niveles sobre el mapa geográfico de Colombia.}
+    \label{fig:selector}
+\end{figure}
+
+\subsection{Contratos}
+Cada nivel se presenta bajo la metáfora de un "Contrato Ferroviario". Antes de iniciar, el sistema presenta una ficha técnica (Figura \ref{fig:contrato}) que detalla el origen, el destino, el presupuesto asignado y una breve reseña histórica o ficticia que justifica la construcción de la vía, inmerso al jugador en el rol de ingeniero civil.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/contratoPuntuación.png}
+    \caption{Ficha del contrato inicial que establece los objetivos y el presupuesto del nivel.}
+    \label{fig:contrato}
+\end{figure}
+
+\subsection{Puntuación}
+El sistema de evaluación calcula el desempeño del jugador mediante un algoritmo de suma ponderada que integra cuatro variables críticas: tiempo, capacidad de carga (vagones), eficiencia presupuestal e integridad del tren. La puntuación total $P_{total}$ se obtiene mediante la Ecuación \ref{eq:puntaje_total}, la cual normaliza el resultado y aplica un factor de escala de $10^6$ para presentar el resultado como un número entero de alto valor.
+
+\begin{equation}
+    P_{total} = \left[ w_t \cdot S_{tiempo} + w_v \cdot S_{vagones} + w_p s\cdot S_{presupuesto} + w_s \cdot S_{salud} \right] \times 10^6
+    \label{eq:puntaje_total}
+\end{equation}
+
+Donde $w_x$ representan los pesos o coeficientes de importancia asignados a cada factor según el diseño del nivel, y $S_x$ son los sub-puntajes normalizados calculados de la siguiente manera:
+
+\begin{itemize}
+    \item \textbf{Factor Tiempo ($S_{tiempo}$):} Penaliza el exceso de tiempo respecto al objetivo mediante una función inversamente proporcional:
+    \begin{equation}
+        S_{tiempo} = \frac{1}{1 + \frac{T_{usado}}{T_{objetivo}}}
+    \end{equation}
+    
+    \item \textbf{Factor Vagones ($S_{vagones}$):} Premia el transporte de mayor carga, normalizado sobre una base de 3 vagones estándar:
+    \begin{equation}
+        S_{vagones} = \text{clamp}_{0}^{1} \left( \frac{N_{vagones}}{3} \right)
+    \end{equation}
+    
+    \item \textbf{Factor Presupuesto ($S_{presupuesto}$):} Evalúa la precisión en el gasto, penalizando la desviación porcentual respecto al presupuesto asignado (error relativo):
+    \begin{equation}
+        S_{presupuesto} = \max \left( 0, \ 1 - \frac{|D_{gastado} - D_{asignado}|}{D_{asignado}} \right)
+    \end{equation}
+    
+    \item \textbf{Factor Salud ($S_{salud}$):} Representa el porcentaje de integridad restante del tren al llegar a la meta:
+    \begin{equation}
+        S_{salud} = \frac{V_{actual}}{V_{maxima}}
+    \end{equation}
+\end{itemize}
+
+\subsubsection{Estrellas}
+Finalmente, la puntuación numérica $P_{total}$ se traduce a un sistema visual de 1 a 3 estrellas... (continuar con el texto que ya tenías).
+
+\subsubsection{Estrellas}
+La puntuación numérica se traduce a un sistema visual de 1 a 4 estrellas para facilitar la lectura rápida del desempeño. Este cálculo se realiza comparando el puntaje final contra umbrales predefinidos en el \textit{Scriptable Object} del nivel. La Figura \ref{fig:victoria} muestra la pantalla de éxito donde se visualiza esta calificación junto con las opciones de navegación.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/pantalla_victoria.png}
+    \caption{Pantalla de victoria mostrando la calificación por estrellas y el puntaje obtenido.}
+    \label{fig:victoria}
+\end{figure}\subsubsection{Estrellas}
+
+\subsection{Pruebas y Análisis de Resultados}
 
 Para validar la efectividad del prototipo como herramienta de aprendizaje y su calidad como software, se realizó una prueba piloto controlada.
 La fase de pruebas contó con la participación voluntaria de \textbf{22} personas de la comunidad universitaria.
