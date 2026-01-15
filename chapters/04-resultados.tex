@@ -836,25 +836,22 @@ Para validar el prototipo como herramienta de aprendizaje y software funcional, 
 El uso de telemetría permitió registrar el comportamiento objetivo de los usuarios, eliminando los sesgos de la autopercepción y proporcionando una visión clara sobre la jugabilidad y la curva de dificultad.
 
 \subsubsection{Retención y Progresión: El desafío de la curva de aprendizaje}
-La Figura \ref{fig:retencion} muestra la distribución de jugadores únicos por nivel. Se evidencia una deserción significativa tras el Nivel 1, donde la participación descendió de 28 a 9 jugadores (una caída del 67.8\%). 
-
-Este fenómeno es común en videojuegos con mecánicas de construcción complejas. Los datos sugieren que el Nivel 1 actuó como un \textit{filtro} de aprendizaje donde los usuarios debieron dominar el sistema de curvas de Bézier y la gestión de presupuestos. La baja tasa de llegada al Nivel 5 (1 solo jugador) confirma que el videojuego no solo es una herramienta de visualización, sino un desafío técnico que requiere persistencia y una comprensión profunda de la lógica ferroviaria implementada.
+La Figura \ref{fig:retencion} muestra el volumen de jugadores únicos que accedieron a cada nivel. El registro indica que 28 usuarios iniciaron el Nivel 1. En el Nivel 2 la participación fue de 9 usuarios, en el Nivel 3 de 8 usuarios, en el Nivel 4 de 5 usuarios, y finalmente, un único jugador alcanzó el Nivel 5.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/retencion.png} 
+\includegraphics[width=1\textwidth]{figures/retencion.png} 
 \caption{Tasa de retención de jugadores únicos por nivel.}
 \label{fig:retencion}
 \end{figure}
 
 \subsubsection{Balance de Dificultad: Victorias frente a Derrotas}
-Al analizar la relación entre éxitos y fracasos (Figura \ref{fig:tasa_exito}), resalta que el Nivel 1 posee una tasa de derrota del 71.4\%. Este dato, aunque elevado para una etapa inicial, se justifica por el carácter \textit{serio} del videojuego: el error es parte del proceso de aprendizaje. 
 
-Se observa una mejora en el desempeño durante el Nivel 2 (66.7\% de éxito), indicando que quienes superaron la barrera inicial lograron una estabilización de sus habilidades. Sin embargo, el repunte de derrotas en los niveles avanzados (superando el 87\% en los niveles 4 y 5) valida que el diseño del mapa y las restricciones económicas representan fielmente la complejidad de la ingeniería civil en terrenos montañosos.
+La Figura \ref{fig:tasa_exito} detalla la proporción de intentos exitosos y fallidos. El Nivel 1 presenta una tasa de derrota del 71.4\%. En el Nivel 2, el porcentaje de éxito fue del 66.7\%, mientras que en el Nivel 3 las derrotas representaron el 69.2\%. Los niveles finales (4 y 5) registraron tasas de fracaso del 89.3\% y 87.5\% respectivamente sobre el total de intentos.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/tasa_exito.png} 
+\includegraphics[width=1\textwidth]{figures/tasa_exito.png} 
 \caption{Proporción de victorias frente a derrotas por nivel.}
 \label{fig:tasa_exito}
 \end{figure}
@@ -864,24 +861,27 @@ Se observa una mejora en el desempeño durante el Nivel 2 (66.7\% de éxito), in
 La encuesta permitió evaluar si los objetivos de concientización y usabilidad definidos en el diseño se cumplieron satisfactoriamente desde la perspectiva del usuario.
 
 \subsubsection{Usabilidad y Experiencia de Usuario (UX)}
-La percepción sobre los controles fue mayoritariamente positiva, con un 81.9\% de aprobación (Figura \ref{fig:facilidadcontroles}). No obstante, existe un 9\% de usuarios que reportaron dificultades, cifra que coincide con quienes calificaron su primera experiencia como confusa (Figura \ref{fig:primeraexperiencia}). Este cruce de datos sugiere que, aunque el sistema es intuitivo para la mayoría, el tutorial inicial es un punto crítico que define el compromiso del jugador a largo plazo.
+
+La percepción sobre los controles fue mayoritariamente positiva, con un 81.9\% de aprobación (Figura \ref{fig:facilidadcontroles}). No obstante, existe un 9\% de usuarios que reportaron dificultades.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/facilidadcontroles.png} 
+\includegraphics[width=1\textwidth]{figures/facilidadcontroles.png} 
 \caption{Nivel de facilidad percibida en los controles.}
 \label{fig:facilidadcontroles}
 \end{figure}
 
+La claridad sobre la primera experiencia de los jugadores fue mayormente favorable, con un 54.5\% de los encuestados reportando que fue clara (Figura \ref{fig:primeraexperiencia}). No obstante existe un 9\% de usuarios que reportaron que era confusa o muy confusa.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{figures/primeraexperiencia.png}
+\includegraphics[width=1\textwidth]{figures/primeraexperiencia.png}
 \caption{Respuestas a la pregunta: ¿Qué tan clara fue su primera experiencia al empezar el juego?}
 \label{fig:primeraexperiencia}
 \end{figure}
 
 \subsubsection{Concientización y Percepción del Aprendizaje (GBL)}
-Esta sección constituye el núcleo de la validación pedagógica. Como indica la Figura \ref{fig:contruisviaslejanas}, un abrumador 81.8\% de los participantes concluyó que la construcción ferroviaria en Colombia es \textit{complicada y costosa}. Este resultado es fundamental: el videojuego logró transformar la percepción del usuario desde una visión simplista hacia una comprensión técnica de la realidad nacional.
+Esta sección constituye el núcleo de la validación del aprendizaje. Como indica la Figura \ref{fig:contruisviaslejanas}, un abrumador 81.8\% de los participantes concluyó que la construcción ferroviaria en Colombia es \textit{complicada y costosa}.
 
 \begin{figure}[H]
 \centering
@@ -890,7 +890,14 @@ Esta sección constituye el núcleo de la validación pedagógica. Como indica l
 \label{fig:contruisviaslejanas}
 \end{figure}
 
-La identificación de los túneles y puentes como los mayores focos de gasto (Figura \ref{fig:dineroyesfuerzo}) confirma que el usuario comprendió el impacto de la topografía. Finalmente, las respuestas abiertas (Figura \ref{fig:encuestaaprendizaje}) reflejan que los jugadores ahora valoran el desarrollo férreo no solo como un deseo político, sino como un reto de ingeniería de gran magnitud, cumpliendo así el objetivo principal de este proyecto de grado.
+En las Figuras\ref{fig:dineroyesfuerzo} y \ref{fig:encuestaaprendizaje} se muestran algunas de las respuestas de la preguntas 29 y 30. Esta pregunta fue hecha con énfasis en responder el objetivo del proyecto, el cual involucra saber el impacto que tuvo en los jugadores el videojuego serio.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/dineroyesfuerzo.png}
+\caption{Respuestas a la pregunta: ¿En qué le pareció que se iba más dinero y esfuerzo?}
+\label{fig:dineroyesfuerzo}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -899,17 +906,11 @@ La identificación de los túneles y puentes como los mayores focos de gasto (Fi
 \label{fig:encuestaaprendizaje}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/dineroyesfuerzo.png}
-\caption{Respuestas a la pregunta: ¿En qué le pareció que se iba más dinero y esfuerzo?}
-\label{fig:dineroyesfuerzo}
-\end{figure}
 \section{Errores Detectados}
 Durante la prueba unitaria, se reportaron los siguientes fallos que requieren corrección:
 \begin{itemize}
     \item \textbf{Cámara en límites del mapa:} La cámara permite visualizar el \textit{vacío} en los bordes extremos. Se requiere implementar \textit{clamping} en las coordenadas.
-    \item \textbf{Colisiones fantasma:} El tren detectó daño en el 2\% de las partidas sin colisión visual clara[cite: 131]. Se deben refinar los \textit{colliders}.
+    \item \textbf{Colisiones fantasma:} El tren detectó daño en el 2\% de las partidas sin colisión visual clara. Se deben refinar los \textit{colliders}.
     \item \textbf{Renderización a larga distancia:} Los ríos y el terreno no se visualizan adecuadamente al alejar la cámara; se recomienda aumentar la distancia de renderizado.
     \item \textbf{Don Raíl en el menú:} El personaje reaparece tras completar el tutorial, indicando que la variable \texttt{tutorialMenuCompletado} no cambia su estado a \texttt{True}.
     \item \textbf{Cámara en nivel 5:} La cámara inicia erróneamente en el punto final del recorrido en lugar del inicial, generando frustración.
