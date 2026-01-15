@@ -490,11 +490,11 @@ Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a
 \label{fig:mapa_inicial}
 \end{figure}
 
-Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly}) y fragmentadas que no solucionaron los problemas de latancia en las llamadas de renderizado(\textit{draw-calls}), se optó por la solución de usar el sistema de terrenos nativo de Unity.\\
+Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly}) y fragmentadas que no solucionaron los problemas de latancia en las llamadas de renderizado(\textit{draw-calls}), se optó por la solución de usar el sistema de terrenos nativo de Unity.
 
 \subsubsection{Automatización y Procesamiento de Datos Geográficos}
 
-Para la implementación definitiva, no se esculpió el terreno manualmente. En su lugar, se desarrolló un flujo de trabajo automatizado mediante \textit{scripts} en C\# que generaban la topografía a partir de datos reales.\\
+Para la implementación definitiva, no se esculpió el terreno manualmente. En su lugar, se desarrolló un flujo de trabajo automatizado mediante \textit{scripts} en C\# que generaban la topografía a partir de datos reales.
 
 Una herramienta fundamental en esta etapa fue el software QGIS ( Quantum Geographic Information System). Esta herramienta permitió procesar y alinear todas las capas de información —fronteras municipales, hidrografía (ríos y lagos) y elevación— bajo un Sistema de Referencia de Coordenadas unificado, específicamente el \textit{EPSG:9377} (MAGNA-SIRGAS Origen Nacional). Esto garantizó que todos los elementos geográficos mantuvieran su posición relativa correcta al ser importados al motor de videojuego. En la Figura \ref{fig:qgis_1} se muestra todos los datos recopilados y correctamente ubicados como son el mapa de alturas, los cuerpos de agua, las fronteras nacional, departamentales y municipales de Colombia.
 
@@ -521,7 +521,7 @@ Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inic
 Sin embargo, durante las pruebas de integración, se observó que el rendimiento del sistema era estable incluso con la totalidad del mapa cargado en memoria. Por consiguiente, se descartó el sistema de carga dinámica para reducir la complejidad del código, aunque se mantuvo la estructura modular de $16 \times 16$ para trabajo a futuro.
 \subsubsection{Texturizado y Restricciones de Construcción}
 
-Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la Figura \ref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.\\
+Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la Figura \ref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.
 
 \begin{figure}[H]
 \centering
