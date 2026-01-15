@@ -414,8 +414,18 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
 \subsubsection{Arquitectura de datos}
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
-\section{Implementación y Desarrollo}
-La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+
+\section{Implementación}
+
+La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git (ver figura \ref{interfaz_git}) para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/interfaz_git.png}
+\caption{Interfaz de repositorio git}
+\label{fig:interfaz_git}
+\end{figure}
+
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
 
@@ -500,7 +510,7 @@ La Figura \ref{fig:mapa_unity} muestra el resultado final del terreno implementa
 \label{fig:mapa_unity}
 \end{figure}
 
-\subsection{Sistema Ferroviario y Físicas}
+\subsection{Desarrollo del Sistema Ferroviario}
 
 La mecánica central del juego es la construcción y simulación de trenes. Para evitar la rigidez de un sistema basado en tramos rectos, se implementó una solución basada en \textit{Splines} (curvas matemáticas suaves).
 
