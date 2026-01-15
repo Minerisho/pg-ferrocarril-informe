@@ -414,7 +414,46 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
 \subsubsection{Arquitectura de datos}
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
-\section{Implementación y Desarrollo}
+Para garantizar la persistencia y el análisis posterior de la telemetría, se diseñó un esquema de datos documental alojado en la infraestructura de Firebase. La Figura \ref{fig:bd_nosql} ilustra la estructura de la colección principal denominada \textit{level\_logs}, la cual actúa como un registro histórico de cada sesión de juego iniciada por el usuario. Este modelo utiliza una relación de composición para almacenar los datos de interacción espacial directamente dentro del documento de la sesión, optimizando así las consultas de lectura.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/uml_bd_nosql.png} 
+\caption{Colección única de la base de datos FireBase en la API.}
+\label{fig:bd_nosql}
+\end{figure}
+
+A continuación, se detalla la función de cada atributo definido en el esquema:
+
+\begin{enumerate}
+    \item \textbf{sessionID (string):} Identificador único generado por la API para diferenciar cada intento de juego, permitiendo trazabilidad individual incluso si un mismo jugador repite el nivel múltiples veces.
+    
+    \item \textbf{playerID (string):} Referencia al identificador del usuario autenticado. Funciona como una clave foránea lógica que vincula la sesión con los metadatos del perfil del jugador.
+    
+    \item \textbf{levelNumber (integer):} Indica el nivel específico que se está jugando (ej. 1 a 5), contextualizando la dificultad y los objetivos activos durante la sesión.
+    
+    \item \textbf{status (string):} Describe el estado final de la partida. Puede tomar valores categóricos como \textit{Victoria}, \textit{Derrota} o \textit{Abandonado}, siendo fundamental para calcular tasas de éxito.
+    
+    \item \textbf{causeOfFailure (string):} Campo opcional que almacena la razón específica de la derrota (ej. \textit{Descarrilamiento}, \textit{Presupuesto Agotado}). Si el estado es de victoria, este campo permanece nulo o vacío.
+    
+    \item \textbf{budgetUsed (float):} Variable económica que registra la cantidad total de dinero virtual gastado por el jugador en la construcción de vías y compra de maquinaria.
+    
+    \item \textbf{score (integer):} Puntuación final obtenida basada en la eficiencia, economía y cumplimiento del contrato del nivel.
+    
+    \item \textbf{durationSeconds (float):} Tiempo total de juego desde el inicio del nivel hasta la finalización o fallo, utilizado para medir la curva de aprendizaje.
+    
+    \item \textbf{trainTravelTime (float):} Métrica específica que contabiliza únicamente el tiempo que el tren estuvo en movimiento sobre las vías, separando el tiempo de construcción del tiempo de simulación.
+    
+    \item \textbf{timestamp (time):} Marca temporal exacta del servidor al momento de guardar el registro, esencial para el ordenamiento cronológico de los datos.
+    
+    \item \textbf{clickData (Array de Objetos):} Estructura anidada (sub-documento) que almacena una lista de coordenadas vectoriales. Cada elemento contiene:
+    \begin{enumerate}
+        \item \textbf{x (float):} Posición horizontal del clic en el mundo del juego.
+        \item \textbf{y (float):} Posición vertical del clic.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Implementación}
 La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
 \subsection{Configuración del Espacio de Trabajo en Unity}
@@ -442,7 +481,7 @@ Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado e
 
 El mapa de Colombia representa el tablero de juego principal. Su implementación pasó por múltiples iteraciones para equilibrar el realismo geográfico con el rendimiento técnico.
 
-Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la Figura \ref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS.
+Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la Figura \ref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS (Fotogramas por segundo).
 
 \begin{figure}[H]
 \centering
