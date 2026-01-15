@@ -109,9 +109,15 @@
 
 % 4. ÍNDICES
 \clearpage
-\tableofcontents
-\listoffigures
-\listoftables
+
+{ % <--- Abre llave para iniciar configuración local
+  \setlength{\parskip}{0pt} % Elimina el espacio extra entre líneas
+  % \renewcommand{\baselinestretch}{1} % Descomenta si quieres forzar interlineado sencillo
+  
+  \tableofcontents
+  \listoffigures
+  \listoftables
+} % <--- Cierra llave para volver a la configuración normal
 
 % 5. RESUMEN (Español e Inglés)
 \clearpage
