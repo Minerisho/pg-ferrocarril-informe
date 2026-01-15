@@ -417,7 +417,7 @@ La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la 
 
 \section{Implementación}
 
-La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git (ver figura \ref{interfaz_git}) para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
+La fase de implementación se llevó a cabo utilizando el motor Unity (versión 6.0), haciendo uso de Git (ver figura \ref{fig:interfaz_git}) para el control de versiones y LFS para la gestión de activos pesados. A continuación, se detalla el proceso técnico de construcción del entorno y las mecánicas ferroviarias.
 
 \begin{figure}[H]
 \centering
@@ -617,4 +617,6 @@ Durante la prueba piloto de 4 días, se reportaron los siguientes fallos que req
 \begin{itemize}
     \item \textbf{Cámara en límites del mapa:} En ocasiones, la cámara permite visualizar el \textit{vacío} si el jugador se desplaza a los bordes extremos del mapa. Se requiere implementar límites rígidos (\textbf{clamping}) en las coordenadas de la cámara.
     \item \textbf{Colisiones fantasma:} En el 2\% de las partidas registradas por la API, el tren detectó daño sin haber una colisión visual clara. Esto sugiere la necesidad de refinar los \textbf{colliders} de las zonas de riesgo.
+    \item \textbf{Renderización a larga distancia: } Al alejar la cámara, los rios y parte del terreno no se ven adecuadamente, lo que lleva a que parezca, en determinadas ocaciones, que no hay un rio cuando si lo hay, se recomiendo aumentar distancia de renderizado.
+    \item \textbf{Don Raíl reaparece en el menú: } Al volver al menú principal, en determinadas ocaciones de las cuales no se ha determinado su causa, Don Raíl reaparece como si nunca se hubiera completado el tutorial, esto refleja que la variable "tutorialMenuCompletado" no esta cambiando su estado a True correctamente una vez se completa el tutorial de menú.
 \end{itemize}
