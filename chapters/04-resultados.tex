@@ -231,7 +231,7 @@ Dada la división en múltiples escenas y el diseño detallado de los scripts e 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.5\textwidth]{figures/test_DiagramaComponentes.png}
-\caption{Diagrama de componentes del sistema organizado por escenas de Unity.}
+\caption{Diagrama de componentes organizado por escenas de Unity.}
 \label{fig:diagrama_componentes}
 \end{figure}
 \end{landscape} 
@@ -480,7 +480,7 @@ Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado e
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/interfaz_unity.jpeg}
-\caption{Interfaz de desarrollo en Unity: 1) Jerarquía con edición multiescena, 2) Pestañas de Escena y Juego, 3) Inspector de componentes de la locomotora, 4) Gestión de activos.}
+\caption{Interfaz de desarrollo en Unity}
 \label{fig:interfaz_unity}
 \end{figure}
 
@@ -508,7 +508,7 @@ Una herramienta fundamental en esta etapa fue el software QGIS ( Quantum Geograp
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/qgis_obramaestra.png}
-\caption{Captura de pantalla del proyecto en QGIS utilizado para el manejo de datos sobre el terreno.}
+\caption{Captura del proyecto en QGIS utilizado para el terreno.}
 \label{fig:qgis_1}
 \end{figure}
 
@@ -520,8 +520,8 @@ Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inic
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/codigo_importador_terrenos.png}
-\caption{Fragmento del código del script que automatizaba la importación de terrenos desde archivos .raw a la escena en Unity.}
+\includegraphics[width=0.8\textwidth]{figures/codigo_importador_terrenos.png}
+\caption{Fragmento del script encargado de la importación de terrenos.}
 \label{fig:cod_1}
 \end{figure}
 
@@ -531,18 +531,19 @@ Sin embargo, durante las pruebas de integración, se observó que el rendimiento
 Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la Figura \ref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{figures/inspector_colores.png}
-\caption{Captura de la clase \textit{HeighBandsPainter} desde el inspector.}
-\label{fig:inspector_colores}
+    \centering
+    \includegraphics[width=0.8\textwidth, trim=0 380 0 0, clip]{figures/inspector_colores.png}
+    \caption{Captura de la clase \textit{HeighBandsPainter} desde el inspector.}
+    \label{fig:inspector_colores}
 \end{figure}
+
 
 La Figura \ref{fig:mapa_unity} muestra el resultado final del terreno implementado.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/mapa_unity.jpeg}
-\caption{Implementación final del entorno geográfico utilizando el sistema de Terrenos de Unity.}
+\caption{Implementación del entorno utilizando el sistema de Terrenos.}
 \label{fig:mapa_unity}
 \end{figure}
 
@@ -656,7 +657,7 @@ El ciclo de vida gestionado por este componente se divide en tres etapas crític
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/pantalla_fallar.png}
-    \caption{Interfaz de retroalimentación desplegada por el gestor de nivel tras un evento de derrota (descarrilamiento).}
+    \caption{Interfaz de retroalimentación tras un evento de derrota.}
     \label{fig:estado_nivel}
 \end{figure}
 
@@ -685,7 +686,7 @@ La arquitectura del sistema se fundamenta en tres pilares técnicos:
     
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/don_rail.png}
+    \includegraphics[width=0.6\textwidth]{figures/don_rail.png}
     \caption{Personaje guía \textit{Don Raíl}.}
     \label{fig:donRail}
     \end{figure}
@@ -707,11 +708,11 @@ El punto de entrada a la experiencia es una escena ligera diseñada para ofrecer
 Funcionalmente, el menú dispone de tres puntos de interacción principales:
 
 \begin{enumerate}
-    \item \textbf{Jugar:} Inicia la transición hacia la escena del \textit{Selector de Niveles}, cambiando el contexto hacia el mapa geográfico de Colombia para que el usuario elija su contrato.
+    \item Jugar: Inicia la transición hacia la escena del \textit{Selector de Niveles}, cambiando el contexto hacia el mapa geográfico de Colombia para que el usuario elija su contrato.
     
-    \item \textbf{Opciones:} Despliega una ventana emergente (\textit{pop-up}) dedicada a la configuración del sistema. En la versión actual del prototipo, este módulo se centra exclusivamente en la gestión del \textit{AudioManager}, permitiendo al usuario ajustar de manera independiente el volumen de la música de fondo y de los efectos de sonido (SFX) mediante deslizadores (\textit{sliders}).
+    \item Opciones: Despliega una ventana emergente (\textit{pop-up}) dedicada a la configuración del sistema. En la versión actual del prototipo, este módulo se centra exclusivamente en la gestión del \textit{AudioManager}, permitiendo al usuario ajustar de manera independiente el volumen de la música de fondo y de los efectos de sonido (SFX) mediante deslizadores (\textit{sliders}).
     
-    \item \textbf{Salir:} Ejecuta la instrucción de finalización del ciclo de vida de la aplicación, cerrando el juego y devolviendo el control al sistema operativo.
+    \item Salir: Ejecuta la instrucción de finalización del ciclo de vida de la aplicación, cerrando el juego y devolviendo el control al sistema operativo.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -727,11 +728,11 @@ Durante la ejecución de cualquier nivel, el jugador dispone de la facultad de i
 Como se observa en la Figura \ref{fig:menu_pausa}, este menú ofrece cuatro opciones funcionales:
 
 \begin{enumerate}
-    \item \textbf{Reanudar:} Oculta la interfaz y reactiva el cronómetro de la simulación inmediatamente.
-    \item \textbf{Reiniciar:} Recarga la escena actual desde cero, restableciendo todas las variables de estado (presupuesto y tiempo) para permitir un nuevo intento limpio.
-    \item \textbf{Guía:} Abre la ventana del menú de guía del juego.
-    \item \textbf{Opciones:} Habilita una ventana emergente para ajustar el volumen de la música y los efectos de sonido en tiempo real.
-    \item \textbf{Salir:} Aborta la misión en curso y redirige al usuario a la escena del Selector de Niveles.
+    \item Reanudar: Oculta la interfaz y reactiva el cronómetro de la simulación inmediatamente.
+    \item Reiniciar: Recarga la escena actual desde cero, restableciendo todas las variables de estado (presupuesto y tiempo) para permitir un nuevo intento limpio.
+    \item Guía: Abre la ventana del menú de guía del juego.
+    \item Opciones: Habilita una ventana emergente para ajustar el volumen de la música y los efectos de sonido en tiempo real.
+    \item Salir: Aborta la misión en curso y redirige al usuario a la escena del Selector de Niveles.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -747,7 +748,7 @@ Integrado dentro de las opciones del menú de pausa, se encuentra el módulo de 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/guia.png} 
-    \caption{Panel de la Guía de Juego detallando controles, mecánicas y recomendaciones.}
+    \caption{Panel de la Guía detallando controles, mecánicas y recomendaciones.}
     \label{fig:guia_juego}
 \end{figure}
 
@@ -767,7 +768,7 @@ Cada nivel se presenta bajo la metáfora de un "Contrato Ferroviario". Antes de 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/contratoPuntuación.png}
-    \caption{Ficha del contrato del Nivel 2 que establece los objetivos y el presupuesto del nivel.}
+    \caption{Ficha de contrato que establece los objetivos y el presupuesto del nivel.}
     \label{fig:contrato}
 \end{figure}
 
@@ -823,13 +824,17 @@ Finalmente, la Figura \ref{fig:victoria} muestra la pantalla de consolidación d
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/pantalla_victoria.png}
-    \caption{Pantalla de victoria mostrando la calificación obtenida según los cuatro criterios definidos.}
+    \caption{Pantalla de victoria con la calificación obtenida según los cuatro criterios.}
     \label{fig:victoria}
 \end{figure}
 
 \subsection{Pruebas y Análisis de Resultados}
 
-Para validar el prototipo como herramienta de aprendizaje y software funcional, se realizó una prueba unitaria con 28 voluntarios de la comunidad universitaria. El proceso de recolección de datos siguió un enfoque mixto: los datos cuantitativos fueron extraídos directamente de la API de informes (telemetría), mientras que los ualitativos se obtuvieron mediante una encuesta de percepción aplicada tras la sesión de juego.
+Para validar el prototipo como herramienta de aprendizaje y software funcional, se realizó una prueba unitaria con 28 voluntarios de la comunidad universitaria. El proceso de recolección de datos siguió un enfoque mixto: los datos cuantitativos fueron extraídos directamente de la API de informes (telemetría), mientras que los cualitativos se obtuvieron mediante una encuesta de percepción aplicada tras la sesión de juego.
+
+\subsection{Encuesta}
+
+Se aplicó una encuesta 
 
 \subsection{Análisis de Telemetría (Datos de la API)}
 
@@ -840,7 +845,7 @@ La Figura \ref{fig:retencion} muestra el volumen de jugadores únicos que accedi
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{figures/retencion.png} 
+\includegraphics[width=0.8\textwidth]{figures/retencion.png} 
 \caption{Tasa de retención de jugadores únicos por nivel.}
 \label{fig:retencion}
 \end{figure}
