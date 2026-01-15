@@ -414,7 +414,7 @@ La Figura \ref{fig:arquitectura_api} ilustra el flujo de información:
 
 \subsubsection{Arquitectura de datos}
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
-Para garantizar la persistencia y el análisis posterior de la telemetría, se diseñó un esquema de datos documental alojado en la infraestructura de Firebase. La Figura \ref{fig:bd_nosql} ilustra la estructura de la colección principal denominada \textit{level\_logs}, la cual actúa como un registro histórico de cada sesión de juego iniciada por el usuario. Este modelo utiliza una relación de composición para almacenar los datos de interacción espacial directamente dentro del documento de la sesión, optimizando así las consultas de lectura.
+Para garantizar la persistencia y el análisis posterior de la telemetría, se diseñó un esquema de datos documental alojado en la infraestructura de Firebase. La Figura \ref{fig:bd_nosql} ilustra la estructura de la colección principal denominada \textit{level\_logs}, la cual actúa como un registro histórico de cada sesión de juego de un nivel terminada por el usuario. Este modelo utiliza una relación de composición para almacenar los datos de interacción espacial directamente dentro del documento de la sesión, optimizando así las consultas de lectura.
 
 \begin{figure}[H]
 \centering
@@ -526,7 +526,7 @@ Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inic
 \end{figure}
 
 Sin embargo, durante las pruebas de integración, se observó que el rendimiento del sistema era estable incluso con la totalidad del mapa cargado en memoria. Por consiguiente, se descartó el sistema de carga dinámica para reducir la complejidad del código, aunque se mantuvo la estructura modular de $16 \times 16$ para trabajo a futuro.
-\subsubsection{Texturizado y Restricciones de Construcción}
+\subsubsection{Texturizado}
 
 Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la Figura \ref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.
 
@@ -558,6 +558,24 @@ Para resolver la lógica matemática del trazado y el seguimiento de los vagones
 
 La interacción para la construcción opera mediante un sistema de dos puntos: el primer clic sobre el terreno establece el nodo de inicio del spline y el segundo define el destino, momento en el cual el algoritmo interpola puntos intermedios para ajustar la vía a la topografía del suelo. El desafío mayor surgió con la implementación de estructuras para atravesar accidentes geográficos como valles, cuerpos de agua o montañas. Para solucionar esto, se desarrolló un modo de construcción estructural que ignora la adaptación al terreno intermedia, forzando una conexión recta entre los puntos. Mediante el uso de \textit{Raycasting}, el sistema analiza el entorno de este vector: si detecta terreno por encima de la vía, instancia automáticamente un túnel; si detecta vacío por debajo, genera los pilares correspondientes para formar un puente.
 
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.4\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/puente.png}
+    \caption{Modelo de un trazo de un puente.}
+    \label{fig:puente}
+\end{minipage}\hfill
+\begin{minipage}{0.4\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/tunel.png}
+    \caption{Modelo de un trazo de túnel.}
+    \label{fig:tunel}
+\end{minipage}
+\end{figure}
+
+Además, se implementó un sistema de previsualización al cual nombramos \textit{PreviewSpline}, con el fin de poder mostrar al jugador una previsualización del trazo o camino que va a realizar, además de ponerse de colores verde o rojo dependiendo si pueden construir en esa zona o no. Esta ayuda visual mejoró drásticamente la claridad e intuición a la hora de construir vías férreas sobre el terreno.
+
 \subsubsection{Lógica y Datos de los Trenes}
 
 Una vez definida la infraestructura, el sistema permite la selección de la locomotora y los vagones, cuyo costo en recursos varía según su tipología. La arquitectura de datos de estas unidades se gestionó mediante \textit{Scriptable Objects}, lo que permitió modularizar estadísticas inmutables como el precio, la salud, la velocidad máxima y el tipo de carga. Finalmente, toda esta lógica se vinculó a la interfaz de usuario (Canvas) del nivel para permitir la interacción en tiempo real, añadiendo detalles de retroalimentación visual como sistemas de partículas que se activan cuando el tren recibe daño durante el recorrido.
@@ -578,9 +596,30 @@ Una vez definida la infraestructura, el sistema permite la selección de la loco
 \end{minipage}
 \end{figure}
 
+
+
+\subsection{Zonas de daño y prohibición}
+Para garantizar la coherencia geográfica y aumentar la dificultad, se implementaron volúmenes de control invisibles en el mapa. La zona de prohibición impiden la construcción directa del jugador, es un plano gigante que cubre todo el terreno pero está al nivel del mar, esto con el objetivo de que no pudieran construir sobre el mar. Mientras que las zonas de daño detectan colisiones físicas del tren y le reducen la vida periódicamente.
+
+La implementación de estas zonas de daño se diseñó bajo un principio de modularidad y separación de datos. El componente lógico principal, denominado \texttt{ZonaDeDaño}, actúa únicamente como un contenedor referencial que no almacena valores directos. En su lugar, consume un activo de datos externo de tipo \textit{Scriptable Object} llamado \texttt{TipoZonasDaño}. Este activo encapsula las propiedades inmutables de la amenaza, definiendo atributos como el nombre identificador y la magnitud del daño flotante.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/zona_daño.png}
+\caption{Ejemplo de una zona de daño en el terreno.}
+\label{fig:zona_daño}
+\end{figure}
+
+Esta estructura permite al equipo de diseño equilibrar la dificultad creando variaciones de peligros (ej. ``Derrumbe Ligero'' vs ``Zona Volcánica'') editando un solo archivo de configuración, el cual se propaga automáticamente a todas las instancias en el nivel. Aunque cabe mencionar, que se decidió no usar más de 1 tipo de zona de daño. Esta decidisión fue en consecuencia del temor a aumentarle demasiado la dificultad al juego.
+
+Finalmente, la materialización de estas zonas en la escena se logra mediante la composición de dos elementos: un \textit{Mesh Collider} configurado como disparador (\textit{Trigger}) para la detección física, y un proyector \textit{Decal} de color rojo semitransparente que renderiza una advertencia visual sobre la topografía irregular del terreno, permitiendo al jugador identificar el peligro intuitivamente.
+
+\subsection{Managers}
+La arquitectura del juego se orquesta a través de una serie de clases controladoras (\textit{Managers}) que centralizan la lógica de negocio y mantienen el estado global de la aplicación, estas son las principales:
+
 \subsubsection{Economía}
 
-La gestión financiera es administrada por la clase \texttt{EconomiaManager}, la cual opera en tiempo real durante el ciclo \texttt{Update} para recalcular el costo total de la infraestructura desplegada. Siguiendo el patrón de diseño orientado a datos, este componente no almacena los precios de los activos internamente; en su lugar, consume una referencia externa al \textit{Scriptable Object} \texttt{CondicionesGlobales}, lo que permite ajustar la inflación o el costo de los materiales (vías por metro, precio por puente/túnel) en un solo archivo para todo el juego.
+La gestión financiera es administrada por la clase \texttt{EconomiaManager}, la cual opera en tiempo real durante el ciclo \texttt{Update()} para recalcular el costo total de la infraestructura desplegada. Siguiendo el patrón de diseño orientado a datos, este componente no almacena los precios de los activos internamente; en su lugar, consume una referencia externa al \textit{Scriptable Object} \texttt{CondicionesGlobales}, lo que permite ajustar la inflación o el costo de los materiales (vías por metro, precio por puente/túnel) en un solo archivo para todo el juego.
 
 El cálculo del saldo disponible se realiza mediante la siguiente sumatoria:
 
@@ -588,19 +627,19 @@ El cálculo del saldo disponible se realiza mediante la siguiente sumatoria:
     S_{remantente} = P_{inicial} - (C_{vias} + C_{estructuras} + C_{tren})
 \end{equation}
 
-Un aspecto fundamental de la experiencia de usuario (UX) en esta implementación es la ausencia de bloqueos restrictivos. A diferencia de los simuladores tradicionales que impiden la construcción al llegar a cero, el sistema permite que el jugador continúe extendiendo la vía incluso si el saldo entra en valores negativos (bancarrota). Esta decisión de diseño prioriza la finalización del nivel y la libertad creativa; sin embargo, incurrir en deuda tiene una consecuencia punitiva en la fase de evaluación, resultando en la pérdida automática de la \textit{Estrella de Economía} y reduciendo drásticamente el puntaje final.
-
-\subsection{Zonas de daño y prohibición}
-Para garantizar la coherencia geográfica y aumentar la dificultad, se implementaron volúmenes de control invisibles en el mapa. Las "zonas de prohibición" impiden la construcción de infraestructura en áreas reservadas (como cascos urbanos densos o reservas naturales), mientras que las "zonas de daño" detectan colisiones físicas del tren. Si el vehículo impacta contra obstáculos no previstos o se descarrila por exceso de velocidad en una curva, el sistema activa el estado de fallo del nivel.
-
-\subsection{Managers}
-La arquitectura del juego se orquesta a través de una serie de clases controladoras (\textit{Managers}) que centralizan la lógica de negocio y mantienen el estado global de la aplicación.
-
-\subsubsection{Economía}
-Este módulo es responsable de calcular el costo dinámico de la infraestructura. Aplica tarifas diferenciadas según el tipo de construcción (vía en superficie, estructura de puente o excavación de túnel) y gestiona las transacciones de compra de los trenes, actualizando la interfaz de usuario (UI) en cada fotograma.
+Un aspecto fundamental de la experiencia de usuario (UX) en esta implementación es la ausencia de bloqueos restrictivos. A diferencia de los simuladores tradicionales que impiden la construcción al llegar a cero, el sistema permite que el jugador continúe extendiendo la vía incluso si el saldo entra en valores negativos. Esta decisión de diseño prioriza la finalización del nivel y la libertad creativa; sin embargo, incurrir en deuda tiene una consecuencia punitiva en la fase de evaluación, resultando en la pérdida automática de la \textit{Estrella de Economía} (más adelante se detallará sobre esto) y reduciendo drásticamente el puntaje final.
 
 \subsubsection{Sistema de Guardado}
-Se diseñó un sistema de persistencia híbrido. La progresión local (niveles desbloqueados y configuración) se almacena mediante archivos binarios en el dispositivo del usuario, mientras que, como se mencionó anteriormente, la telemetría detallada de las sesiones se sincroniza con la base de datos en la nube.
+
+La persistencia local de datos es gestionada por la clase \texttt{SaveSystem}, un componente que implementa el patrón \textit{Singleton} para garantizar una única instancia de acceso a archivos durante la ejecución. El sistema serializa el estado del juego en formato JSON y lo almacena en el directorio persistente del dispositivo (\texttt{Application.persistentDataPath}), asegurando que el progreso sobreviva al cierre de la aplicación.
+
+La lógica de guardado no es destructiva; utiliza un algoritmo de actualización condicional detallado a continuación:
+
+\begin{enumerate}
+    \item \textbf{Progresión Lineal:} El sistema incluye el método \texttt{IsLevelUnlocked}, el cual verifica la existencia de datos completados del nivel $N-1$ para permitir el acceso al nivel $N$.
+    \item \textbf{Validación de Mejor Puntuación:} Al finalizar un nivel, el sistema compara el puntaje obtenido con el almacenado previamente. El archivo solo se actualiza si el jugador ha superado su propio récord (\textit{High Score}).
+    \item \textbf{Fusión de Estrellas:} Las condiciones de victoria (estrellas) se guardan de manera acumulativa. Si el jugador obtuvo la ``Estrella de Tiempo'' en un intento anterior y la ``Estrella de Economía'' en el actual, el sistema fusiona ambos resultados mediante una operación lógica OR, permitiendo completar el nivel en múltiples intentos.
+\end{enumerate}
 
 \subsubsection{Nivel}
 
@@ -622,23 +661,95 @@ El ciclo de vida gestionado por este componente se divide en tres etapas crític
 \end{figure}
 
 \subsubsection{Telemetría}
-Este componente opera en segundo plano recopilando datos críticos (clics, tiempo, presupuesto) y los empaqueta en objetos JSON. Al finalizar la partida, se encarga de la comunicación asíncrona con la API para el envío seguro de la información.
+
+El componente \texttt{AnalyticsManager} es el responsable de la comunicación Cliente-Servidor. A diferencia del guardado local, este sistema no almacena datos en el dispositivo, sino que los empaqueta y envía a una API REST alojada en \textit{Google Cloud Functions}.
+
+Su funcionamiento se divide en tres procesos concurrentes:
+
+\begin{itemize}
+    \item \textbf{Captura de Interacción (Heatmaps):} Durante el ciclo de juego (\texttt{Update}), el script registra las coordenadas $(x, y)$ de cada clic realizado por el usuario en la interfaz o el terreno. Estos datos se almacenan temporalmente en una lista de objetos \texttt{ClickPos} y se adjuntan al reporte final, lo que permite la futura generación de mapas de calor para analizar el comportamiento del jugador.
+    
+    \item \textbf{Registro de Intentos:} Al finalizar una partida (ya sea por victoria, derrota o abandono), se instancia un objeto \texttt{LevelLogPayload}. Este paquete de datos contiene métricas precisas como la duración exacta de la sesión, el presupuesto consumido, la causa específica del fallo y la marca temporal (\textit{timestamp}).
+    
+    \item \textbf{Transmisión Asíncrona:} Para evitar congelamientos en la interfaz de usuario debido a la latencia de red, el envío de datos se realiza mediante Corrutinas de Unity (\texttt{IEnumerator}). Se utiliza la clase \texttt{UnityWebRequest} con el método POST para transmitir el JSON serializado, manejando internamente los encabezados y la confirmación de recepción del servidor.
+\end{itemize}
 
 \subsubsection{Tutorial}
-El sistema de tutorial no es una escena separada, sino una capa lógica superpuesta en el primer nivel. Utiliza disparadores (\textit{triggers}) espaciales y de eventos para pausar el juego momentáneamente y guiar al usuario mediante ayudas visuales y cuadros de texto, enseñando las mecánicas básicas de cámara y construcción de forma progresiva.
+
+El sistema de aprendizaje no se implementó como una escena aislada, sino como una capa lógica transversal gestionada por la clase \texttt{TutorialManager}. Este componente funciona como una máquina de estados secuencial que se superpone tanto en el Menú Principal como en el primer nivel de juego, adaptando su comportamiento mediante la bandera lógica \texttt{esTutorialDeMenu}.
+
+La arquitectura del sistema se fundamenta en tres pilares técnicos:
+
+\begin{enumerate}
+    \item \textbf{Estructura de Datos Narrativa:} El contenido del tutorial se define mediante una lista de objetos serializables de la clase \texttt{DialogoTutorial}. Cada elemento contiene el texto explicativo, la expresión emocional del personaje guía (``Don Rail''), una referencia opcional a un objeto de la interfaz que debe resaltarse (activando indicadores visuales) y, lo más importante, la \texttt{TutorialAction} requerida para avanzar.
+    
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/don_rail.png}
+    \caption{Personaje guía \textit{Don Raíl}.}
+    \label{fig:donRail}
+    \end{figure}
+    
+    \item \textbf{Sistema de Eventos y Polling:} Para validar el progreso del jugador, el gestor utiliza un enfoque híbrido.
+    \begin{enumerate}
+        \item \textit{Detección Activa:} En el ciclo \texttt{Update}, el script monitorea entradas de hardware específicas, como el movimiento de los ejes del ratón o las teclas WASD, para validar lecciones de control de cámara.
+        \item \textit{Detección Pasiva:} Para interacciones de interfaz (UI) o mecánicas complejas (como conectar vías), otros scripts notifican que una tarea ha sido completada invocando el método público \texttt{ReportarAccion(ID)}.
+    \end{enumerate}
+    
+    \item \textbf{Gestión de Tiempos (UX):} Para evitar que el tutorial avance abruptamente apenas el usuario toca un control, se implementó una corrutina de espera (\texttt{RutinaEsperarYAvanzar}). Esta lógica introduce un retraso intencional (configurable, por defecto 3 segundos) después de acciones continuas como mover la cámara, permitiendo que el jugador asimile la mecánica antes de presentar el siguiente cuadro de diálogo.
+\end{enumerate}
+
+Finalmente, el sistema se integra con el módulo de persistencia (\texttt{SaveSystem}) para verificar si el tutorial introductorio ya fue completado, evitando repeticiones innecesarias en sesiones futuras.
 
 \subsection{Menú Principal}
-El punto de entrada a la experiencia es una escena ligera diseñada para la navegación rápida. Desde aquí, el usuario puede acceder a la configuración, créditos y al inicio del juego. La interfaz, mostrada en la Figura \ref{fig:menu_principal}, mantiene la estética \textit{low-poly} del proyecto presentando una vista previa animada del entorno.
+El punto de entrada a la experiencia es una escena ligera diseñada para ofrecer una navegación intuitiva y rápida. La interfaz gráfica, ilustrada en la Figura \ref{fig:menu_principal}, conserva la identidad visual \textit{low-poly} del proyecto mediante una vista previa animada del entorno ferroviario.
+
+Funcionalmente, el menú dispone de tres puntos de interacción principales:
+
+\begin{enumerate}
+    \item \textbf{Jugar:} Inicia la transición hacia la escena del \textit{Selector de Niveles}, cambiando el contexto hacia el mapa geográfico de Colombia para que el usuario elija su contrato.
+    
+    \item \textbf{Opciones:} Despliega una ventana emergente (\textit{pop-up}) dedicada a la configuración del sistema. En la versión actual del prototipo, este módulo se centra exclusivamente en la gestión del \textit{AudioManager}, permitiendo al usuario ajustar de manera independiente el volumen de la música de fondo y de los efectos de sonido (SFX) mediante deslizadores (\textit{sliders}).
+    
+    \item \textbf{Salir:} Ejecuta la instrucción de finalización del ciclo de vida de la aplicación, cerrando el juego y devolviendo el control al sistema operativo.
+\end{enumerate}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/menu_ferro.png}
-    \caption{Interfaz del Menú Principal con el título y opciones de navegación.}
+    \caption{Interfaz del Menú Principal.}
     \label{fig:menu_principal}
 \end{figure}
 
-\subsubsection{Guía}
-Se incluye un módulo de referencia documental dentro del juego (Gladiolo), accesible desde el menú. Esta sección ofrece al jugador explicaciones estáticas sobre los controles y la simbología del juego, sirviendo como manual de usuario consultable en cualquier momento.
+\subsection{Menú de Pausa}
+Durante la ejecución de cualquier nivel, el jugador dispone de la facultad de interrumpir el ciclo de simulación pulsando la tecla \textit{Escape}. Esta acción invoca al \textit{PauseManager}, el cual detiene el tiempo de juego (estableciendo \texttt{Time.timeScale = 0}) y despliega una interfaz superpuesta que permite gestionar la sesión sin perder el progreso actual.
+
+Como se observa en la Figura \ref{fig:menu_pausa}, este menú ofrece cuatro opciones funcionales:
+
+\begin{enumerate}
+    \item \textbf{Reanudar:} Oculta la interfaz y reactiva el cronómetro de la simulación inmediatamente.
+    \item \textbf{Reiniciar:} Recarga la escena actual desde cero, restableciendo todas las variables de estado (presupuesto y tiempo) para permitir un nuevo intento limpio.
+    \item \textbf{Guía:} Abre la ventana del menú de guía del juego.
+    \item \textbf{Opciones:} Habilita una ventana emergente para ajustar el volumen de la música y los efectos de sonido en tiempo real.
+    \item \textbf{Salir:} Aborta la misión en curso y redirige al usuario a la escena del Selector de Niveles.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/menuPausa.png} 
+    \caption{Interfaz del Menú de Pausa superpuesta a la simulación.}
+    \label{fig:menu_pausa}
+\end{figure}
+
+\subsubsection{Guía de Juego}
+Integrado dentro de las opciones del menú de pausa, se encuentra el módulo de consulta denominado \textbf{Guía} (Figura \ref{fig:guia_juego}). Este componente actúa como una enciclopedia interactiva y estática, diseñada para reforzar el aprendizaje de las mecánicas sin obligar al jugador a abandonar la experiencia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/guia.png} 
+    \caption{Panel de la Guía de Juego detallando controles, mecánicas y recomendaciones.}
+    \label{fig:guia_juego}
+\end{figure}
 
 \subsection{Selector de Niveles}
 Para contextualizar geográficamente al jugador, la selección de misiones no se realiza mediante una lista tradicional, sino a través de un mapa interactivo de Colombia (Figura \ref{fig:selector}). Los marcadores sobre el territorio indican la ubicación real de los contratos ferroviarios, reforzando el componente educativo de geografía nacional.
@@ -651,12 +762,12 @@ Para contextualizar geográficamente al jugador, la selección de misiones no se
 \end{figure}
 
 \subsection{Contratos}
-Cada nivel se presenta bajo la metáfora de un "Contrato Ferroviario". Antes de iniciar, el sistema presenta una ficha técnica (Figura \ref{fig:contrato}) que detalla el origen, el destino, el presupuesto asignado y una breve reseña histórica o ficticia que justifica la construcción de la vía, inmerso al jugador en el rol de ingeniero civil.
+Cada nivel se presenta bajo la metáfora de un "Contrato Ferroviario". Antes de iniciar, el sistema presenta una ficha técnica (Figura \ref{fig:contrato}) que detalla el origen, los destinos, el presupuesto asignado y el tiempo límite acordado del trayecto del tren.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/contratoPuntuación.png}
-    \caption{Ficha del contrato inicial que establece los objetivos y el presupuesto del nivel.}
+    \caption{Ficha del contrato del Nivel 2 que establece los objetivos y el presupuesto del nivel.}
     \label{fig:contrato}
 \end{figure}
 
@@ -692,18 +803,29 @@ Donde $w_x$ representan los pesos o coeficientes de importancia asignados a cada
     \end{equation}
 \end{itemize}
 
-\subsubsection{Estrellas}
-Finalmente, la puntuación numérica $P_{total}$ se traduce a un sistema visual de 1 a 3 estrellas... (continuar con el texto que ya tenías).
+\subsubsection{Sistema de Estrellas}
+La puntuación numérica $P_{total}$ se complementa con un sistema de calificación cualitativa visualizado mediante iconos de estrellas. Este esquema evalúa cuatro dimensiones independientes del desempeño del jugador, permitiendo identificar áreas específicas de mejora en la gestión del proyecto ferroviario.
 
-\subsubsection{Estrellas}
-La puntuación numérica se traduce a un sistema visual de 1 a 4 estrellas para facilitar la lectura rápida del desempeño. Este cálculo se realiza comparando el puntaje final contra umbrales predefinidos en el \textit{Scriptable Object} del nivel. La Figura \ref{fig:victoria} muestra la pantalla de éxito donde se visualiza esta calificación junto con las opciones de navegación.
+Los criterios de obtención para cada insignia son:
+
+\begin{itemize}
+    \item \textbf{Estrella por Completado (Cumplimiento):} Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con el destino válido.
+    
+    \item \textbf{Estrella de Presupuesto (Eficiencia Económica):} Evalúa la gestión financiera. Se obtiene únicamente si el jugador logra finalizar la obra manteniendo un saldo positivo en la billetera virtual ($Presupuesto_{final} > 0$).
+    
+    \item \textbf{Estrella de Vida (Seguridad Operativa):} Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber sufrido ningún tipo de daño por colisiones o descarrilamientos parciales durante el trayecto.
+    
+    \item \textbf{Estrella de Tiempo (Eficiencia Temporal):} Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de conducción adecuada.
+\end{itemize}
+
+Finalmente, la Figura \ref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza la sumatoria de estas calificaciones junto con el puntaje numérico global.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/pantalla_victoria.png}
-    \caption{Pantalla de victoria mostrando la calificación por estrellas y el puntaje obtenido.}
+    \caption{Pantalla de victoria mostrando la calificación obtenida según los cuatro criterios definidos.}
     \label{fig:victoria}
-\end{figure}\subsubsection{Estrellas}
+\end{figure}
 
 \subsection{Pruebas y Análisis de Resultados}
 
