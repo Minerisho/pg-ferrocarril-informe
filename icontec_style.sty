@@ -68,6 +68,18 @@
 }
 \AtBeginEnvironment{longtable}{\small ...} % o \footnotesize
 
+% El paquete chngcntr permite cambiar la dependencia de los contadores
+\RequirePackage{chngcntr}
+
+% Le decimos a LaTeX: "La figura NO depende del capítulo"
+\counterwithout{figure}{chapter}
+
+% Lo mismo para las tablas
+\counterwithout{table}{chapter}
+
+% Opcional: Si quieres que las ecuaciones también sean continuas (Ec. 1, Ec. 2...)
+% \counterwithout{equation}{chapter}
+
 % --- Formato de títulos ---
 \RequirePackage{titlesec}
 
