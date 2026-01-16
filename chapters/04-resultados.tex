@@ -552,7 +552,7 @@ La fase de implementación se llevó a cabo utilizando el motor Unity (versión 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/interfaz_git.png}
-\caption{Interfaz del repositorio git}
+\caption{Interfaz del repositorio Git}
 \label{fig:interfaz_git}
 \end{figure}
 
@@ -741,11 +741,11 @@ La clase \texttt{NivelSpline} actúa como el orquestador central o máquina de e
 
 El ciclo de vida gestionado por este componente se divide en tres etapas críticas:
 
-\begin{itemize}
+\begin{enumerate}
     \item Gestión Temporal: Distingue entre el tiempo de ``Planeación'' (desde la carga de la escena) y el tiempo de ``Simulación'' (activación del tren), lo cual es vital para no penalizar al jugador mientras diseña la vía.
     \item Validación de Ruta: Implementa un sistema de control de puntos de paso (\textit{Checkpoints}). Mediante la detección de colisiones, verifica que el tren recorra la ruta geográfica obligatoria en el orden correcto, impidiendo atajos no válidos.
     \item Resolución de Estado: Al finalizar el recorrido, centraliza la información de los demás gestores (economía, integridad del tren y tiempo), ejecuta el algoritmo de puntuación descrito anteriormente y orquesta la persistencia de datos, enviando los resultados tanto al sistema de guardado local como al servicio de telemetría en la nube.
-\end{itemize}
+\end{enumerate}
 
 \begin{figure}[H]
     \centering
@@ -760,13 +760,13 @@ El componente \texttt{AnalyticsManager} es el responsable de la comunicación Cl
 
 Su funcionamiento se divide en tres procesos concurrentes:
 
-\begin{itemize}
+\begin{enumerate}
     \item Captura de Interacción (Heatmaps): Durante el ciclo de juego (\texttt{Update}), el script registra las coordenadas $(x, y)$ de cada clic realizado por el usuario en la interfaz o el terreno. Estos datos se almacenan temporalmente en una lista de objetos \texttt{ClickPos} y se adjuntan al reporte final, lo que permite la futura generación de mapas de calor para analizar el comportamiento del jugador.
     
     \item Registro de Intentos: Al finalizar una partida (ya sea por victoria, derrota o abandono), se instancia un objeto \texttt{LevelLogPayload}. Este paquete de datos contiene métricas precisas como la duración exacta de la sesión, el presupuesto consumido, la causa específica del fallo y la marca temporal (\textit{timestamp}).
     
     \item Transmisión Asíncrona: Para evitar congelamientos en la interfaz de usuario debido a la latencia de red, el envío de datos se realiza mediante Corrutinas de Unity (\texttt{IEnumerator}). Se utiliza la clase \texttt{UnityWebRequest} con el método POST para transmitir el JSON serializado, manejando internamente los encabezados y la confirmación de recepción del servidor.
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Tutorial}
 
@@ -874,7 +874,7 @@ El sistema de evaluación calcula el desempeño del jugador mediante un algoritm
 
 Donde $w_x$ representan los pesos o coeficientes de importancia asignados a cada factor según el diseño del nivel, y $S_x$ son los sub-puntajes normalizados calculados de la siguiente manera:
 
-\begin{itemize}
+\begin{enumerate}
     \item Factor Tiempo ($S_{tiempo}$) Penaliza el exceso de tiempo respecto al objetivo mediante una función inversamente proporcional:
     \begin{equation}
         S_{tiempo} = \frac{1}{1 + \frac{T_{usado}}{T_{objetivo}}}
@@ -894,14 +894,14 @@ Donde $w_x$ representan los pesos o coeficientes de importancia asignados a cada
     \begin{equation}
         S_{salud} = \frac{V_{actual}}{V_{maxima}}
     \end{equation}
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Sistema de Estrellas}
 La puntuación numérica $P_{total}$ se complementa con un sistema de calificación cualitativa visualizado mediante iconos de estrellas. Este esquema evalúa cuatro dimensiones independientes del desempeño del jugador, permitiendo identificar áreas específicas de mejora en la gestión del proyecto ferroviario.
 
 Los criterios de obtención para cada insignia son:
 
-\begin{itemize}
+\begin{enumerate}
     \item Estrella por Completado (Cumplimiento): Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con los destinos correspondientes.
     
     \item Estrella de Presupuesto (Eficiencia Económica): Evalúa la gestión financiera. Se obtiene únicamente si el jugador logra finalizar la obra manteniendo un saldo positivo en la billetera virtual ($Presupuesto_{final} > 0$).
@@ -909,7 +909,7 @@ Los criterios de obtención para cada insignia son:
     \item Estrella de Vida (Seguridad Operativa): Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber perdido vida por atravezar zonas de daño durante el trayecto.
     
     \item Estrella de Tiempo (Eficiencia Temporal): Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de locomotora adecuada.
-\end{itemize}
+\end{enumerate}
 
 Finalmente, la \cref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza el puntaje numérico global junto con la cantidad de estrellas obtuvidas.
 
@@ -1044,9 +1044,9 @@ En las \cref{fig:dineroyesfuerzo,fig:encuestaaprendizaje} se muestran algunas de
 
 \section{Errores Detectados}
 Durante la prueba unitaria, se reportaron los siguientes fallos que requieren corrección:
-\begin{itemize}
+\begin{enumerate}
     \item Colisiones fantasma: El tren detectó daño en el 2\% de las partidas sin colisión visual clara. Se deben refinar los \textit{colliders}.
     \item Renderización a larga distancia: Los ríos y el terreno no se visualizan adecuadamente al alejar la cámara; se recomienda aumentar la distancia de renderizado.
     \item Don Raíl en el menú: El personaje reaparece tras completar el tutorial, indicando que la variable \texttt{tutorialMenuCompletado} no cambia su estado a \texttt{True}.
     \item Cámara en nivel 5: La cámara inicia erróneamente en el punto final del recorrido en lugar del inicial, generando frustración.
-\end{itemize}
+\end{enumerate}
