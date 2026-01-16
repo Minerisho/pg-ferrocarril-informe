@@ -349,9 +349,13 @@ En esta escena podemos encontrar componentes como:
     \item Fronteras Nacional: En este estan contenidas las fronteras nacionales con otros paises como lo son Panamá, Peru, Brasil, Venezuela, y Ecuador.
     \item Etiquetas Municipios: Contiene las etiquetas de todos los municipios de Colombia, teniendo etiquetas desde Abejorral hasta Zipaquira.
     \item Etiquetas Departamentales: Contiene las etiquetas de todos los departamentos de Colombia, teniendo etiquetas desde Amazonas hasta Vichada.
+\end{enumerate}
+\newpage
+\begin{enumerate}[resume]
     \item PlanoOceanoNoContruye: Un plano 3D gigante, con textura transparente, que cubre el area de todo el pais, asignado a la altura 0, es usado como freno para que los jugadores no construyan en el oceano.
     \item LevelLoader: Este elemento esta encargado de manejar la carga de diferentes escenas.
 \end{enumerate}
+
 
 \afterpage{
 \begin{landscapefull}
@@ -377,7 +381,7 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
         \item Controlador de movimiento: Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
         \item Cámaras: Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
         \item Splines: Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
-        \end{enumerate}
+    \end{enumerate}
 
     \item Terreno: En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
     \item Canvas Nivel: En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
@@ -387,7 +391,12 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
         \item Fin de Nivel: Aqui se encuentran las interfaces de victoria y derrota.
         \item Tutorial: Encargado de almacenar los elementos de la interfaz del tutorial, como lo son los cuadros de dialogo y los sprites de "Don Raíl".
         \item ContrataciónLvl: Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
-        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\begin{enumerate}[resume]
     \item Tren: Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
     \item Managers: Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
     \begin{enumerate}
@@ -435,7 +444,10 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
         \item Pausa: Encargado de almacenar los componentes del menu de pausa, tales como los botones de reinicio, guia y volver al menú principal.
         \item Fin de Nivel: Aqui se encuentran las interfaces de victoria y derrota.
         \item ContrataciónLvl: Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
-        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\newpage
+\begin{enumerate}[resume]
     \item Tren: Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
     \item Managers: Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
     \begin{enumerate}
@@ -573,7 +585,7 @@ Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/mapa_inicial (1).png}
+\includegraphics[width=0.5\textwidth]{figures/mapa_inicial (1).png}
 \caption{Primer intento de generar el terreno usando un modelo 3D en Blender.}
 \label{fig:mapa_inicial}
 \end{figure}
@@ -848,14 +860,13 @@ Cada nivel se presenta bajo la metáfora de un "Contrato Ferroviario". Antes de 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/contratoPuntuación.png}
+    \includegraphics[width=0.4\textwidth]{figures/contratoPuntuación.png}
     \caption{Ficha de contrato que establece los objetivos y el presupuesto del nivel.}
     \label{fig:contrato}
 \end{figure}
 
 \subsection{Puntuación}
 El sistema de evaluación calcula el desempeño del jugador mediante un algoritmo de suma ponderada que integra cuatro variables críticas: tiempo, capacidad de carga (vagones), eficiencia presupuestal e integridad del tren. La puntuación total $P_{total}$ se obtiene mediante la Ecuación \cref{eq:puntaje_total}, la cual normaliza el resultado y aplica un factor de escala de $10^6$ para presentar el resultado como un número entero de alto valor.
-
 \begin{equation}
     P_{total} = \left[ w_t \cdot S_{tiempo} + w_v \cdot S_{vagones} + w_p s\cdot S_{presupuesto} + w_s \cdot S_{salud} \right] \times 10^6
     \label{eq:puntaje_total}
