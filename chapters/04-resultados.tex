@@ -21,14 +21,14 @@ Para categorizar el estado de las amenazas identificadas, se aplicó la escala d
 La Tabla \cref{tab:matriz-riesgos-final} presenta la matriz de riesgos, donde las columnas representan lo siguiente:\\
 
 \begin{enumerate}
-  \item \textbf{Ref:} Identificador único alfanumérico asignado a cada riesgo para facilitar su seguimiento y referencia en el documento.
-  \item \textbf{Descripción:} Detalle narrativo del evento incierto o problema técnico que podría afectar el desarrollo del proyecto.
-  \item \textbf{Causa:} Factor, condición o decisión técnica que daría origen a la aparición del riesgo identificado.
-  \item \textbf{Impacto:} Estimación de la magnitud de las consecuencias negativas sobre los objetivos del proyecto (rendimiento, tiempo o calidad) en una escala del 1 al 5.
-  \item \textbf{Probabilidad:} Calificación numérica de la posibilidad de que el evento de riesgo ocurra durante el ciclo de vida del desarrollo, evaluada del 1 al 5.
-  \item \textbf{Riesgo:} Valor cuantitativo obtenido del producto entre el Impacto y la Probabilidad, utilizado para priorizar la criticidad de la amenaza.
-  \item \textbf{Plan de Acción:} Conjunto de estrategias, tareas o medidas de mitigación diseñadas para reducir o eliminar el efecto del riesgo en el sistema.
-  \item \textbf{Estado:} Se definieron dos posibles estados para cada riesgo: \textit{Abierto}, que indica que el riesgo persiste y requiere de una resolución, y \textit{Cerrado}, que señala que el riesgo se ha materializado, ha sido mitigado exitosamente o se ha aceptado conscientemente que no se realizarán más acciones sobre él.
+  \item Ref: Identificador único alfanumérico asignado a cada riesgo para facilitar su seguimiento y referencia en el documento.
+  \item Descripción: Detalle narrativo del evento incierto o problema técnico que podría afectar el desarrollo del proyecto.
+  \item Causa: Factor, condición o decisión técnica que daría origen a la aparición del riesgo identificado.
+  \item Impacto: Estimación de la magnitud de las consecuencias negativas sobre los objetivos del proyecto (rendimiento, tiempo o calidad) en una escala del 1 al 5.
+  \item Probabilidad: Calificación numérica de la posibilidad de que el evento de riesgo ocurra durante el ciclo de vida del desarrollo, evaluada del 1 al 5.
+  \item Riesgo: Valor cuantitativo obtenido del producto entre el Impacto y la Probabilidad, utilizado para priorizar la criticidad de la amenaza.
+  \item Plan de Acción: Conjunto de estrategias, tareas o medidas de mitigación diseñadas para reducir o eliminar el efecto del riesgo en el sistema.
+  \item Estado: Se definieron dos posibles estados para cada riesgo: \textit{Abierto}, que indica que el riesgo persiste y requiere de una resolución, y \textit{Cerrado}, que señala que el riesgo se ha materializado, ha sido mitigado exitosamente o se ha aceptado conscientemente que no se realizarán más acciones sobre él.
 \end{enumerate}
 
 Tras las iteraciones de desarrollo y las correcciones implementadas en la fase de implementación, todos los riesgos técnicos críticos fueron mitigados y cerrados exitosamente antes de la fase de evaluación.
@@ -123,11 +123,11 @@ En la Tabla \cref{tab:epicas} se presentan las 8 épicas resultantes de esta cat
 La Tabla \cref{tab:HU-final} presenta el formato consolidado de las historias de usuario tras el proceso de refinamiento continuo tras cada iteración durante las fases del proyecto. Se define las columnas de la siguiente manera:
 
 \begin{enumerate}
-    \item \textbf{Épica:} Categoría funcional de alto nivel que agrupa un conjunto de historias de usuario relacionadas con un mismo módulo o subsistema del proyecto definidas anteriormente.
-    \item \textbf{Código:} Referencia alfanumérica única asignada a cada requisito (ej. HU1) para facilitar su identificación y rastreabilidad técnica.
-    \item \textbf{Historia de Usuario:} Descripción breve de una funcionalidad o necesidad del sistema, redactada desde la perspectiva del rol respectivo.
-    \item \textbf{Prioridad:} Nivel de importancia asignado mediante el método MoSCoW, clasificando las tareas en: \textit{Must have} (M) como imprescindibles, \textit{Should have} (S) como importantes, \textit{Could have} (C) como deseables y \textit{Won't have} (W) para futuras implementaciones.
-    \item \textbf{Complejidad:} Valor numérico en una escala de 1 a 5 que estima el grado de dificultad técnica y el esfuerzo requerido para la implementación de la funcionalidad.
+    \item Épica: Categoría funcional de alto nivel que agrupa un conjunto de historias de usuario relacionadas con un mismo módulo o subsistema del proyecto definidas anteriormente.
+    \item Código: Referencia alfanumérica única asignada a cada requisito (ej. HU1) para facilitar su identificación y rastreabilidad técnica.
+    \item Historia de Usuario: Descripción breve de una funcionalidad o necesidad del sistema, redactada desde la perspectiva del rol respectivo.
+    \item Prioridad: Nivel de importancia asignado mediante el método MoSCoW, clasificando las tareas en: \textit{Must have} (M) como imprescindibles, \textit{Should have} (S) como importantes, \textit{Could have} (C) como deseables y \textit{Won't have} (W) para futuras implementaciones.
+    \item Complejidad: Valor numérico en una escala de 1 a 5 que estima el grado de dificultad técnica y el esfuerzo requerido para la implementación de la funcionalidad.
 \end{enumerate}
 \pagebreak
 \begin{landscapefull} 
@@ -218,13 +218,13 @@ En nuestro caso, el flujo de ejecución comienza con la carga simultánea de las
 A continuación, se describen las 8 escenas que componen el videojuego serio dentro de Unity:
 
 \begin{enumerate}
-    \item \textbf{MainMenu:} Es la escena persistente que contiene el lienzo (\textit{Canvas}) principal de la interfaz y los gestores globales del sistema. Los objetos instanciados aquí están condos para no destruirse entre cargas (\textit{DontDestroyOnLoad}), asegurando la continuidad de la música, los datos del jugador y la gestión de estados.
+    \item MainMenu: Es la escena persistente que contiene el lienzo (\textit{Canvas}) principal de la interfaz y los gestores globales del sistema. Los objetos instanciados aquí están condos para no destruirse entre cargas (\textit{DontDestroyOnLoad}), asegurando la continuidad de la música, los datos del jugador y la gestión de estados.
     
-    \item \textbf{MapaMenu:} Funciona como una escena puramente decorativa para el fondo del menú principal. Consiste en un fragmento extraído del mapa completo (exactamente 1 \textit{tile} de terreno) en el cual se ejecutan animaciones de trenes en bucle, brindando contexto visual sin cargar la totalidad de la geografía.
+    \item MapaMenu: Funciona como una escena puramente decorativa para el fondo del menú principal. Consiste en un fragmento extraído del mapa completo (exactamente 1 \textit{tile} de terreno) en el cual se ejecutan animaciones de trenes en bucle, brindando contexto visual sin cargar la totalidad de la geografía.
     
-    \item \textbf{MapaCompleto:} Es la escena más compleja y pesada del sistema, encargada de contener la totalidad de la representación geográfica. Esta escena integra la malla del terreno dividida en una cuadrícula de $16 \times 16$ \textit{tiles}, la red hidrográfica completa (ríos lineales y cuerpos de agua), las delimitaciones políticas administrativas y el etiquetado geográfico de todos los municipios posicionados sobre la topografía.
+    \item MapaCompleto: Es la escena más compleja y pesada del sistema, encargada de contener la totalidad de la representación geográfica. Esta escena integra la malla del terreno dividida en una cuadrícula de $16 \times 16$ \textit{tiles}, la red hidrográfica completa (ríos lineales y cuerpos de agua), las delimitaciones políticas administrativas y el etiquetado geográfico de todos los municipios posicionados sobre la topografía.
     
-    \item \textbf{Niveles (1 al 5):} Corresponden a 5 escenas independientes (\textit{Nivel 1 Tutorial}, \textit{Nivel 2}, etc.) que se cargan de forma aditiva sobre el mapa completo. Estas escenas contienen únicamente los objetos necesarios para la jugabilidad específica de ese contrato: los puntos de inicio y fin, la conción de las mecánicas, los gestores de eventos locales y los \textit{Canvas} específicos de la misión.
+    \item Niveles (1 al 5): Corresponden a 5 escenas independientes (\textit{Nivel 1 Tutorial}, \textit{Nivel 2}, etc.) que se cargan de forma aditiva sobre el mapa completo. Estas escenas contienen únicamente los objetos necesarios para la jugabilidad específica de ese contrato: los puntos de inicio y fin, la conción de las mecánicas, los gestores de eventos locales y los \textit{Canvas} específicos de la misión.
 \end{enumerate}
 
 \subsection{Diagrama de Componentes}
@@ -251,12 +251,12 @@ El Main Menu es la escena encargada de mostrar la interfaz inicial que verá el 
 En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
-  \item \textbf{SaveSystem: } Es el encargado de manejar el archivo de guardado del progreso del jugador.
-  \item \textbf{System\_SceneLoader: } Se encarga de manejar la carga de las distintas escenas que utilizarán.
-  \item \textbf{TutorialManager: } Se encarga de los diálogos y controles durante el tutorial la primera vez que se ejecuta el juego.
-  \item \textbf{EventSystem: } Un componente nativo de unity usado para la deteccion de interacciones.
-  \item \textbf{MúsicaSonido y UISonido: } Encargados del manejo del sonido tanto musical como de interacción.
-  \item \textbf{Canvas: } componente que se encarga de todo lo visual y de interacción en el menú, como son los botones, sliders, etc.
+  \item SaveSystem: Es el encargado de manejar el archivo de guardado del progreso del jugador.
+  \item System\_SceneLoader: Se encarga de manejar la carga de las distintas escenas que utilizarán.
+  \item TutorialManager: Se encarga de los diálogos y controles durante el tutorial la primera vez que se ejecuta el juego.
+  \item EventSystem: Un componente nativo de unity usado para la deteccion de interacciones.
+  \item MúsicaSonido y UISonido: Encargados del manejo del sonido tanto musical como de interacción.
+  \item Canvas: componente que se encarga de todo lo visual y de interacción en el menú, como son los botones, sliders, etc.
 \end{enumerate}
 
 \begin{landscapefull}
@@ -279,12 +279,12 @@ La escena de Mapa Menu es la encargada de mostrar el mapa que se ve de fondo cua
 En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
-  \item \textbf{Terreno\_ColombiaV2: } Contenedor del fragmento del mapa que vemos en el menu.
-  \item \textbf{Agua: } Se encarga de almacenar los ríos.
-  \item \textbf{PathSplineMenu: } Se encarga de gestionar los spline de las vías por las que los trenes transitan.
-  \item \textbf{Tren1, Tren2 y Tren3: } Son las 3 variantes de trenes junto a sus respectivos vagones.
-  \item \textbf{Infraestructura: } Contiene los puentes y tuneles por los que vemos a los trenes transitar.
-  \item \textbf{Bandera: } El simbolo patrio, contiene su modelo y su animacion de ser meneada por el viento.
+    \item Terreno\_ColombiaV2: Contenedor del fragmento del mapa que vemos en el menu.
+    \item Agua: Se encarga de almacenar los ríos.
+    \item PathSplineMenu: Se encarga de gestionar los spline de las vías por las que los trenes transitan.
+    \item Tren1, Tren2 y Tren3: Son las 3 variantes de trenes junto a sus respectivos vagones.
+    \item Infraestructura: Contiene los puentes y tuneles por los que vemos a los trenes transitar.
+    \item Bandera: El simbolo patrio, contiene su modelo y su animacion de ser meneada por el viento.
 \end{enumerate}
 
 \begin{landscapefull}
@@ -307,15 +307,15 @@ La escena del Mapa completo se encarga de mostrar el mapa completo de todo el pa
 En esta escena podemos encontrar componentes como:
 
 \begin{enumerate}
-  \item \textbf{Terreno\_ColombiaV2: } Contenedor del mapa completo del país, contando con 256 fragmentos del mapa que conectados forman toda la extension territorial de Colombia.
-  \item \textbf{Agua: } Se encarga de almacenar los ríos, lagos y otros cuerpos de agua, contando con mas de 40,000 cuerpos de agua almacenados.
-  \item \textbf{Fronteras Municipales: } En este estan contenidas todas las fronteras de los municipios.
-  \item \textbf{Fronteras Departamentales: } En este estan contenidas todas las fronteras de los departamentos.
-  \item \textbf{Fronteras Nacional: } En este estan contenidas las fronteras nacionales con otros paises como lo son Panamá, Peru, Brasil, Venezuela, y Ecuador.
-  \item \textbf{Etiquetas Municipios: } Contiene las etiquetas de todos los municipios de Colombia, teniendo etiquetas desde Abejorral hasta Zipaquira.
-  \item \textbf{Etiquetas Departamentales: } Contiene las etiquetas de todos los departamentos de Colombia, teniendo etiquetas desde Amazonas hasta Vichada.
-  \item \textbf{PlanoOceanoNoContruye: } Un plano 3D gigante, con textura transparente, que cubre el area de todo el pais, asignado a la altura 0, es usado como freno para que los jugadores no construyan en el oceano.
-  \item \textbf{LevelLoader: } Este elemento esta encargado de manejar la carga de diferentes escenas.
+    \item Terreno\_ColombiaV2: Contenedor del mapa completo del país, contando con 256 fragmentos del mapa que conectados forman toda la extension territorial de Colombia.
+    \item Agua: Se encarga de almacenar los ríos, lagos y otros cuerpos de agua, contando con mas de 40,000 cuerpos de agua almacenados.
+    \item Fronteras Municipales: En este estan contenidas todas las fronteras de los municipios.
+    \item Fronteras Departamentales: En este estan contenidas todas las fronteras de los departamentos.
+    \item Fronteras Nacional: En este estan contenidas las fronteras nacionales con otros paises como lo son Panamá, Peru, Brasil, Venezuela, y Ecuador.
+    \item Etiquetas Municipios: Contiene las etiquetas de todos los municipios de Colombia, teniendo etiquetas desde Abejorral hasta Zipaquira.
+    \item Etiquetas Departamentales: Contiene las etiquetas de todos los departamentos de Colombia, teniendo etiquetas desde Amazonas hasta Vichada.
+    \item PlanoOceanoNoContruye: Un plano 3D gigante, con textura transparente, que cubre el area de todo el pais, asignado a la altura 0, es usado como freno para que los jugadores no construyan en el oceano.
+    \item LevelLoader: Este elemento esta encargado de manejar la carga de diferentes escenas.
 \end{enumerate}
 
 
@@ -337,30 +337,30 @@ En esta escena podemos encontrar componentes como:
 En esta escena se encuentran objetos tanto de visibilidad del jugador como de analisis y calculos de resultados, asi como también manejar el tutorial para guiar al jugador durante su primera experiencia con el videojuego serio
 
 \begin{enumerate}
-  \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
-  \begin{enumerate}
-      \item \textbf{Controlador de movimiento: } Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
-      \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
-      \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
-    \end{enumerate}
+    \item Jugador: En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
+    \begin{enumerate}
+        \item Controlador de movimiento: Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
+        \item Cámaras: Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
+        \item Splines: Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
+        \end{enumerate}
 
-  \item \textbf{Terreno: } En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
-  \item \textbf{Canvas Nivel: } En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
-  \begin{enumerate}
-      \item \textbf{Nivel: } Este componente contiene todos los elementos que el jugador puede ver durante el desarrollo normal del nivel, entre estos elementos se encuentran las interfaces de vida y dinero, los botones para la activación de modo de construccion y la selección de trenes.
-      \item \textbf{Pausa: } Encargado de almacenar los componentes del menú de pausa, tales como los botones de reinicio, guia y volver al menú principal.
-      \item \textbf{Fin de Nivel: } Aqui se encuentran las interfaces de victoria y derrota.
-      \item \textbf{Tutorial: } Encargado de almacenar los elementos de la interfaz del tutorial, como lo son los cuadros de dialogo y los sprites de "Don Raíl".
-      \item \textbf{ContrataciónLvl: } Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
-    \end{enumerate}
-  \item \textbf{Tren: } Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
-  \item \textbf{Managers: } Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
-  \begin{enumerate}
-      \item \textbf{SplineLevel: } Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
-      \item \textbf{Map Manager: } Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
-      \item \textbf{AudioManager: } Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
-      \item \textbf{TutorialManager: } En él se encuentran almacenados los diálogos y acciones que se espera que el jugador realice durante el desarrollo del tutorial
-      \item \textbf{EconomiaManager: } Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
+    \item Terreno: En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
+    \item Canvas Nivel: En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
+    \begin{enumerate}
+        \item Nivel: Este componente contiene todos los elementos que el jugador puede ver durante el desarrollo normal del nivel, entre estos elementos se encuentran las interfaces de vida y dinero, los botones para la activación de modo de construccion y la selección de trenes.
+        \item Pausa: Encargado de almacenar los componentes del menú de pausa, tales como los botones de reinicio, guia y volver al menú principal.
+        \item Fin de Nivel: Aqui se encuentran las interfaces de victoria y derrota.
+        \item Tutorial: Encargado de almacenar los elementos de la interfaz del tutorial, como lo son los cuadros de dialogo y los sprites de "Don Raíl".
+        \item ContrataciónLvl: Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
+        \end{enumerate}
+    \item Tren: Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
+    \item Managers: Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
+    \begin{enumerate}
+        \item SplineLevel: Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
+        \item Map Manager: Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
+        \item AudioManager: Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
+        \item TutorialManager: En él se encuentran almacenados los diálogos y acciones que se espera que el jugador realice durante el desarrollo del tutorial
+        \item EconomiaManager: Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
     \end{enumerate}
 \end{enumerate}
 
@@ -382,28 +382,28 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
 Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura similar, los cambios más destacables son la remoción del tutorial y cambios individuales a cada nivel para determinar los objetivos del mismo
 
 \begin{enumerate}
-  \item \textbf{Jugador: } En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
-  \begin{enumerate}
-      \item \textbf{Controlador de movimiento: } Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
-      \item \textbf{Cámaras: } Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
-      \item \textbf{Splines: } Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
-    \end{enumerate}
+    \item Jugador: En este item se encuentra todo lo referente al jugador, tales como el controlador de movimiento, la cámara y las funciones de deteccion y construccion de vías.
+    \begin{enumerate}
+        \item Controlador de movimiento: Encargado de recibir y ejecutar los movimientos que el jugador haga por medio del mouse y el teclado
+        \item Cámaras: Encargadas de ser los ojos del jugador, también cuenta con una cámara secundaria que actua como vista aerea encima del país
+        \item Splines: Este componente contiene el script encargado de la creacion de las vías férreas, la previsualizacion de construccion y la construccion de estructuras como tuneles y puentes.
+        \end{enumerate}
 
-  \item \textbf{Terreno: } En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
-  \item \textbf{Canvas Nivel: } En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
-  \begin{enumerate}
-      \item \textbf{Nivel: } Este componente contiene todos los elementos que el jugador puede ver durante el desarrollo normal del nivel, entre estos elementos se encuentran las interfaces de vida y dinero, los botones para la activación de modo de construccion y la selección de trenes.
-      \item \textbf{Pausa: } Encargado de almacenar los componentes del menu de pausa, tales como los botones de reinicio, guia y volver al menú principal.
-      \item \textbf{Fin de Nivel: } Aqui se encuentran las interfaces de victoria y derrota.
-      \item \textbf{ContrataciónLvl: } Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
-    \end{enumerate}
-  \item \textbf{Tren: } Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
-  \item \textbf{Managers: } Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
-  \begin{enumerate}
-      \item \textbf{SplineLevel: } Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
-      \item \textbf{Map Manager: } Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
-      \item \textbf{AudioManager: } Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
-      \item \textbf{EconomiaManager: } Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
+    \item Terreno: En este componente se encuentran almacenados los elementos unicos referentes al nivel, tales como lo son las zonas de daño y los puntos por los que debe pasar el tren.
+    \item Canvas Nivel: En este canvas estan contenidos todos los elementos de interfaz con los que puede interactuar el jugador, tales como botones y sliders.
+    \begin{enumerate}
+        \item Nivel: Este componente contiene todos los elementos que el jugador puede ver durante el desarrollo normal del nivel, entre estos elementos se encuentran las interfaces de vida y dinero, los botones para la activación de modo de construccion y la selección de trenes.
+        \item Pausa: Encargado de almacenar los componentes del menu de pausa, tales como los botones de reinicio, guia y volver al menú principal.
+        \item Fin de Nivel: Aqui se encuentran las interfaces de victoria y derrota.
+        \item ContrataciónLvl: Encargado de almacenar los elementos del contrato del nivel, como los detalles de paradas y dinero disponible.
+        \end{enumerate}
+    \item Tren: Este componente contiene los objetos de las distintas locomotoras y vagones a los que se tienen acceso durante el desarrollo de los niveles.
+    \item Managers: Aqui esta almacenada la lógica interna y de gestión del nivel, cuenta con los siguientes componentes
+    \begin{enumerate}
+        \item SplineLevel: Este componente es el corazón del nivel, en él se encuentran los parametros necesarios para gestionar el nivel, como lo son las estaciones por las que hay que pasar, las zonas de daño que se encontrarán en el nivel y es el encargado de decidir si un intento cuenta como una victoria o una derrota.
+        \item Map Manager: Encargado de almacenar los iconos de los distintos puntos del mapa, como lo son los puertos, las ciudades e incluso el jugador.
+        \item AudioManager: Encargado de la gestión de sonido del juego, comprende elementos como la musica y los efectos de sonido del tren en movimiento.
+        \item EconomiaManager: Encargado de la gestión económica del nivel, se encarga de analizar los gastos y gestionar los calculos monetarios del nivel.
     \end{enumerate}
 \end{enumerate}
 
@@ -434,10 +434,10 @@ La  \cref{fig:arquitectura_api} ilustra el flujo de información:
 \end{figure}
 
 \begin{enumerate}
-    \item \textbf{Cliente Unity (C\#):} Al finalizar un nivel, el cliente recopila métricas clave y empaqueta estos datos en un objeto JSON.
-    \item \textbf{API REST:} Se desarrolló una API intermedia que recibe las peticiones POST provenientes del videojuego. Esta API valida la integridad de los datos y gestiona la seguridad de las transacciones.
-    \item \textbf{Base de Datos:} Los registros se almacenan en una base de datos No-SQL (FireBase), permitiendo la persistencia histórica de los intentos de los jugadores.
-    \item \textbf{Módulo de Generación de Informes:} Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
+    \item Cliente Unity (C\#): Al finalizar un nivel, el cliente recopila métricas clave y empaqueta estos datos en un objeto JSON.
+    \item API REST: Se desarrolló una API intermedia que recibe las peticiones POST provenientes del videojuego. Esta API valida la integridad de los datos y gestiona la seguridad de las transacciones.
+    \item Base de Datos: Los registros se almacenan en una base de datos No-SQL (FireBase), permitiendo la persistencia histórica de los intentos de los jugadores.
+    \item Módulo de Generación de Informes: Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
 \end{enumerate}
 
 \subsubsection{Arquitectura de datos}
@@ -454,30 +454,30 @@ Para garantizar la persistencia y el análisis posterior de la telemetría, se d
 A continuación, se detalla la función de cada atributo definido en el esquema:
 
 \begin{enumerate}
-    \item \textbf{sessionID (string):} Identificador único generado por la API para diferenciar cada intento de juego, permitiendo trazabilidad individual incluso si un mismo jugador repite el nivel múltiples veces.
+    \item sessionID (string): Identificador único generado por la API para diferenciar cada intento de juego, permitiendo trazabilidad individual incluso si un mismo jugador repite el nivel múltiples veces.
     
-    \item \textbf{playerID (string):} Referencia al identificador del usuario autenticado. Funciona como una clave foránea lógica que vincula la sesión con los metadatos del perfil del jugador.
+    \item playerID (string): Referencia al identificador del usuario autenticado. Funciona como una clave foránea lógica que vincula la sesión con los metadatos del perfil del jugador.
     
-    \item \textbf{levelNumber (integer):} Indica el nivel específico que se está jugando (ej. 1 a 5), contextualizando la dificultad y los objetivos activos durante la sesión.
+    \item levelNumber (integer): Indica el nivel específico que se está jugando (ej. 1 a 5), contextualizando la dificultad y los objetivos activos durante la sesión.
     
-    \item \textbf{status (string):} Describe el estado final de la partida. Puede tomar valores categóricos como \textit{Victoria}, \textit{Derrota} o \textit{Abandonado}, siendo fundamental para calcular tasas de éxito.
+    \item status (string): Describe el estado final de la partida. Puede tomar valores categóricos como \textit{Victoria}, \textit{Derrota} o \textit{Abandonado}, siendo fundamental para calcular tasas de éxito.
     
-    \item \textbf{causeOfFailure (string):} Campo opcional que almacena la razón específica de la derrota (ej. \textit{Descarrilamiento}, \textit{Presupuesto Agotado}). Si el estado es de victoria, este campo permanece nulo o vacío.
+    \item causeOfFailure (string): Campo opcional que almacena la razón específica de la derrota (ej. \textit{Descarrilamiento}, \textit{Presupuesto Agotado}). Si el estado es de victoria, este campo permanece nulo o vacío.
     
-    \item \textbf{budgetUsed (float):} Variable económica que registra la cantidad total de dinero virtual gastado por el jugador en la construcción de vías y compra de maquinaria.
+    \item budgetUsed (float): Variable económica que registra la cantidad total de dinero virtual gastado por el jugador en la construcción de vías y compra de maquinaria.
     
-    \item \textbf{score (integer):} Puntuación final obtenida basada en la eficiencia, economía y cumplimiento del contrato del nivel.
+    \item score (integer): Puntuación final obtenida basada en la eficiencia, economía y cumplimiento del contrato del nivel.
     
-    \item \textbf{durationSeconds (float):} Tiempo total de juego desde el inicio del nivel hasta la finalización o fallo, utilizado para medir la curva de aprendizaje.
+    \item durationSeconds (float): Tiempo total de juego desde el inicio del nivel hasta la finalización o fallo, utilizado para medir la curva de aprendizaje.
     
-    \item \textbf{trainTravelTime (float):} Métrica específica que contabiliza únicamente el tiempo que el tren estuvo en movimiento sobre las vías, separando el tiempo de construcción del tiempo de simulación.
+    \item trainTravelTime (float): Métrica específica que contabiliza únicamente el tiempo que el tren estuvo en movimiento sobre las vías, separando el tiempo de construcción del tiempo de simulación.
     
-    \item \textbf{timestamp (time):} Marca temporal exacta del servidor al momento de guardar el registro, esencial para el ordenamiento cronológico de los datos.
+    \item timestamp (time): Marca temporal exacta del servidor al momento de guardar el registro, esencial para el ordenamiento cronológico de los datos.
     
-    \item \textbf{clickData (Array de Objetos):} Estructura anidada (sub-documento) que almacena una lista de coordenadas vectoriales. Cada elemento contiene:
+    \item clickData (Array de Objetos): Estructura anidada (sub-documento) que almacena una lista de coordenadas vectoriales. Cada elemento contiene:
     \begin{enumerate}
-        \item \textbf{x (float):} Posición horizontal del clic en el mundo del juego.
-        \item \textbf{y (float):} Posición vertical del clic.
+        \item x (float): Posición horizontal del clic en el mundo del juego.
+        \item y (float): Posición vertical del clic.
     \end{enumerate}
 \end{enumerate}
 
@@ -496,13 +496,13 @@ La fase de implementación se llevó a cabo utilizando el motor Unity (versión 
 Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado en Unity 6.0, diseñado para gestionar la complejidad del mapa de Colombia y la lógica de los sistemas ferroviarios. En la  \cref{fig:interfaz_unity} se observa la disposición de las herramientas y la interacción entre las ventanas del editor:
 
 \begin{enumerate}
-    \item \textbf{Jerarquía (Hierarchy):} En esta sección se evidencia el uso de un flujo de trabajo basado en múltiples escenas cargadas simultáneamente (\textit{Multi-Scene Editing}), como \textit{MapaCompleto}, \textit{Nivel 1} y \textit{Nivel 2}. Cada escena agrupa sus propios componentes y lógica de forma independiente. En este caso, se encuentra desplegado el \textit{Nivel 2}, donde se ha seleccionado el objeto \textit{Locomotora}, permitiendo una edición focalizada sin alterar el resto del entorno global.
+    \item Jerarquía (Hierarchy): En esta sección se evidencia el uso de un flujo de trabajo basado en múltiples escenas cargadas simultáneamente (\textit{Multi-Scene Editing}), como \textit{MapaCompleto}, \textit{Nivel 1} y \textit{Nivel 2}. Cada escena agrupa sus propios componentes y lógica de forma independiente. En este caso, se encuentra desplegado el \textit{Nivel 2}, donde se ha seleccionado el objeto \textit{Locomotora}, permitiendo una edición focalizada sin alterar el resto del entorno global.
     
-    \item \textbf{Vista de Escena y Juego (Scene \& Game View):} El área central permite alternar entre la edición y la visualización final. La pestaña activa (\textit{Scene}) muestra el espacio tridimensional donde se realiza el ensamblaje del relieve y la ubicación de objetos. Adyacente a esta, se encuentra la pestaña \textit{Game}, la cual permite previsualizar la cámara del jugador y la interfaz de usuario final para realizar pruebas de ejecución inmediatas.
+    \item Vista de Escena y Juego (Scene \& Game View): El área central permite alternar entre la edición y la visualización final. La pestaña activa (\textit{Scene}) muestra el espacio tridimensional donde se realiza el ensamblaje del relieve y la ubicación de objetos. Adyacente a esta, se encuentra la pestaña \textit{Game}, la cual permite previsualizar la cámara del jugador y la interfaz de usuario final para realizar pruebas de ejecución inmediatas.
     
-    \item \textbf{Inspector:} Esta ventana actúa de forma reactiva a la selección realizada en la Jerarquía. Al estar señalada la \textit{Locomotora}, el Inspector despliega todos los componentes asignados a dicho objeto. Desde aquí se gestionan propiedades como el \textit{Transform}, el sistema de audio y las variables físicas del motor del tren, permitiendo ajustar el comportamiento del vehículo en tiempo real.
+    \item Inspector: Esta ventana actúa de forma reactiva a la selección realizada en la Jerarquía. Al estar señalada la \textit{Locomotora}, el Inspector despliega todos los componentes asignados a dicho objeto. Desde aquí se gestionan propiedades como el \textit{Transform}, el sistema de audio y las variables físicas del motor del tren, permitiendo ajustar el comportamiento del vehículo en tiempo real.
     
-    \item \textbf{Explorador de Proyecto (Project Window):} Contiene la biblioteca de archivos del juego organizada mediante una estructura de carpetas estandarizada (\textit{Meshes, Prefabs, Scripts, Settings}). Esta organización es fundamental para el control de versiones, asegurando que todos los activos del mapa de Colombia y los modelos ferroviarios estén correctamente indexados.
+    \item Explorador de Proyecto (Project Window): Contiene la biblioteca de archivos del juego organizada mediante una estructura de carpetas estandarizada (\textit{Meshes, Prefabs, Scripts, Settings}). Esta organización es fundamental para el control de versiones, asegurando que todos los activos del mapa de Colombia y los modelos ferroviarios estén correctamente indexados.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -665,9 +665,9 @@ La persistencia local de datos es gestionada por la clase \texttt{SaveSystem}, u
 La lógica de guardado no es destructiva; utiliza un algoritmo de actualización condicional detallado a continuación:
 
 \begin{enumerate}
-    \item \textbf{Progresión Lineal:} El sistema incluye el método \texttt{IsLevelUnlocked}, el cual verifica la existencia de datos completados del nivel $N-1$ para permitir el acceso al nivel $N$.
-    \item \textbf{Validación de Mejor Puntuación:} Al finalizar un nivel, el sistema compara el puntaje obtenido con el almacenado previamente. El archivo solo se actualiza si el jugador ha superado su propio récord (\textit{High Score}).
-    \item \textbf{Fusión de Estrellas:} Las condiciones de victoria (estrellas) se guardan de manera acumulativa. Si el jugador obtuvo la ``Estrella de Tiempo'' en un intento anterior y la ``Estrella de Economía'' en el actual, el sistema fusiona ambos resultados mediante una operación lógica OR, permitiendo completar el nivel en múltiples intentos.
+    \item Progresión Lineal: El sistema incluye el método \texttt{IsLevelUnlocked}, el cual verifica la existencia de datos completados del nivel $N-1$ para permitir el acceso al nivel $N$.
+    \item Validación de Mejor Puntuación: Al finalizar un nivel, el sistema compara el puntaje obtenido con el almacenado previamente. El archivo solo se actualiza si el jugador ha superado su propio récord (\textit{High Score}).
+    \item Fusión de Estrellas: Las condiciones de victoria (estrellas) se guardan de manera acumulativa. Si el jugador obtuvo la ``Estrella de Tiempo'' en un intento anterior y la ``Estrella de Economía'' en el actual, el sistema fusiona ambos resultados mediante una operación lógica OR, permitiendo completar el nivel en múltiples intentos.
 \end{enumerate}
 
 \subsubsection{Nivel}
@@ -677,9 +677,9 @@ La clase \texttt{NivelSpline} actúa como el orquestador central o máquina de e
 El ciclo de vida gestionado por este componente se divide en tres etapas críticas:
 
 \begin{itemize}
-    \item \textbf{Gestión Temporal:} Distingue entre el tiempo de ``Planeación'' (desde la carga de la escena) y el tiempo de ``Simulación'' (activación del tren), lo cual es vital para no penalizar al jugador mientras diseña la vía.
-    \item \textbf{Validación de Ruta:} Implementa un sistema de control de puntos de paso (\textit{Checkpoints}). Mediante la detección de colisiones, verifica que el tren recorra la ruta geográfica obligatoria en el orden correcto, impidiendo atajos no válidos.
-    \item \textbf{Resolución de Estado:} Al finalizar el recorrido, centraliza la información de los demás gestores (economía, integridad del tren y tiempo), ejecuta el algoritmo de puntuación descrito anteriormente y orquesta la persistencia de datos, enviando los resultados tanto al sistema de guardado local como al servicio de telemetría en la nube.
+    \item Gestión Temporal: Distingue entre el tiempo de ``Planeación'' (desde la carga de la escena) y el tiempo de ``Simulación'' (activación del tren), lo cual es vital para no penalizar al jugador mientras diseña la vía.
+    \item Validación de Ruta: Implementa un sistema de control de puntos de paso (\textit{Checkpoints}). Mediante la detección de colisiones, verifica que el tren recorra la ruta geográfica obligatoria en el orden correcto, impidiendo atajos no válidos.
+    \item Resolución de Estado: Al finalizar el recorrido, centraliza la información de los demás gestores (economía, integridad del tren y tiempo), ejecuta el algoritmo de puntuación descrito anteriormente y orquesta la persistencia de datos, enviando los resultados tanto al sistema de guardado local como al servicio de telemetría en la nube.
 \end{itemize}
 
 \begin{figure}[H]
@@ -696,11 +696,11 @@ El componente \texttt{AnalyticsManager} es el responsable de la comunicación Cl
 Su funcionamiento se divide en tres procesos concurrentes:
 
 \begin{itemize}
-    \item \textbf{Captura de Interacción (Heatmaps):} Durante el ciclo de juego (\texttt{Update}), el script registra las coordenadas $(x, y)$ de cada clic realizado por el usuario en la interfaz o el terreno. Estos datos se almacenan temporalmente en una lista de objetos \texttt{ClickPos} y se adjuntan al reporte final, lo que permite la futura generación de mapas de calor para analizar el comportamiento del jugador.
+    \item Captura de Interacción (Heatmaps): Durante el ciclo de juego (\texttt{Update}), el script registra las coordenadas $(x, y)$ de cada clic realizado por el usuario en la interfaz o el terreno. Estos datos se almacenan temporalmente en una lista de objetos \texttt{ClickPos} y se adjuntan al reporte final, lo que permite la futura generación de mapas de calor para analizar el comportamiento del jugador.
     
-    \item \textbf{Registro de Intentos:} Al finalizar una partida (ya sea por victoria, derrota o abandono), se instancia un objeto \texttt{LevelLogPayload}. Este paquete de datos contiene métricas precisas como la duración exacta de la sesión, el presupuesto consumido, la causa específica del fallo y la marca temporal (\textit{timestamp}).
+    \item Registro de Intentos: Al finalizar una partida (ya sea por victoria, derrota o abandono), se instancia un objeto \texttt{LevelLogPayload}. Este paquete de datos contiene métricas precisas como la duración exacta de la sesión, el presupuesto consumido, la causa específica del fallo y la marca temporal (\textit{timestamp}).
     
-    \item \textbf{Transmisión Asíncrona:} Para evitar congelamientos en la interfaz de usuario debido a la latencia de red, el envío de datos se realiza mediante Corrutinas de Unity (\texttt{IEnumerator}). Se utiliza la clase \texttt{UnityWebRequest} con el método POST para transmitir el JSON serializado, manejando internamente los encabezados y la confirmación de recepción del servidor.
+    \item Transmisión Asíncrona: Para evitar congelamientos en la interfaz de usuario debido a la latencia de red, el envío de datos se realiza mediante Corrutinas de Unity (\texttt{IEnumerator}). Se utiliza la clase \texttt{UnityWebRequest} con el método POST para transmitir el JSON serializado, manejando internamente los encabezados y la confirmación de recepción del servidor.
 \end{itemize}
 
 \subsubsection{Tutorial}
@@ -710,7 +710,7 @@ El sistema de aprendizaje no se implementó como una escena aislada, sino como u
 La arquitectura del sistema se fundamenta en tres pilares técnicos:
 
 \begin{enumerate}
-    \item \textbf{Estructura de Datos Narrativa:} El contenido del tutorial se define mediante una lista de objetos serializables de la clase \texttt{DialogoTutorial}. Cada elemento contiene el texto explicativo, la expresión emocional del personaje guía (``Don Rail''), una referencia opcional a un objeto de la interfaz que debe resaltarse (activando indicadores visuales) y, lo más importante, la \texttt{TutorialAction} requerida para avanzar.
+    \item Estructura de Datos Narrativa: El contenido del tutorial se define mediante una lista de objetos serializables de la clase \texttt{DialogoTutorial}. Cada elemento contiene el texto explicativo, la expresión emocional del personaje guía (``Don Rail''), una referencia opcional a un objeto de la interfaz que debe resaltarse (activando indicadores visuales) y, lo más importante, la \texttt{TutorialAction} requerida para avanzar.
     
     \begin{figure}[H]
     \centering
@@ -719,13 +719,13 @@ La arquitectura del sistema se fundamenta en tres pilares técnicos:
     \label{fig:donRail}
     \end{figure}
     
-    \item \textbf{Sistema de Eventos y Polling:} Para validar el progreso del jugador, el gestor utiliza un enfoque híbrido.
+    \item Sistema de Eventos y Polling: Para validar el progreso del jugador, el gestor utiliza un enfoque híbrido.
     \begin{enumerate}
         \item \textit{Detección Activa:} En el ciclo \texttt{Update}, el script monitorea entradas de hardware específicas, como el movimiento de los ejes del ratón o las teclas WASD, para validar lecciones de control de cámara.
         \item \textit{Detección Pasiva:} Para interacciones de interfaz (UI) o mecánicas complejas (como conectar vías), otros scripts notifican que una tarea ha sido completada invocando el método público \texttt{ReportarAccion(ID)}.
     \end{enumerate}
     
-    \item \textbf{Gestión de Tiempos (UX):} Para evitar que el tutorial avance abruptamente apenas el usuario toca un control, se implementó una corrutina de espera (\texttt{RutinaEsperarYAvanzar}). Esta lógica introduce un retraso intencional (conble, por defecto 3 segundos) después de acciones continuas como mover la cámara, permitiendo que el jugador asimile la mecánica antes de presentar el siguiente cuadro de diálogo.
+    \item Gestión de Tiempos (UX): Para evitar que el tutorial avance abruptamente apenas el usuario toca un control, se implementó una corrutina de espera (\texttt{RutinaEsperarYAvanzar}). Esta lógica introduce un retraso intencional (conble, por defecto 3 segundos) después de acciones continuas como mover la cámara, permitiendo que el jugador asimile la mecánica antes de presentar el siguiente cuadro de diálogo.
 \end{enumerate}
 
 Finalmente, el sistema se integra con el módulo de persistencia (\texttt{SaveSystem}) para verificar si el tutorial introductorio ya fue completado, evitando repeticiones innecesarias en sesiones futuras.
@@ -771,7 +771,7 @@ Como se observa en la  \cref{fig:menu_pausa}, este menú ofrece cuatro opciones 
 \end{figure}
 
 \subsubsection{Guía de Juego}
-Integrado dentro de las opciones del menú de pausa, se encuentra el módulo de consulta denominado \textbf{Guía} ( \cref{fig:guia_juego}). Este componente actúa como una enciclopedia interactiva y estática, diseñada para reforzar el aprendizaje de las mecánicas sin obligar al jugador a abandonar la experiencia.
+Integrado dentro de las opciones del menú de pausa, se encuentra el módulo de consulta denominado \textit{Guía} ( \cref{fig:guia_juego}). Este componente actúa como una enciclopedia interactiva y estática, diseñada para reforzar el aprendizaje de las mecánicas sin obligar al jugador a abandonar la experiencia.
 
 \begin{figure}[H]
     \centering
@@ -811,22 +811,22 @@ El sistema de evaluación calcula el desempeño del jugador mediante un algoritm
 Donde $w_x$ representan los pesos o coeficientes de importancia asignados a cada factor según el diseño del nivel, y $S_x$ son los sub-puntajes normalizados calculados de la siguiente manera:
 
 \begin{itemize}
-    \item \textbf{Factor Tiempo ($S_{tiempo}$):} Penaliza el exceso de tiempo respecto al objetivo mediante una función inversamente proporcional:
+    \item Factor Tiempo ($S_{tiempo}$) Penaliza el exceso de tiempo respecto al objetivo mediante una función inversamente proporcional:
     \begin{equation}
         S_{tiempo} = \frac{1}{1 + \frac{T_{usado}}{T_{objetivo}}}
     \end{equation}
     
-    \item \textbf{Factor Vagones ($S_{vagones}$):} Premia el transporte de mayor carga, normalizado sobre una base de 3 vagones estándar:
+    \item Factor Vagones ($S_{vagones}$) Premia el transporte de mayor carga, normalizado sobre una base de 3 vagones estándar:
     \begin{equation}
         S_{vagones} = \text{clamp}_{0}^{1} \left( \frac{N_{vagones}}{3} \right)
     \end{equation}
     
-    \item \textbf{Factor Presupuesto ($S_{presupuesto}$):} Evalúa la precisión en el gasto, penalizando la desviación porcentual respecto al presupuesto asignado (error relativo):
+    \item Factor Presupuesto ($S_{presupuesto}$) Evalúa la precisión en el gasto, penalizando la desviación porcentual respecto al presupuesto asignado (error relativo):
     \begin{equation}
         S_{presupuesto} = \max \left( 0, \ 1 - \frac{|D_{gastado} - D_{asignado}|}{D_{asignado}} \right)
     \end{equation}
     
-    \item \textbf{Factor Salud ($S_{salud}$):} Representa el porcentaje de integridad restante del tren al llegar a la meta:
+    \item Factor Salud ($S_{salud}$) Representa el porcentaje de integridad restante del tren al llegar a la meta:
     \begin{equation}
         S_{salud} = \frac{V_{actual}}{V_{maxima}}
     \end{equation}
@@ -838,13 +838,13 @@ La puntuación numérica $P_{total}$ se complementa con un sistema de calificaci
 Los criterios de obtención para cada insignia son:
 
 \begin{itemize}
-    \item \textbf{Estrella por Completado (Cumplimiento):} Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con los destinos correspondientes.
+    \item Estrella por Completado (Cumplimiento): Es la distinción base que se otorga automáticamente al superar los requisitos mínimos del contrato, es decir, conectar el origen con los destinos correspondientes.
     
-    \item \textbf{Estrella de Presupuesto (Eficiencia Económica):} Evalúa la gestión financiera. Se obtiene únicamente si el jugador logra finalizar la obra manteniendo un saldo positivo en la billetera virtual ($Presupuesto_{final} > 0$).
+    \item Estrella de Presupuesto (Eficiencia Económica): Evalúa la gestión financiera. Se obtiene únicamente si el jugador logra finalizar la obra manteniendo un saldo positivo en la billetera virtual ($Presupuesto_{final} > 0$).
     
-    \item \textbf{Estrella de Vida (Seguridad Operativa):} Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber perdido vida por atravezar zonas de daño durante el trayecto.
+    \item Estrella de Vida (Seguridad Operativa): Premia la integridad de la maquinaria. Para conseguirla, el tren debe llegar a la meta sin haber perdido vida por atravezar zonas de daño durante el trayecto.
     
-    \item \textbf{Estrella de Tiempo (Eficiencia Temporal):} Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de locomotora adecuada.
+    \item Estrella de Tiempo (Eficiencia Temporal): Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de locomotora adecuada.
 \end{itemize}
 
 Finalmente, la  \cref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza el puntaje numérico global junto con la cantidad de estrellas obtuvidas.
@@ -942,9 +942,9 @@ En las s\cref{fig:dineroyesfuerzo} y \cref{fig:encuestaaprendizaje} se muestran 
 \section{Errores Detectados}
 Durante la prueba unitaria, se reportaron los siguientes fallos que requieren corrección:
 \begin{itemize}
-    \item \textbf{Cámara en límites del mapa:} La cámara permite visualizar el \textit{vacío} en los bordes extremos. Se requiere implementar \textit{clamping} en las coordenadas.
-    \item \textbf{Colisiones fantasma:} El tren detectó daño en el 2\% de las partidas sin colisión visual clara. Se deben refinar los \textit{colliders}.
-    \item \textbf{Renderización a larga distancia:} Los ríos y el terreno no se visualizan adecuadamente al alejar la cámara; se recomienda aumentar la distancia de renderizado.
-    \item \textbf{Don Raíl en el menú:} El personaje reaparece tras completar el tutorial, indicando que la variable \texttt{tutorialMenuCompletado} no cambia su estado a \texttt{True}.
-    \item \textbf{Cámara en nivel 5:} La cámara inicia erróneamente en el punto final del recorrido en lugar del inicial, generando frustración.
+    \item Cámara en límites del mapa: La cámara permite visualizar el \textit{vacío} en los bordes extremos. Se requiere implementar \textit{clamping} en las coordenadas.
+    \item Colisiones fantasma: El tren detectó daño en el 2\% de las partidas sin colisión visual clara. Se deben refinar los \textit{colliders}.
+    \item Renderización a larga distancia: Los ríos y el terreno no se visualizan adecuadamente al alejar la cámara; se recomienda aumentar la distancia de renderizado.
+    \item Don Raíl en el menú: El personaje reaparece tras completar el tutorial, indicando que la variable \texttt{tutorialMenuCompletado} no cambia su estado a \texttt{True}.
+    \item Cámara en nivel 5: La cámara inicia erróneamente en el punto final del recorrido en lugar del inicial, generando frustración.
 \end{itemize}
