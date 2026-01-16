@@ -256,7 +256,7 @@ En esta escena podemos encontrar componentes como:
 \end{enumerate}
 
 \begin{landscapefull}
-\begin{figure}[p] % 'p' sugiere que ocupe una página completa
+\begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
 \includegraphics[
             width=\linewidth,    % Ocupa todo el ancho disponible
@@ -284,7 +284,7 @@ En esta escena podemos encontrar componentes como:
 \end{enumerate}
 
 \begin{landscapefull}
-\begin{figure}[p] % 'p' sugiere que ocupe una página completa
+\begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
 \includegraphics[
             width=\linewidth,    % Ocupa todo el ancho disponible
@@ -316,7 +316,7 @@ En esta escena podemos encontrar componentes como:
 
 
 \begin{landscapefull}
-\begin{figure}[p] % 'p' sugiere que ocupe una página completa
+\begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
 \includegraphics[
             width=\linewidth,    % Ocupa todo el ancho disponible
@@ -361,18 +361,22 @@ En esta escena se encuentran objetos tanto de visibilidad del jugador como de an
 \end{enumerate}
 
 \begin{landscapefull}
-\begin{figure}[p] % 'p' sugiere que ocupe una página completa
+\begin{figure}[H] 
 \centering
-\includegraphics[
-            width=\linewidth,    % Ocupa todo el ancho disponible
-            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
-            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
-        ]{figures/niveltutorial.png} 
-\caption{Diagrama de componentes del Nivel 1 Tutorial}
-\label{fig:diagrama_niveltutorial}
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio,trim=0 0 2350 0,clip]{figures/niveltutorial.png} 
+\caption{Diagrama de componentes del Nivel 1 Tutorial (Figura a)}
+\label{fig:diagrama_niveltutoriala}
 \end{figure}
 \end{landscapefull}
 
+\begin{landscapefull}
+\begin{figure}[H] 
+\centering
+\includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio,trim=1400 0 0 0,clip]{figures/niveltutorial.png} 
+\caption{Diagrama de componentes del Nivel 1 Tutorial (Figura b)}
+\label{fig:diagrama_niveltutorialb}
+\end{figure}
+\end{landscapefull}
 \subsubsection{Niveles 2 a 5}
 
 Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura similar, los cambios más destacables son la remoción del tutorial y cambios individuales a cada nivel para determinar los objetivos del mismo
@@ -404,15 +408,28 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
 \end{enumerate}
 
 \begin{landscapefull}
-\begin{figure}[p] % 'p' sugiere que ocupe una página completa
+\begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
 \includegraphics[
             width=\linewidth,    % Ocupa todo el ancho disponible
             height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
-            keepaspectratio      % VITAL: Evita que la imagen se deforme al estirarse
+            keepaspectratio, trim=0 0 2200 0, clip
         ]{figures/niveles25.png} 
-\caption{Diagrama de componentes de los niveles 2 a 5}
-\label{fig:diagrama_niveles25}
+\caption{Diagrama de componentes de los niveles 2 a 5 (Figura a).}
+\label{fig:diagrama_niveles25a}
+\end{figure}
+\end{landscapefull}
+
+\begin{landscapefull}
+\begin{figure}[H] % 'p' sugiere que ocupe una página completa
+\centering
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=0.85\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio, trim=1450 0 0 0, clip
+        ]{figures/niveles25.png} 
+\caption{Diagrama de componentes de los niveles 2 a 5 (Figura b).}
+\label{fig:diagrama_niveles25b}
 \end{figure}
 \end{landscapefull}
 
