@@ -200,7 +200,11 @@ El diseño de la arquitectura de software un videojuego serio, se orientó a sat
 
 \subsection{Arquitectura de Escenas en Unity}
 
-Para optimizar el uso de memoria y organizar lógicamente los componentes del videojuego, se optó por una arquitectura basada en escenas aditivas. En lugar de cargar un entorno monolítico único, el sistema gestiona la carga y descarga de escenas de manera superpuesta. Esto permite separar la lógica de la interfaz de usuario, el entorno geográfico pesado y las mecánicas específicas de cada nivel. En la  \cref{fig:escenas_aditivas} se ejemplifica este diseño.
+Para optimizar la gestión de recursos y organizar lógicamente los componentes del videojuego, se implementó una arquitectura modular basada en escenas aditivas. A diferencia de los entornos monolíticos tradicionales, este sistema permite fragmentar la aplicación en capas independientes que se gestionan dinámicamente en tiempo de ejecución.
+
+Como se ilustra en la \cref{fig:escenas_aditivas}, el diagrama describe el ciclo de vida de estas capas a través de tres zonas funcionales. En la parte izquierda (zona de carga), el sistema invoca e instancia nuevas escenas de manera aditiva, sumándolas al entorno sin detener la ejecución actual. Estas pasan a situarse en la sección central (zona de apilamiento), donde coexisten y operan simultáneamente como capas superpuestas, manteniendo su independencia lógica aunque compartan el mismo espacio de memoria.
+
+Finalmente, el flujo concluye en la parte derecha (zona de descarga), la cual representa la liberación selectiva de recursos. En esta etapa, el sistema puede retirar una capa específica de la pila —como un nivel completado— sin afectar a las demás escenas persistentes. Esta estrategia de "quitar y poner" capas evita la reinicialización redundante de sistemas transversales como la del terreno de juego, garantizando transiciones fluidas y un uso eficiente del procesador.
 
 \begin{figure}[H]
 \centering
@@ -209,7 +213,7 @@ Para optimizar el uso de memoria y organizar lógicamente los componentes del vi
 \label{fig:escenas_aditivas}
 \end{figure}
 
-El flujo de ejecución comienza con la carga simultánea de las escenas \textit{MainMenu} y \textit{MapaMenu}. Posteriormente, al iniciar la partida, se descarga la escena decorativa y se carga la escena \textit{MapaCompleto} junto con la escena del nivel correspondiente (por ejemplo, \textit{Nivel 1 Tutorial}), manteniendo siempre activa la escena base de gestión.
+En nuestro caso, el flujo de ejecución comienza con la carga simultánea de las escenas \textit{MainMenu} y \textit{MapaMenu}. Posteriormente, al iniciar la partida, se descarga la escena decorativa y se carga la escena \textit{MapaCompleto} junto con la escena del nivel correspondiente (por ejemplo, \textit{Nivel 1 Tutorial}), manteniendo siempre activa la escena base de gestión.
 
 A continuación, se describen las 8 escenas que componen el videojuego serio dentro de Unity:
 
