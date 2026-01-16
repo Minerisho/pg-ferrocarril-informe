@@ -231,23 +231,26 @@ A continuación, se describen las 8 escenas que componen el videojuego serio den
 
 En el diagrama que se presenta en la \cref{fig:diagramaUsoMenu}, se muestra la forma en la que la interacción con el menú principal es realizada por parte del jugador, siguiendo todos los casos de cada interacción por parte del jugador con todos los elementos de la interfaz del juego, además, notese como el sistema, una vez detectado la falta de un archivo de guardado, se encargará de generar uno y activar los tutoriales para que el jugador pueda comenzar.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/diagramaUsoMenu.drawio.png}
 \caption{Diagrama de proceso del menú.}
 \label{fig:diagramaUsoMenu}
 \end{figure}
 
-Por su parte, en el diagrama que se presenta en la \cref{fig:diagramaUsonivela, fig:diagramaUsonivelb} se demuestra la forma en la que una partida es realizada por el jugador, tomando en cuenta la interacción con cada elemento de la interfaz y con los elementos físicos como los son el mouse (clicls y arrastre) y el teclado (teclas WASD). De manera general, el proceso abarca desde la aceptación del contrato y la gestion de movimiento del jugador, pasando por la construcción de vías y la elección de los trenes a utilizar, hasta la ejecución de la simulación, donde se evalúan los criterios de victoria o derrota. Finalmente, el sistema automatiza el envío de métricas a la API y la persistencia de datos en la base de datos NoSQL.
+Por su parte, en el diagrama que se presenta en la \cref{fig:diagramaUsonivela} y \cref{fig:diagramaUsonivelb} se demuestra la forma en la que una partida es realizada por el jugador, tomando en cuenta la interacción con cada elemento de la interfaz y con los elementos físicos como los son el mouse (clicls y arrastre) y el teclado (teclas WASD). De manera general, el proceso abarca desde la aceptación del contrato y la gestion de movimiento del jugador, pasando por la construcción de vías y la elección de los trenes a utilizar, hasta la ejecución de la simulación, donde se evalúan los criterios de victoria o derrota. Finalmente, el sistema automatiza el envío de métricas a la API y la persistencia de datos en la base de datos NoSQL.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/diagramaprocenivela.drawio.png}
+\includegraphics[
+            width=\linewidth,    % Ocupa todo el ancho disponible
+            height=1\textheight, % Ocupa máximo el 85% del alto (para dejar espacio al caption)
+            keepaspectratio, trim=0 0 650 0, clip]{figures/diagramaprocenivela.drawio.png}
 \caption{Diagrama de proceso del menú (Figura a).}
 \label{fig:diagramaUsonivela}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/diagramaprocenivelb.drawio.png}
 \caption{Diagrama de proceso del menú (Figura b).}
@@ -258,6 +261,7 @@ Por su parte, en el diagrama que se presenta en la \cref{fig:diagramaUsonivela, 
 
 Dada la división en múltiples escenas y el diseño detallado de los scripts e iteraciones del sistema, se optó por representar esta estructura en un diagrama de componentes. Con el fin de facilitar la lectura, dicho diagrama se fragmentó en módulos que corresponden a cada escena como lo son la gestión del mapa, el diseño de niveles y la interfaz de usuario. Más adelante se presentará la descripción a detalle de cada escena junto con sus componentes principales.
 
+\afterpage{
 \begin{landscapefull} 
     \begin{figure}[H]
         \centering
@@ -269,7 +273,7 @@ Dada la división en múltiples escenas y el diseño detallado de los scripts e 
         \caption{Diagrama de componentes organizado por escenas de Unity.}
         \label{fig:diagrama_componentes}
     \end{figure}
-\end{landscapefull} 
+\end{landscapefull}}
 
 \subsubsection{Main Menu}
 
@@ -286,6 +290,7 @@ En esta escena podemos encontrar componentes como:
   \item Canvas: componente que se encarga de todo lo visual y de interacción en el menú, como son los botones, sliders, etc.
 \end{enumerate}
 
+\afterpage{
 \begin{landscapefull}
 \begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
@@ -297,7 +302,7 @@ En esta escena podemos encontrar componentes como:
 \caption{Diagrama de componentes del Menú Principal}
 \label{fig:diagrama_mainmenu}
 \end{figure}
-\end{landscapefull}
+\end{landscapefull}}
 
 \subsubsection{Mapa Menu}
 
@@ -314,6 +319,7 @@ En esta escena podemos encontrar componentes como:
     \item Bandera: El simbolo patrio, contiene su modelo y su animacion de ser meneada por el viento.
 \end{enumerate}
 
+\afterpage{
 \begin{landscapefull}
 \begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
@@ -325,7 +331,7 @@ En esta escena podemos encontrar componentes como:
 \caption{Diagrama de componentes del Mapa del Menu}
 \label{fig:diagrama_mapamenu}
 \end{figure}
-\end{landscapefull}
+\end{landscapefull}}
 
 \subsubsection{MapaCompleto}
 
@@ -345,7 +351,7 @@ En esta escena podemos encontrar componentes como:
     \item LevelLoader: Este elemento esta encargado de manejar la carga de diferentes escenas.
 \end{enumerate}
 
-
+\afterpage{
 \begin{landscapefull}
 \begin{figure}[H] % 'p' sugiere que ocupe una página completa
 \centering
@@ -357,7 +363,7 @@ En esta escena podemos encontrar componentes como:
 \caption{Diagrama de componentes del Mapa completo}
 \label{fig:diagrama_mapacompleto}
 \end{figure}
-\end{landscapefull}
+\end{landscapefull}}
 
 \subsubsection{Nivel 1 Tutorial}
 
