@@ -101,7 +101,7 @@ Con el objetivo de garantizar que el videojuego cumpliera con los lineamientos d
 
 Posteriormente, para facilitar la gestión del desarrollo y la planificación de las iteraciones, estas historias de usuario fueron analizadas y agrupadas en categorías de alto nivel denominadas \textit{Épicas}. Esta organización permitió clasificar los requisitos de manera lógica según el subsistema o área funcional a la que pertenecían.
 
-En la Tabla \cref{tab:epicas} se presentan las 8 épicas resultantes de esta categorización.
+En la \cref{tab:epicas} se presentan las 8 épicas resultantes de esta categorización.
 
 \begin{table}[H] 
 \centering 
@@ -120,7 +120,9 @@ En la Tabla \cref{tab:epicas} se presentan las 8 épicas resultantes de esta cat
 \end{tabular} 
 \end{table}
 
-La Tabla \cref{tab:HU-final} presenta el formato consolidado de las historias de usuario tras el proceso de refinamiento continuo tras cada iteración durante las fases del proyecto. Se define las columnas de la siguiente manera:
+\pagebreak
+
+La \cref{tab:HU-final} presenta el formato consolidado de las historias de usuario tras el proceso de refinamiento continuo tras cada iteración durante las fases del proyecto. Se define las columnas de la siguiente manera:
 
 \begin{enumerate}
     \item Épica: Categoría funcional de alto nivel que agrupa un conjunto de historias de usuario relacionadas con un mismo módulo o subsistema del proyecto definidas anteriormente.
@@ -441,7 +443,7 @@ Similar a la escena 1 tutorial, los niveles 2 a 5 comparten una estructura simil
 
 Con el propósito de fortalecer el componente de \textit{Apoyo al Aprendizaje}, requisito fundamental en el diseño GBL, y trascender el sistema básico de puntuación numérica y por estrellas, se implementó una arquitectura Cliente-Servidor para la gestión de datos telemétricos. En este esquema, el cliente (videojuego en Unity) se comunica con un servidor \textit{backend} responsable de procesar y almacenar la actividad de las sesiones. Esto faculta al administrador para analizar los resultados y potenciar la realimentación hacia el jugador mediante la generación de informes detallados.
 
-La  \cref{fig:arquitectura_api} ilustra el flujo de información:
+la \cref{fig:arquitectura_api} ilustra el flujo de información:
 
 \begin{figure}[H]
 \centering
@@ -457,9 +459,10 @@ La  \cref{fig:arquitectura_api} ilustra el flujo de información:
     \item Módulo de Generación de Informes: Un servicio independiente consulta la base de datos para generar visualizaciones estadísticas y reportes de rendimiento, los cuales son utilizados para la evaluación pedagógica presentada más adelante en este capítulo.
 \end{enumerate}
 
-\subsubsection{Arquitectura de datos}
+\subsubsection{Tablas de base de datos}
 La razón en usar una base de datos No-SQL vs SQL se debe a la naturaleza de la arquitectura de datos en el desarrollo de un videojuego; durante sus ciclos de vida un videojuego a comparación de otros productos software, sufren muchos cambios a nivel de estructura de datos. Por ejemplo, grandes empresas de videojuegos como \textit{RiotGames} o \textit{Electronics Arts} hoy en día utilizan DynamoDB, una base de datos No-SQL para sus videojuegos \autocite{AmazonDynamoDB}.
-Para garantizar la persistencia y el análisis posterior de la telemetría, se diseñó un esquema de datos documental alojado en la infraestructura de Firebase. La  \cref{fig:bd_nosql} ilustra la estructura de la colección principal denominada \textit{level\_logs}, la cual actúa como un registro histórico de cada sesión de juego de un nivel terminada por el usuario. Este modelo utiliza una relación de composición para almacenar los datos de interacción espacial directamente dentro del documento de la sesión, optimizando así las consultas de lectura.
+
+Para garantizar la persistencia y el análisis posterior de la telemetría, se diseñó un esquema de datos documental alojado en la infraestructura de Firebase. la \cref{fig:bd_nosql} ilustra la estructura de la colección principal denominada \textit{level\_logs}, la cual actúa como un registro histórico de cada sesión de juego de un nivel terminada por el usuario. Este modelo utiliza una relación de composición para almacenar los datos de interacción espacial directamente dentro del documento de la sesión, optimizando así las consultas de lectura.
 
 \begin{figure}[H]
 \centering
@@ -510,7 +513,7 @@ La fase de implementación se llevó a cabo utilizando el motor Unity (versión 
 
 \subsection{Conción del Espacio de Trabajo en Unity}
 
-Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado en Unity 6.0, diseñado para gestionar la complejidad del mapa de Colombia y la lógica de los sistemas ferroviarios. En la  \cref{fig:interfaz_unity} se observa la disposición de las herramientas y la interacción entre las ventanas del editor:
+Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado en Unity 6.0, diseñado para gestionar la complejidad del mapa de Colombia y la lógica de los sistemas ferroviarios. En la \cref{fig:interfaz_unity} se observa la disposición de las herramientas y la interacción entre las ventanas del editor:
 
 \begin{enumerate}
     \item Jerarquía (Hierarchy): En esta sección se evidencia el uso de un flujo de trabajo basado en múltiples escenas cargadas simultáneamente (\textit{Multi-Scene Editing}), como \textit{MapaCompleto}, \textit{Nivel 1} y \textit{Nivel 2}. Cada escena agrupa sus propios componentes y lógica de forma independiente. En este caso, se encuentra desplegado el \textit{Nivel 2}, donde se ha seleccionado el objeto \textit{Locomotora}, permitiendo una edición focalizada sin alterar el resto del entorno global.
@@ -533,7 +536,7 @@ Para el desarrollo del proyecto se configuró un entorno de trabajo optimizado e
 
 El mapa de Colombia representa el tablero de juego principal. Su implementación pasó por múltiples iteraciones para equilibrar el realismo geográfico con el rendimiento técnico.
 
-Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la  \cref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS (Fotogramas por segundo).
+Inicialmente, se importó un modelo 3D de alta resolución generado en Blender a partir de mapas de elevación (DEM). Como se observa en la \cref{fig:mapa_inicial}, aunque visualmente detallado, este enfoque resultó inviable debido a la carga de 24.5 millones de vértices, lo que redujo la tasa de refresco a menos de 26 FPS (Fotogramas por segundo).
 
 \begin{figure}[H]
 \centering
@@ -548,7 +551,7 @@ Tras experimentar con versiones de baja cantidad de polígonos (\textit{low-poly
 
 Para la implementación definitiva, no se esculpió el terreno manualmente. En su lugar, se desarrolló un flujo de trabajo automatizado mediante \textit{scripts} en C\# que generaban la topografía a partir de datos reales.
 
-Una herramienta fundamental en esta etapa fue el software QGIS ( Quantum Geographic Information System). Esta herramienta permitió procesar y alinear todas las capas de información —fronteras municipales, hidrografía (ríos y lagos) y elevación— bajo un Sistema de Referencia de Coordenadas unificado, específicamente el \textit{EPSG:9377} (MAGNA-SIRGAS Origen Nacional). Esto garantizó que todos los elementos geográficos mantuvieran su posición relativa correcta al ser importados al motor de videojuego. En la  \cref{fig:qgis_1} se muestra todos los datos recopilados y correctamente ubicados como son el mapa de alturas, los cuerpos de agua, las fronteras nacional, departamentales y municipales de Colombia.
+Una herramienta fundamental en esta etapa fue el software QGIS ( Quantum Geographic Information System). Esta herramienta permitió procesar y alinear todas las capas de información —fronteras municipales, hidrografía (ríos y lagos) y elevación— bajo un Sistema de Referencia de Coordenadas unificado, específicamente el \textit{EPSG:9377} (MAGNA-SIRGAS Origen Nacional). Esto garantizó que todos los elementos geográficos mantuvieran su posición relativa correcta al ser importados al motor de videojuego. En la \cref{fig:qgis_1} se muestra todos los datos recopilados y correctamente ubicados como son el mapa de alturas, los cuerpos de agua, las fronteras nacional, departamentales y municipales de Colombia.
 
 \begin{figure}[H]
 \centering
@@ -573,7 +576,7 @@ Esta división en 256 \textit{tiles} o baldosas respondía a una estrategia inic
 Sin embargo, durante las pruebas de integración, se observó que el rendimiento del sistema era estable incluso con la totalidad del mapa cargado en memoria. Por consiguiente, se descartó el sistema de carga dinámica para reducir la complejidad del código, aunque se mantuvo la estructura modular de $16 \times 16$ para trabajo a futuro.
 \subsubsection{Texturizado}
 
-Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la  \cref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.
+Finalmente, el terreno fue texturizado automáticamente aplicando un material autogenerado y semi-autocoloreado según la altura (mar, pasto, nieve). En la \cref{fig:inspector_colores} se muestra el script desde la vista del inspector dentro del objeto \textit{Terreno\_Colombiav2} en donde se evidencia la interfaz hecha para manejar las capas por color y alturas.
 
 \begin{figure}[H]
     \centering
@@ -606,16 +609,16 @@ La interacción para la construcción opera mediante un sistema de dos puntos: e
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/puente.png}
-    \caption{Modelo de un trazo de un puente.}
+    \caption{Modelo de un puente.}
     \label{fig:puente}
 \end{minipage}\hfill
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/tunel.png}
-    \caption{Modelo de un trazo de túnel.}
+    \caption{Modelo de un túnel.}
     \label{fig:tunel}
 \end{minipage}
 \end{figure}
@@ -628,13 +631,13 @@ Una vez definida la infraestructura, el sistema permite la selección de la loco
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/tren_modelo.jpeg}
     \caption{Modelado de locomotoras.}
     \label{fig:tren_modelo}
 \end{minipage}\hfill
-\begin{minipage}{0.4\textwidth}
+\begin{minipage}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/trenExplota.png}
     \caption{Sistema de partículas de daño.}
@@ -748,7 +751,7 @@ La arquitectura del sistema se fundamenta en tres pilares técnicos:
 Finalmente, el sistema se integra con el módulo de persistencia (\texttt{SaveSystem}) para verificar si el tutorial introductorio ya fue completado, evitando repeticiones innecesarias en sesiones futuras.
 
 \subsection{Menú Principal}
-El punto de entrada a la experiencia es una escena ligera diseñada para ofrecer una navegación intuitiva y rápida. La interfaz gráfica, ilustrada en la  \cref{fig:menu_principal}, conserva la identidad visual \textit{low-poly} del proyecto mediante una vista previa animada del entorno ferroviario.
+El punto de entrada a la experiencia es una escena ligera diseñada para ofrecer una navegación intuitiva y rápida. La interfaz gráfica, ilustrada en la \cref{fig:menu_principal}, conserva la identidad visual \textit{low-poly} del proyecto mediante una vista previa animada del entorno ferroviario.
 
 Funcionalmente, el menú dispone de tres puntos de interacción principales:
 
@@ -770,7 +773,7 @@ Funcionalmente, el menú dispone de tres puntos de interacción principales:
 \subsection{Menú de Pausa}
 Durante la ejecución de cualquier nivel, el jugador dispone de la facultad de interrumpir el ciclo de simulación pulsando la tecla \textit{Escape}. Esta acción invoca al \textit{PauseManager}, el cual detiene el tiempo de juego (estableciendo \texttt{Time.timeScale = 0}) y despliega una interfaz superpuesta que permite gestionar la sesión sin perder el progreso actual.
 
-Como se observa en la  \cref{fig:menu_pausa}, este menú ofrece cuatro opciones funcionales:
+Como se observa en la \cref{fig:menu_pausa}, este menú ofrece cuatro opciones funcionales:
 
 \begin{enumerate}
     \item Reanudar: Oculta la interfaz y reactiva el cronómetro de la simulación inmediatamente.
@@ -864,7 +867,7 @@ Los criterios de obtención para cada insignia son:
     \item Estrella de Tiempo (Eficiencia Temporal): Se otorga al cumplir el objetivo de tiempo ideal estipulado en el contrato, lo cual exige una planificación de ruta óptima y una velocidad de locomotora adecuada.
 \end{itemize}
 
-Finalmente, la  \cref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza el puntaje numérico global junto con la cantidad de estrellas obtuvidas.
+Finalmente, la \cref{fig:victoria} muestra la pantalla de consolidación de éxito, donde se visualiza el puntaje numérico global junto con la cantidad de estrellas obtuvidas.
 
 \begin{figure}[H]
     \centering
@@ -886,7 +889,7 @@ Se aplicó una encuesta
 El uso de telemetría permitió registrar el comportamiento objetivo de los usuarios, eliminando los sesgos de la autopercepción y proporcionando una visión clara sobre la jugabilidad y la curva de dificultad.
 
 \subsubsection{Retención y Progresión: El desafío de la curva de aprendizaje}
-La  \cref{fig:retencion} muestra el volumen de jugadores únicos que accedieron a cada nivel. El registro indica que 28 usuarios iniciaron el Nivel 1. En el Nivel 2 la participación fue de 9 usuarios, en el Nivel 3 de 8 usuarios, en el Nivel 4 de 5 usuarios, y finalmente, un único jugador alcanzó el Nivel 5.
+la \cref{fig:retencion} muestra el volumen de jugadores únicos que accedieron a cada nivel. El registro indica que 28 usuarios iniciaron el Nivel 1. En el Nivel 2 la participación fue de 9 usuarios, en el Nivel 3 de 8 usuarios, en el Nivel 4 de 5 usuarios, y finalmente, un único jugador alcanzó el Nivel 5.
 
 \begin{figure}[H]
 \centering
@@ -897,7 +900,7 @@ La  \cref{fig:retencion} muestra el volumen de jugadores únicos que accedieron 
 
 \subsubsection{Balance de Dificultad: Victorias frente a Derrotas}
 
-La  \cref{fig:tasa_exito} detalla la proporción de intentos exitosos y fallidos. El Nivel 1 presenta una tasa de derrota del 71.4\%. En el Nivel 2, el porcentaje de éxito fue del 66.7\%, mientras que en el Nivel 3 las derrotas representaron el 69.2\%. Los niveles finales (4 y 5) registraron tasas de fracaso del 89.3\% y 87.5\% respectivamente sobre el total de intentos.
+la \cref{fig:tasa_exito} detalla la proporción de intentos exitosos y fallidos. El Nivel 1 presenta una tasa de derrota del 71.4\%. En el Nivel 2, el porcentaje de éxito fue del 66.7\%, mientras que en el Nivel 3 las derrotas representaron el 69.2\%. Los niveles finales (4 y 5) registraron tasas de fracaso del 89.3\% y 87.5\% respectivamente sobre el total de intentos.
 
 \begin{figure}[H]
 \centering
@@ -931,7 +934,7 @@ La claridad sobre la primera experiencia de los jugadores fue mayormente favorab
 \end{figure}
 
 \subsubsection{Concientización y Percepción del Aprendizaje (GBL)}
-Esta sección constituye el núcleo de la validación del aprendizaje. Como indica la  \cref{fig:contruisviaslejanas}, un abrumador 81.8\% de los participantes concluyó que la construcción ferroviaria en Colombia es \textit{complicada y costosa}.
+Esta sección constituye el núcleo de la validación del aprendizaje. Como indica la \cref{fig:contruisviaslejanas}, un abrumador 81.8\% de los participantes concluyó que la construcción ferroviaria en Colombia es \textit{complicada y costosa}.
 
 \begin{figure}[H]
 \centering
