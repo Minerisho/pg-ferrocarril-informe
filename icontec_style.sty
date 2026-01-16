@@ -120,21 +120,20 @@
   {}
 
 
-% --- Encabezados y pies ---
+% --- Encabezados y pies (Arriba derecha + Cursiva) ---
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhf{} % Limpia cualquier configuración previa (borra el centro abajo)
+\fancyhf{} 
 
-% Configuración para páginas normales
-\fancyhead[R]{\thepage} % R = Right (Derecha), Head = Encabezado
-\renewcommand{\headrulewidth}{0pt} % 0pt para que no salga una línea debajo del número
+% 1. Páginas normales
+% \textit{...} convierte el número en cursiva
+\fancyhead[R]{\textit{\thepage}} 
+\renewcommand{\headrulewidth}{0pt}
 
-% Configuración para inicios de Capítulo (estilo 'plain')
-% Por defecto LaTeX pone el número abajo en la primera hoja de cada capítulo.
-% Si quieres que SIEMPRE (incluso en capítulos) esté arriba a la derecha, usa esto:
+% 2. Páginas de inicio de capítulo (plain)
 \fancypagestyle{plain}{%
   \fancyhf{}
-  \fancyhead[R]{\thepage}
+  \fancyhead[R]{\textit{\thepage}} % También aquí en cursiva
   \renewcommand{\headrulewidth}{0pt}
 }
 
