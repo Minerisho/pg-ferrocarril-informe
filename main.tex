@@ -14,6 +14,7 @@
 \usepackage[table]{xcolor}
 \usepackage{rotating}
 \usepackage{afterpage}
+\usepackage{enumitem} % Ya debería estar cargado
 
 % --- REFERENCIAS BIB ---
 \usepackage[
@@ -26,8 +27,9 @@
 ]{biblatex}
 
 % Evitar líneas viudas y huérfanas
-\widowpenalty=10000
-\clubpenalty=10000
+\widowpenalty=1000
+\clubpenalty=1000
+\displaywidowpenalty=1000
 
 % Controla las separaciones deseadas en bibliografía
 \setlength{\bibitemsep}{12pt} 
@@ -104,6 +106,7 @@
 % ==========================================
 %           INICIO DEL DOCUMENTO
 % ==========================================
+\raggedbottom
 \begin{document}
 
 % 1. PORTADA
